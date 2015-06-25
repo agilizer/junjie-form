@@ -14,7 +14,6 @@ form.setBeforeText("表单前文本(可选)")
 form.setAfterText("表单后文本(可选)")
 
 HtmlInput input = new HtmlInput()
-input.setFormId(formId)
 input.setLabelBefore("文本表单年龄示例")
 input.setLabelAfter("请输入年龄")
 def attrs = [min:18,max:50]
@@ -24,7 +23,6 @@ input.setSequence(0);
 def inputList = [input]
 
 input = new HtmlInput()
-input.setFormId(formId)
 input.setLabelBefore("文本表单text")
 input.setLabelAfter("请输入名称")
 attrs = [placeholder:"2-5个中文",maxlength:5]

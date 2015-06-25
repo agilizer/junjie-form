@@ -12,10 +12,8 @@ public class HtmlInput implements Serializable{
 	 * 唯一标识
 	 */
 	private String id;
-	/**
-	 * form  id(必填)
-	 */
-	private String formId;
+	
+	private String saasId;
 	/**
 	 * input前显示的文本(可选)
 	 */
@@ -35,11 +33,32 @@ public class HtmlInput implements Serializable{
 	/**
 	 * input的类型(必填)
 	 */
-	private InputType inputType;
+	private InputType inputType = InputType.text;
 	/**
 	 * 显示的序号(必填),前端处理
 	 */
 	private Integer sequence;
+	/**
+	 * 字段分为显示给用户，和不显示给用户。
+	 * 不显示给用户时表单创建者可以对这个值进行更改。
+	 */
+	private Boolean showToUser;
+	/**
+	 * 列表查询时显示
+	 */
+	private Boolean listShow;
+	/**
+	 * 存储select,checkbox,radio选项数据。
+	 */
+	private Map<String,String> selectInfo;
+	private ValueType valueType = ValueType.STRING;
+	
+	public static enum ValueType{
+		DOUBLE,
+		STRING,
+		LONG,
+		HTML
+	}
 	/**
 	 * input类型数据定义
 	 */
@@ -74,6 +93,7 @@ public class HtmlInput implements Serializable{
 	     */
 	    date,
 	    textarea,
+	    html,
 	    number
 	}
 	public String getId() {
@@ -81,12 +101,6 @@ public class HtmlInput implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getFormId() {
-		return formId;
-	}
-	public void setFormId(String formId) {
-		this.formId = formId;
 	}
 	public String getLabelBefore() {
 		return labelBefore;
@@ -118,5 +132,36 @@ public class HtmlInput implements Serializable{
 	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
 	}
+	public Boolean getShowToUser() {
+		return showToUser;
+	}
+	public void setShowToUser(Boolean showToUser) {
+		this.showToUser = showToUser;
+	}
+	public Boolean getListShow() {
+		return listShow;
+	}
+	public void setListShow(Boolean listShow) {
+		this.listShow = listShow;
+	}
+	public Map<String, String> getSelectInfo() {
+		return selectInfo;
+	}
+	public void setSelectInfo(Map<String, String> selectInfo) {
+		this.selectInfo = selectInfo;
+	}
+	public ValueType getValueType() {
+		return valueType;
+	}
+	public void setValueType(ValueType valueType) {
+		this.valueType = valueType;
+	}
+	public String getSaasId() {
+		return saasId;
+	}
+	public void setSaasId(String saasId) {
+		this.saasId = saasId;
+	}
+	
 	
 }
