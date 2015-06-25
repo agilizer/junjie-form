@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/bootstrap :: head (title='觅油网')">
+</head>
+<body>
+	<div class="navbar navbar-default"
+		th:replace="layout/bootstrap :: nav1"></div>
+	<div class="container">
+		<div class="row" th:replace="layout/bootstrap :: search"></div>
+		<div class="row" th:replace="layout/bootstrap :: menu (active='shop')"></div>
+		<!-- content  start -->
+		<div class="c_width content" style="min-height: 300px;text-align:center">
+			<h1>没有找到相关信息！</h1>
+		</div>
+		<!-- content  end -->
+
+		<div id="footer" th:replace="layout/bootstrap :: footer"></div>
+		<!-- wrapper	end -->
+	</div>
+	<script>
+		
+	</script>
+</body>
+</html>

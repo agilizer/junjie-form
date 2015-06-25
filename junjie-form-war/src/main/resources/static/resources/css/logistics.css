@@ -1,0 +1,381 @@
+/*logistics  content  start*/
+.logistics_banner{
+  height: 340px;
+  margin: 0 0 40px;
+  background: url(../images/banner.jpg) no-repeat 50% 50%;
+}
+
+.logistics_banner .banner_common{
+  position: relative;
+}
+.logistics_banner .tab {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 400px;
+  height: 343px;
+  box-shadow: 0 0 3px #999;
+  background: #fff;
+}
+
+.logistics_banner .tab .icon_arrow {
+  position: absolute;
+  left: -20px;
+  top: 323px;
+  width: 20px;
+  height: 20px;
+  background: url(../images/icon2.png) no-repeat;
+}
+
+
+.logistics_banner .tab .top {
+  position: relative;
+  top: -7px;
+  height: 48px;
+  background: url(../images/tab1.png) no-repeat;
+}
+
+
+.logistics_banner .tab .top a {
+  float: left;
+  display: inline-block;
+  width: 200px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.logistics_banner .tab .top a.active {
+  color: #317ee7;
+}
+
+.logistics_banner .tab .tab_box {
+  padding: 23px 0 0;
+}
+
+.logistics_banner .tab .tab_box dl {
+  float: left;
+  display: inline;
+  margin: 0 0 17px;
+}
+
+.logistics_banner .tab .tab_box dl dt {
+  float: left;
+  display: inline;
+  width: 75px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333;
+  text-align: right;
+}
+
+.logistics_banner .tab .tab_box dl dd {
+  float: left;
+  display: inline;
+}
+
+.logistics_banner .tab .tab_box dl dd input {
+  width: 100px;
+  height: 28px;
+  border: 1px solid #ccc;
+}
+
+.logistics_banner .tab .tab_box dl dd input.short {
+  width: 60px;
+}
+.logistics_banner .tab .tab_box dl dt.long {
+  width: 105px;
+}
+
+.logistics_banner .tab .tab_box dl dd select {
+  width: 80px;
+  height: 30px;
+  margin: 0 10px 0 0;
+  border: 1px solid #ccc;
+}
+
+.logistics_banner .tab .tab_box .btn2{
+  float: left;
+  display: inline-block;
+  width: 120px;
+  height: 42px;
+  margin: 0 0 0 75px;
+  border-radius: 5px;
+  line-height: 42px;
+  background: #f57514;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+.logistics_banner .tab .tab_box .btn1 {
+  float: left;
+  display: inline-block;
+  width: 240px;
+  height: 52px;
+  margin: 50px 0 20px 80px;
+  border-radius: 5px;
+  line-height: 52px;
+  background: #f57514;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+}
+.logistics_banner .tab .tab_box .tip {
+  float: left;
+  display: inline;
+  width: 400px;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+}
+.logistics_banner .tab .tab_box .tips {
+  float: left;
+  display: inline;
+  height: 20px;
+  margin: 22px 0 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.logistics_banner .tab .tab_box .tipss {
+  float: left;
+  display: inline;
+  height: 20px;
+  margin: 10px 0 0 75px;
+  font-size: 12px;
+  color: #f57514;
+}
+
+
+/*logistics_menu  start*/
+
+/*left  content  start*/
+.lo_good {
+  float: left;
+  display: inline;
+  width: 600px;
+}
+.lo_good h2 {
+  height: 66px;
+  background: url(../images/title.png) no-repeat;
+  text-indent: -9999px;
+}
+.lo_good ul li {
+  width: 580px;
+  height: 100px;
+  margin: 0 0 10px;
+  background: #e8eaeb;
+}
+.lo_good ul li .num {
+  position: relative;
+  float: left;
+  display: inline;
+  width: 140px;
+  height: 100px;
+  margin: 0 0 0 10px;
+  line-height: 100px;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  color: #fff;
+  text-align: center;
+}
+
+.lo_good ul li .one {
+  background: #34afe4;
+}
+.lo_good ul li .two {
+  background: #f0ae2b;
+}
+.lo_good ul li .three {
+  background: #f55670;
+}
+.lo_good ul li .four {
+  background: #2ed1d1;
+}
+.lo_good ul li .num .icon_arrow {
+  position: absolute;
+  left: 140px;
+  top: 40px;
+  width: 10px;
+  height: 20px;
+}
+
+.lo_good ul li .one .icon_arrow {
+  background: url(../images/arrow1.png) no-repeat;
+}
+
+.lo_good ul li .text {
+  float: left;
+  display: inline;
+  padding: 0 0 0 45px;
+  color: #333;
+}
+
+.lo_good ul li .text h3 {
+  margin: 15px 0 10px;
+  font-size: 26px;
+  font-weight: normal;
+}
+
+.lo_good ul li .text p {
+  font-size: 16px;
+}
+/*left  content  end*/
+
+
+/*right content  sart*/
+.lo_news {
+  float: left;
+  display: inline;
+  width: 400px;
+  margin-top:65px;
+}
+
+.lo_news h2 {
+  width: 400px;
+  height: 60px;
+  line-height: 60px;
+  background: #34afe4;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.lo_news h2 .icon_arrow {
+  display: inline-block;
+  width: 30px;
+  height: 26px;
+  margin: 0 10px 0 20px;
+  background: url(../images/icon1.png) no-repeat;
+  vertical-align: -6px;
+}
+
+.lo_news h3 {
+  border-bottom: 2px solid #34afe4;
+  line-height: 42px;
+  color: #333;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.lo_news h3 .way {
+  float: left;
+  display: inline;
+  width: 160px;
+}
+
+.lo_news h3 .weight {
+  float: left;
+  display: inline;
+  width: 80px;
+}
+
+.lo_news h3 .state {
+  float: left;
+  display: inline;
+  width: 90px;
+}
+
+.lo_news h3 .time {
+  float: left;
+  display: inline;
+  width: 70px;
+}
+
+.lo_news .list {
+  position: relative;
+  height: 320px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+.lo_news .list ul {
+  width: 400px;
+  /*height: 320px;*/
+}
+.lo_news .list ul li {
+  line-height: 32px;
+  color: #666;
+  overflow: hidden;
+}
+
+.lo_news .list ul li .way {
+  float: left;
+  display: inline;
+  width: 150px;
+  padding: 0 0 0 10px;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lo_news .list ul li .way b {
+  float: left;
+  display: inline;
+  width: 65px;
+  font-weight: normal;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lo_news .list ul li .way em {
+  float: left;
+  display: inline;
+  width: 20px;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lo_news .list ul li .weight {
+  float: left;
+  display: inline;
+  width: 80px;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lo_news .list ul li .state {
+  float: left;
+  display: inline;
+  width: 90px;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lo_news .list ul li .time {
+  float: left;
+  display: inline;
+  width: 70px;
+  text-align: center;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lo_news .call {
+  line-height: 50px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+/*right content  end*/
+
+/*logistics_menu   end*/
+
+
+/*logistics  content  ends*/

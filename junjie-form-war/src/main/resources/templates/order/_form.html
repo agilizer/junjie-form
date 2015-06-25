@@ -1,0 +1,231 @@
+<div class="row" th:fragment="form">
+	<div class="col-xs-12 col-md-12 col-md-12">
+		<h4>收货地址</h4>
+		<a href="" data-toggle="modal" data-target="#addAddress">新增收货地址</a>
+		<ul id="orderAddressUl" class="list-unstyled">
+			<li th:each="address,addressStat:${addressList}"><div
+					class="radio">
+					<label> <input type="radio"
+						onclick="changeOrderAddress(this)" name="addressRadio"
+						th:value="${address.id}" /> <span
+						th:text="${address.name+'  '+address.tel+'   '+ address.address}"></span>
+					</label>
+				</div></li>
+		</ul>
+		<!-- Modal -->
+		<div class="modal fade" id="addAddress" tabindex="-1" role="dialog"
+			aria-labelledby="addAddressLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/orderAddress/save"
+						id="orderAddressForm" class="form-horizontal">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">新增收货地址</h4>
+							
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-md-3  addressClass" for="name">收件人</label>
+								<div class="col-md-8">
+									<input type="text" class="form-control"
+										id="orderAddressFormName"
+										th:value="${order?.orderAddress?.name}" name="name"
+										placeholder="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3  addressClass" for="tel">收件人电话</label>
+								<div class="col-md-8">
+									<input type="text" class="form-control"
+										id="orderAddressFormTel" name="tel" placeholder="11位手机号"
+										th:value="${order?.orderAddress?.tel}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3  addressClass"
+									for="address">&nbsp;所在区域</label>
+								<div class="col-md-8">
+									<select id="areaSelectOne" onchange="changeArea(this,'areaSelectTwo')">
+									<option value='-1' selected="selected">请选择:</option>
+									<option th:text="${area.name}"
+											th:each="area,areaStat:${order.product?.areas}"
+											th:value="${area.id}">
+									</option>
+									</select>
+									<select id="areaSelectTwo"  onchange="changeArea(this,'areaSelectThree')">
+									<option value='-1' selected="selected">请选择:</option>
+									</select>
+									<select id="areaSelectThree" onchange="changeArea(this,'')">
+									<option value='-1' selected="selected">请选择:</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3  addressClass"
+									for="address">&nbsp;详细地址</label>
+								<div class="col-md-8">
+									<input type="text" class="form-control"
+										id="orderAddressFormAddress" name="address" placeholder=""
+										th:value="${order?.orderAddress?.address}" />
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary text-right">保存</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-12 col-md-12">
+		<h4>发票开票信息</h4>
+		<a href="" data-toggle="modal" data-target="#addInvoice">添加增值税开票信息</a>
+		<a href="" data-toggle="modal" data-target="#addInvoiceNormal">添加普通开票信息</a>
+		<ul id="invoiceUl" class="list-unstyled">
+			<li th:each="invoice,invoiceStat:${invoiceList}"><div
+					class="radio">
+					<label> <input type="radio" onclick="changeInvoice(this)"
+						name="invoiceRadio" th:value="${invoice.id}" /> 
+						<span
+						th:if="${invoice?.invoiceType?.toString()=='NORMAL'}" th:text="${'增值：'+invoice?.companyName}"></span>
+					<span
+						th:if="${invoice?.invoiceType?.toString()=='VAT'}" th:text="${'普通：'+invoice?.companyName+'  发票内容  '+invoice?.content}"></span>
+					</label>
+				</div></li>
+		</ul>
+		<!-- Modal -->
+		<div class="modal fade" style="min-width: 600px;" id="addInvoice"
+			tabindex="-1" role="dialog" aria-labelledby="addInvoiceLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/invoice/save" id="invoiceForm"
+						class="form-horizontal">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">增值税开票信息</h4>
+						</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="companyName">公司名称</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control col-md-4"
+										id="companyName" name="companyName" placeholder=""
+										th:value="${order?.invoice?.companyName}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="number">纳税人识别号</label>
+								<div class="col-md-6">
+									<input type="text" th:value="${order?.invoice?.number}"
+										class="form-control" id="number" name="number" placeholder="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="invoiceAddress">地址</label>
+								<div class="col-md-6">
+									<input type="text" th:value="${order?.invoice?.invoiceAddress}"
+										class="form-control" id="invoiceAddress" name="invoiceAddress"
+										placeholder="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="invoiceTel">电话</label>
+								<div class="col-md-6">
+									<input type="text" th:value="${order?.invoice?.invoiceTel}"
+										class="form-control" id="invoiceTel" name="invoiceTel"
+										placeholder="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="bankName">开户行名称</label>
+								<div class="col-md-6">
+									<input type="text" th:value="${order?.invoice?.bankName}"
+										class="form-control" id="bankName" name="bankName"
+										placeholder="" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="bankNo">开户行账号</label>
+								<div class="col-md-6">
+									<input type="text" th:value="${order?.invoice?.bankNo}"
+										class="form-control" id="bankNo" name="bankNo" placeholder="" />
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" style="min-width: 600px;"
+			id="addInvoiceNormal" tabindex="-1" role="dialog"
+			aria-labelledby="addInvoiceNormalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" action="/invoice/save" id="invoiceNormalForm"
+						class="form-horizontal">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">普通开票信息</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="companyName">发票抬头</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control col-md-4"
+										id="invoiceNormalCompanyName" name="companyName"
+										placeholder="" th:value="${order?.invoice?.companyName}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 col-md-offset-1" for="number">发票内容</label>
+								<div class="col-md-6">
+									<select id="invoiceNormalContent" name="content"
+										class="form-control">
+										<option value="明细">明细</option>
+										<option value="办公用品">办公用品</option>
+										<option value="电脑配件">电脑配件</option>
+										<option value="耗材">耗材</option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- 			end -->
+
+	</div>
+	<hr />
+
+</div>
+

@@ -1,0 +1,58 @@
+/*user_money_info   start*/
+.user_auction_content .user_money_info{
+  height: 90px;
+}
+.user_auction_content .user_money_info .img {
+  width: 88px;
+  height: 88px;
+  margin: 0 30px 0 0;
+  border: 1px solid #e6e6e6;
+}
+.user_auction_content .user_money_info .img img {
+  display: block;
+}
+
+.user_auction_content .user_money_info .text {
+  color: #666;
+}
+.user_auction_content .user_money_info .text h3 {
+  margin: 5px 0 10px;
+  font-size: 18px;
+}
+
+.user_auction_content .user_money_info .text p span {
+  margin: 0 35px 0 0;
+}
+
+.user_auction_content .user_money_info .text p b {
+  font-size: 30px;
+}
+
+.user_auction_content .user_money_info .text p b.black {
+  color: #474e5d;
+}
+
+.user_auction_content .user_money_info .button {
+  margin: 52px 0 0;
+}
+
+.user_auction_content .user_money_info .button .btn {
+  display: inline-block;
+  width: 115px;
+  height: 38px;
+  border-radius: 3px;
+  line-height: 38px;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+}
+
+.user_auction_content .user_money_info .button .btn.red {
+  margin: 0 10px 0 0;
+  background: #ea544a;
+}
+
+.user_auction_content .user_money_info .button .btn.black {
+  background: #474e5d;
+}
+/*user_money_info   end*/

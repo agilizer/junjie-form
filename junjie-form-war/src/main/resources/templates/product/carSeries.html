@@ -1,0 +1,192 @@
+<!-- 上传资源单 -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wb="http://open.weibo.com/wb">
+<head th:replace="layout/bootstrap :: head (title='产品车系编辑--觅油网')">
+</head>
+<body>
+	<link rel="stylesheet" href="/resources/css/share.css" />
+	<div class="navbar navbar-default"
+		th:replace="layout/bootstrap :: nav1"></div>
+	<div class="container">
+		<div class="row" th:replace="layout/bootstrap :: search"></div>
+		<div class="row"
+			th:replace="layout/bootstrap :: menu (active='upload')"></div>
+		<div class="well">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<h3 th:text="${'产品编辑--'+product.name}">产品编辑</h3>
+					<form class="form-horizontal" id="productUpdateForm"
+						action="/product/update" method="post"
+						enctype="multipart/form-data">
+							<input type="hidden" name="id" value="" th:value="${product?.id}"
+							id="productId" />
+						<input type="hidden" name="catalogJoinName" value=""
+							id="catalogJoinName" />
+						<div class="well">
+							<div class="form-group">
+								<label for="productCatalogId" class="col-sm-2 control-label">类别</label>
+								<div class="col-sm-2">
+									<select id="catalogLevelOne" name="catalogs.id"
+										class="form-control">
+										<option th:text="${productCatalog.name}"
+											th:each="productCatalog,productCatalogStat:${rootCatalogList}"
+											th:value="${productCatalog.id}"></option>
+									</select>
+								</div>
+								<div class="col-sm-8" th:id="${'levelTwoDiv'+productCatalog.id}"
+									th:each="productCatalog,levelTwoCatalogStat:${rootCatalogList}">
+									<div class="col-sm-5"
+										th:each="levelTwoCatalog,levelTwoCatalogStat:${productCatalog.childrenCatalogs}">
+										<label class="col-sm-6" th:text="${levelTwoCatalog.name}"></label>
+										<select id="catalogLevelThree" name="catalogs.id"
+											class="form-control col-sm-6">
+											<option th:text="${levelThreeCatalog.name}"
+												th:if="${#lists.contains(product.catalogs, levelThreeCatalog)}"
+												checked=""
+												th:each="levelThreeCatalog,levelThreeCatalogStat:${levelTwoCatalog.childrenCatalogs}"
+												th:value="${levelThreeCatalog.id}"></option>
+											<option th:text="${levelThreeCatalog.name}"
+												th:unless="${#lists.contains(product.catalogs, levelThreeCatalog)}"
+												th:each="levelThreeCatalog,levelThreeCatalogStat:${levelTwoCatalog.childrenCatalogs}"
+												th:value="${levelThreeCatalog.id}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group" style="margin-top: 10px;">
+								<label for="areaIds" class="col-sm-2 control-label">出售区域</label>
+								<div class="col-sm-10">
+									<div class="col-sm-2" th:each="area,areaStat:${areaList}">
+										<label class="col-sm-10" th:text="${area.name}"> </label> <input
+											th:if="${#lists.contains(product.areas, area)}"
+											checked="checked" type="checkbox" class="col-sm-2"
+											name="area.id" th:value="${area.id}" /> <input
+											th:unless="${#lists.contains(product.areas, area)}"
+											type="checkbox" class="col-sm-2" name="area.id"
+											th:value="${area.id}" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="madeFactory" class="col-sm-2 control-label">产品名称</label>
+							<div class="col-sm-10">
+								<input type="text" name="name" class="form-control"
+									required="required" placeholder="产品名称" id="name"
+									th:value="${product?.name}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="madeFactory" class="col-sm-2 control-label">产品关键字</label>
+							<div class="col-sm-10">
+								<input type="text" name="littleName" class="form-control"
+									required="required" placeholder="产品简要描述，用户最购买时最关心的几个关键字"
+									id="littleName" th:value="${product?.littleName}" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="madeFactory" class="col-sm-2 control-label">制造工厂/品牌</label>
+							<div class="col-sm-10">
+								<input type="text" name="madeFactory" class="form-control"
+									th:value="${product?.madeFactory}" required="required"
+									placeholder="制造工厂或者品牌" id="madeFactory" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="sellSumNumber" class="col-sm-2 control-label">库存</label>
+							<div class="col-sm-4">
+								<input type="text" name="sellSumNumber" min="0"
+									th:value="${product?.sellSumNumber}" required="required"
+									class="form-control number" placeholder="件数需要大于0"
+									id="sellSumNumber" />
+							</div>
+							<label for="productUnit" class="col-sm-2 control-label">销售单位</label>
+							<div class="col-sm-4">
+								<input type="text" name="productUnit" required="required"
+									class="form-control" placeholder="销售单位 吨  2L 4L ..."
+									id="productUnit" th:value="${product?.productUnit}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="unitPrice" class="col-sm-2 control-label">出售单价</label>
+							<div class="col-sm-4">
+								<input type="text" name="unitPrice" min="0" readonly=""
+									required="required" class="form-control number"
+									placeholder="出售单价需要大于0" id="unitPrice"
+									th:value="${product?.unitPrice}" />
+							</div>
+							<label for="marketPrice" class="col-sm-2 control-label">市场单价</label>
+							<div class="col-sm-4">
+								<input type="text" name="marketPrice" min="0"
+									th:value="${product?.marketPrice}" required="required"
+									class="form-control number" placeholder="市场单价需要大于0"
+									id="marketPrice" />
+							</div>
+						</div>
+
+						<div class="form-group hide">
+							<label for="storageLocationId" class="col-sm-2 control-label">仓库</label>
+							<div class="col-sm-2"
+								th:each="storageLocation,storageLocationStat:${storageLocationList}">
+								<label class="col-sm-10" th:text="${storageLocation.name}">
+								</label> <input type="checkbox" class="col-sm-2"
+									name="storageLocation.id" th:value="${storageLocation.id}" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="unitPrice" class="col-sm-2 control-label">分析报告</label>
+							<div class="col-sm-10">
+								<a class="col-sm-1" href="/fileInfo/download"
+									th:href="${'/fileInfo/download/'+product?.analysisReport?.id}">下载</a>
+
+								<input class="col-sm-10" type="file"
+									name="analysisReportFile" />
+							</div>
+						</div>
+
+						<div class="form-group"
+							th:replace="product/_imageFileUpload :: imageFileUpload"></div>
+						<div th:replace="product/_images :: images"></div>
+						<div class="form-group">
+							<label for="content" class="col-sm-2 control-label">产品详情</label>
+							<div class="col-sm-10">
+								<textArea name="content" required="required"
+									class="form-control" id="content" th:text="${product?.content}"></textArea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-default">更新</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="text-center" th:replace="layout/bootstrap :: footer">
+	</div>
+	<div th:replace="layout/bootstrap :: jsEnd"></div>
+	<div th:replace="layout/plugins :: select2"></div>
+	<div th:replace="layout/plugins :: jquery-validation"></div>
+	<script src="/resources/js/dmuploader.min.js"></script>
+	<script src="/resources/jsCustom/product/edit.js"></script>
+	<script src="/resources/plugins/ckeditor/ckeditor.js"></script>
+	<script src="/resources/plugins/ckeditor/lang/zh-cn.js"></script>
+	<script>
+		var fileUploadUrl = "/fileInfo/upload";
+		$(document).ready(function() {
+			CKEDITOR.replace('content')
+			$("#productUpdateForm").validate({
+				ignore : "",
+			});
+		});
+	</script>
+</body>
+</html>

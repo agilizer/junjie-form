@@ -1,0 +1,209 @@
+/*--------------------  resource_menu  start --------------------  */
+.resource_menu_search{
+	border: 1px solid #ddd;
+	margin:10px 0;
+  clear:both;
+}
+
+.resource_menu_search .city {
+  position: relative;
+  height: 30px;
+  border-bottom: 1px solid #e3e3e3;
+  background: #f3f3f3;
+}
+.resource_menu_search .city h2 {
+  line-height: 30px;
+  font-size: 12px;
+  color: #666;
+  text-indent: 15px;
+}
+
+.resource_menu_search .city .tab {
+  position: absolute;
+  right: 0;
+  top: -1px;
+  height: 32px;
+}
+
+.tab .tab_ul li{
+	  float: left;
+	  display: inline-block;
+	  height: 29px;
+	  padding: 0 15px;
+	  border-width: 3px 1px 0 1px;
+	  border-style: solid;
+	  border-color: transparent;
+	  _border-color: #f3f3f3;
+	  line-height: 29px;
+	  color: #3f3f3f;
+}
+
+.tab .tab_ul li.active {
+  border-color: #317ee7 #e3e3e3 #e3e3e3;
+  background: #fff;
+  font-weight: bold;
+}
+
+
+
+
+
+.resource_menu_search .search_breed {
+  height: 32px;
+  margin: 0 10px;
+  padding: 10px 0 0;
+  border-bottom: 1px dotted #ccc;
+}
+
+.resource_menu_search .search_breed span {
+  float: left;
+  display: inline-block;
+  width: 50px;
+  line-height: 20px;
+  font-weight: bold;
+  color: #3f3f3f;
+  text-align: right;
+}
+
+.resource_menu_search .search_breed .breed_ul li{
+  float: left;
+  display: inline-block;
+  height: 20px;
+  margin: 0 0 0 10px;
+  padding: 0 8px;
+  line-height: 20px;
+  color: #3f3f3f;	
+}
+.resource_menu_search .search_breed .breed_ul li a,.tab .tab_ul li{
+	display: inline-block;
+}
+
+.resource_menu_search .search_breed .breed_ul li.active {
+  background: #317ee7;
+  color: #fff;
+}
+.resource_menu_search .search_breed .breed_ul li.active a{
+	color:#fff;
+}
+/*conflict  filter_search  start*/
+.filter_form_div{
+	border:none;
+}
+.form_ul li{
+  margin-right:10px;
+}
+
+.form_ul li.upload{
+  margin:0px;
+}
+.form_ul li input.upload{
+  width: 80px;
+  text-align: center;
+  height: 30px;
+  line-height: 28px;
+  margin:0px;
+}
+.filter_result_table{
+	float: none;
+}
+/*conflict  filter_search  end*/
+
+
+/*-------------------- resource_menu filter_result_table  start  --------------------*/
+.w14{ width: 14%;}
+.resource_tab{
+  position: relative;
+  height: 33px;
+  border-bottom: 2px solid #e3e3e3;
+}
+.resource_tab .resource_tab_box{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 35px;
+}
+
+.resource_tab .resource_tab_box li{
+  float: left;
+  display: inline-block;
+  width: 120px;
+  height: 30px;
+  border-width: 3px 1px 2px;
+  border-style: solid;
+  border-color: #fff #fff #e3e3e3;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+.resource_tab .resource_tab_box li.active {
+  border-color: #317ee7 #e3e3e3 #fff;
+  font-weight: bold;
+}
+.resource_tab .resource_tab_box li a{
+	display: inline-block;
+}
+
+.resource_result_table ul li .checkbox{
+	margin: 0 8px 0 8px;
+	vertical-align: -2px;
+}
+.resource_result_table ul li.item{
+	text-align: left;
+}
+
+.result_ul_item li .money {
+  display: block;
+  width: 70px;
+  text-align: center;
+}
+.result_ul_item li .down {
+  color: #339900;
+}
+
+.result_ul_item li .money .iocn_arrow {
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  margin: 0 4px 0 0;
+  background: url(../images/bill.png) no-repeat;
+  vertical-align: -1px;
+  _vertical-align: -1px;
+}
+
+.result_ul_item li .down .iocn_arrow {
+  background-position: -216px -63px;
+}
+
+.result_ul_item li .up {
+  color: #f94100;
+}
+.result_ul_item li .up .iocn_arrow {
+  background-position: -205px -63px;
+}
+.result_ul_item li .preview,.result_ul_item li .download{
+	background: #fff;
+	border:1px solid #ddd;
+	display: inline-block;
+	padding:4px 5px;
+	text-align: center;
+	cursor:pointer;
+}
+.result_ul_item li .preview{
+	width: 50px;
+}
+.result_ul_item li .download{
+	width: 40px;
+}
+.result_ul_item li .preview:hover,.result_ul_item li .download:hover{
+	background: #ddd;
+}
+
+
+/*-------------------- resource_menu filter_result_table  end  --------------------*/
+
+
+/*--------------------  resource_menu  end --------------------  */
+.filter_result_table {
+  margin: 2px 0px 20px 0;
+}

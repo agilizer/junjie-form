@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: "maven"
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+version = '0.0.1-SNAPSHOT'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'junjie form', 'Implementation-Version': version
+	}
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+    compile("org.codehaus.groovy:groovy-all:2.4.1")
+	compile('org.apache.commons:commons-lang3:3.3.2')
+	compile('com.datastax.cassandra:cassandra-driver-core:2.1.6')
+	compile('com.datastax.cassandra:cassandra-driver-mapping:2.1.6')
+	compile("com.alibaba:fastjson:1.1.33")
+	compile fileTree(dir: 'libs',include: '*.jar')
+}
+

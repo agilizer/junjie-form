@@ -1,0 +1,6 @@
+<div class="wizard-steps"  th:fragment="wizard">
+	 <div class="completed-step" ><a href="#step-one"><span>1</span> 创建订单</a></div>
+	 <div th:if="${step>1}" th:attr="class='completed-step'" class="active-step"><a href="#step-two"><span>2</span>订单付款</a></div>
+	 <div th:if="${step>2}" th:attr="class='completed-step'" class="active-step"><a href="#"><span>3</span>提贷 </a></div>
+	 <div th:if="${step>3}" th:attr="class='completed-step'" class="active-step"><a href="#"><span>4</span> 交易完成</a></div>
+</div>

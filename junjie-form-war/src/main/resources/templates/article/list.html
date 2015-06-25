@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wb="http://open.weibo.com/wb">
+<head th:replace="layout/bootstrap :: head (title='油行情|油资讯|行情资讯--觅油网')">
+</head>
+<body>
+	<div class="navbar navbar-default"
+		th:replace="layout/bootstrap :: nav1"></div>
+	<div class="container">
+		<div class="row" th:replace="layout/bootstrap :: search"></div>
+		<div class="row" th:replace="layout/bootstrap :: menu (active='news')"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row" style="margin-bottom: 20px;"
+					th:each="article,articleStat:${jdbcPage.pageItems}">
+					<article class="">
+						<div class="col-md-4">
+							<a title="" th:href="${'/article/show/'+article[0]}"
+								th:title="${article[1]}"> <img width="220" height="162"
+								th:src="@{'/upload'+${article[3]}}" th:title="${article[1]}"
+								th:alt="${article[1]}" />
+							</a>
+						</div>
+
+						<div class="col-md-8">
+							<header>
+								<h4 class="title">
+									<a th:text="${article[1]}"
+										th:href="${'/article/show/'+article[0]}"
+										th:title="${article[1]}"> title</a>
+								</h4>
+								<div style="font-size: 12px;">
+									<span style="color: #ff9933">发布日期</span> | <span
+										class="thetime" th:text="${#calendars.format(article[4],'yyyy-MM-dd')}">>2015年5月13日</span>
+								</div>
+
+							</header>
+							<!--.header-->
+							<div class="post-content image-caption-format-1"
+								th:text="${article[2]}">"select a.id,
+								a.title,a.metaDesc,fileInfo.storePath" + " ,a.dateCreated "</div>
+							<span class="readMore"> <a href="#"
+								th:href="${'/article/show/'+article[0]}" th:title="${article[1]}">阅读</a></span>
+						</div>
+					</article>
+				</div>
+			</div>
+			<div class="col-md-4">
+				
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="text-center" th:replace="layout/bootstrap :: footer">
+	</div>
+	<div th:replace="layout/bootstrap :: jsEnd"></div>
+
+</body>
+</html>

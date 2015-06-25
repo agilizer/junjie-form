@@ -1,0 +1,39 @@
+<div class="well" th:fragment="comment" id="commentDiv">
+	<div class="row" th:if="${isComment}" id="commentFormDiv">
+		<form class="form-horizontal"  id="commentForm">
+			<input name="productId" type="hidden"   value="0" th:value="${product.id}" />
+			<div class="form-group">
+				<label class="radio-inline col-sm-offset-1"> <input type="radio" name="star"
+					value="非常不满" /> 非常不满
+				</label> <label class="radio-inline"> <input type="radio"
+					name="star" value="不满意" /> 不满意
+				</label> <label class="radio-inline"> <input type="radio"
+					name="star" value="一般" /> 一般
+				</label> <label class="radio-inline"> <input type="radio"
+					name="star" value="满意" checked="" /> 满意
+				</label> <label class="radio-inline"> <input type="radio"
+					name="star" value="非常满意" /> 非常满意
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-2 control-label">购买评价</label>
+				<div class="col-sm-8">
+					<textarea rows="6" id="commentContent" name="content" class="form-control"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-1 col-sm-8">
+					<input type="button" class="btn btn-primary btn-sx" value="提交评论"
+						onclick="submitComment()" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="row col-sm-offset-1 commentShow"   th:each="c,commentStat:${comments.pageItems}">
+		<span class="name col-sm-2" th:text="${c.author.username}"></span>
+		<span class="name col-sm-4" th:text="${c.star}"></span>  
+		<span class="date col-sm-2"
+			th:text="${#calendars.format(c.dateCreated,'yyyy-MM-dd')}"></span>
+		<div class="content col-sm-8" th:utext="${c.content}"></div>
+	</div>
+</div>

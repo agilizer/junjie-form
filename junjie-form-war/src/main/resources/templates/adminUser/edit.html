@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head th:replace="layout/admin :: head (title='用户列表管理--管理员后台')">
+<!-- BEGIN PLUGINS CSS -->
+<!-- END PLUGINS CSS -->
+</head>
+<body>
+	<div class="nav-bar-container" th:include="layout/admin :: nav">
+	</div>
+	<div id="page-wrapper">
+		<div class="row">
+			<div align="center">
+				<h1>用户信息</h1>
+				
+			</div>
+			<div>
+			<p>
+			用户id:
+			<span th:text="${user.id}">
+			</span>
+			用户名:
+			<span th:text="${user.username}">
+			</span>
+			</p>
+			</div>
+			
+		</div>
+	</div>
+	<div th:include="layout/admin :: jsEnd"></div>
+	<script type="text/javascript"  th:inline="text">
+	   var articleDelUrl ="/article/delete/";
+	</script>
+</body>
+</html>

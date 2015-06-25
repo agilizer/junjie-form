@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wb="http://open.weibo.com/wb">
+<head th:replace="layout/bootstrap :: head (title='商城--觅油网')">
+</head>
+<body>
+
+	<div class="navbar navbar-default"
+		th:replace="layout/bootstrap :: nav1"></div>
+	<div class="container">
+		<div class="row" th:replace="layout/bootstrap :: search"></div>
+		<div class="row" th:replace="layout/bootstrap :: menu (active='shop')"></div>
+		<div class="row">
+			<div class="shop_content search_filter_content" id="mainContentDiv">
+				<div class="row text-center"  
+				th:replace="layout/bootstrap :: moreSearch(productCatalogList=${productCatalogList},areaList=${areaList})">
+				</div>
+				<div class="well" style="margin-top: 20px;">
+					<div class="row">
+						<div  th:replace="product/_list :: list(jdbcPage=${jdbcPage})">
+						</div>
+					</div>
+					
+					<!-- page  start -->
+					<nav>
+						<div class="c_width" th:if="${jdbcPage.sumItem!=0}">
+							<ul class="pagination">
+								<li th:if="${jdbcPage.pageNumber!=0}"><a
+									href="javaScript:void(0)"
+									th:attr="href=${'/product/list/'+jdbcPage.max+'/'+jdbcPage.max*(jdbcPage.pageNumber-1)+paramsUrl}">上一页</a></li>
+								<li th:unless="${jdbcPage.pageNumber!=0}" class="disabled">
+									<a href="javaScript:void(0)">上一页</a>
+								</li>
+								<li
+									th:each="i : ${#numbers.sequence( 0, jdbcPage.pagesAvailable-1)}">
+									<a href=""
+									th:attr="href=${'/product/list/'+jdbcPage.max+'/'+jdbcPage.max*i+paramsUrl}"
+									index="1" th:text="${i+1}">1</a>
+								</li>
+
+								<li th:if="${jdbcPage.pageNumber != jdbcPage.pagesAvailable-1}">
+									<a href="javaScript:void(0)"
+									th:attr="href=${'/product/list/'+jdbcPage.max+'/'+jdbcPage.max*(jdbcPage.pageNumber+1)+paramsUrl}">下一页</a>
+								</li>
+								<li class="disabled"
+									th:unless="${jdbcPage.pageNumber!=jdbcPage.pagesAvailable-1}">
+									<a href="javaScript:void(0)">下一页</a>
+								</li>
+								<li class="disabled"><a href="javaScript:void(0)"
+									class="all_page"> 当前第<span
+										th:text="${jdbcPage.pageNumber+1}">50</span>页， 共<span
+										th:text="${jdbcPage.pagesAvailable}">50</span>页
+								</a></li>
+							</ul>
+						</div>
+						<div class="c_width" th:if="${jdbcPage.sumItem==0}">
+							没有查找到相关数据,请重选搜索.</div>
+					</nav>
+					<!-- page  end -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr />
+	<div class="text-center" th:replace="layout/bootstrap :: footer">
+	</div>
+	<div th:replace="layout/bootstrap :: jsEnd"></div>
+</body>
+</html>

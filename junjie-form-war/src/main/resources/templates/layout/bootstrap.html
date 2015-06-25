@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-Frame-Options" content="allow" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title th:text="${title}">title</title>
+<!-- Bootstrap Core CSS -->
+<link
+	href="/resources/plugins/sb-admin/bower_components/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/resources/css/share.css" />
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+.btn-default {
+	background-color: #FF9933;
+}
+
+.myNavbar {
+	background-color: #FF9933;
+}
+
+#menuNav {
+	font-weight: bold;
+	font-size: 20px;
+	color: #0000CC
+}
+
+#menuNav>li>a {
+	color: black
+}
+
+#my-panel-heading {
+	background-color: #FF9933;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-default" th:fragment="nav1">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand active" href="/"> <img alt="Brand"
+					style="margin-top: -24px;" src="/resources/images/logo.png" />
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav"
+					th:if="${#authentication.name!='anonymousUser'}">
+					<li><a href="/product/list/10/0">喵，欢迎来找油</a></li>
+					<li class="login"><a
+						th:if="${#authentication.name!='anonymousUser'}"
+						sec:authentication="name" href="/userCenter/index" title="用户中心">用户名</a>
+					</li>
+					<li><a href="/logout">安全退出</a></li>
+				</ul>
+				<ul class="nav navbar-nav"
+					th:if="${#authentication.name=='anonymousUser'}">
+					<li><a href="/product/list/10/0">喵，欢迎来找油</a></li>
+					<li class="login"><a href="/auth/loginPage" title="请登录">请登录</a>
+					</li>
+					<li><a href="/auth/registerPage" title="免费注册">[免费注册]</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/userCenter/index">我的觅油网</a></li>
+					<li class="dropdown"><a href="/order/user/list/10/0">我的订单
+					</a></li>
+					<li><a href="#">在线客服</a></li>
+					<li><a href="#">咨询电话&nbsp; 010-84871345</a></li>
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row" th:fragment="search">
+				<div class="col-lg-3"></div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-6">
+					<div class="input-group" id="searchDiv">
+						<select id="searchCarBrand" onchange="searchCarBrandChange(this)" name="searchCarBrand" >
+						<option value="">请选择品牌</option>
+						</select>
+						<select id="searchCarSeries" onchange="searchCarSeriesChange(this)" name="searchCarSeries" >
+						<option value="">请选择车系</option>
+						</select>
+						<select id="searchCarModel" onchange="searchCarModelChange(this)" name="searchCarModel" >
+						<option value="">请选择车型</option>
+						</select>
+					</div>
+					<!-- /input-group -->
+				</div>
+				<!-- /.col-lg-6 -->
+				<div class="col-lg-3"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 20px;" th:fragment="menu">
+		<nav class="navbar navbar-default myNavbar">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav" id="menuNav">
+						<li th:if="${active=='index'}" class="active"><a href="/"
+							title="首页" class="active">首页</a></li>
+						<li th:if="${active!='index'}"><a href="/" title="首页"
+							class="active">首页</a></li>
+
+						<li th:if="${active=='shop'}" class="active"><a
+							href="/product/list/10/0" title="商城" class="active">商城</a></li>
+						<li th:if="${active!='shop'}"><a href="/product/list/10/0"
+							title="商城" class="active">商城</a></li>
+
+						<li th:if="${active=='baseOil'}" class="active hide"><a
+							href="/product/list/10/0" title="基础油" class="active">基础油</a></li>
+						<li th:if="${active!='baseOil'}"><a href="/product/list/10/0"
+							title="基础油" class="active hide">基础油</a></li>
+
+						<li th:if="${active=='oil'}" class="active"><a
+							href="/product/list/10/0" title="润滑油" class="active">润滑油</a></li>
+						<li th:if="${active!='oil'}"><a href="/product/list/10/0"
+							title="润滑油" class="active">润滑油</a></li>
+
+						<li th:if="${active=='resources'}" class="active hide"><a
+							href="/product/resource/list/10/0" title="资源单" class="active">资源单</a>
+						</li>
+						<li th:if="${active!='resources'}" class="hide"><a
+							href="/product/resource/list/10/0" title="资源单" class="active">资源单</a>
+						</li>
+
+						<li th:if="${active=='news'}" class="active"><a
+							href="/article/list/10/0" title="行情" class="active">行情</a></li>
+						<li th:if="${active!='news'}"><a href="/article/list/10/0"
+							title="行情" class="active">行情</a></li>
+
+						<li th:if="${active=='upload'}" class="active hide"><a
+							href="/product/create" title="我要卖油">我要卖油</a></li>
+						<li th:if="${active!='upload'}" class="hide"><a
+							href="/product/create" title="我要卖油">我要卖油</a></li>
+
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</div>
+
+
+	<div class="row text-center" th:fragment="moreSearch">
+		<!-- filter form start -->
+		<div class="filter_form_div clearfix">
+			<form class="form-inline" action="/product/list/10/0"
+				name="filter_form" method="post">
+				<div class="col-md-11">
+					<div class="col-md-12"
+						th:each="productCatalog,productCatalogStat:${productCatalogList}">
+						<label class="col-md-12 text-left hide"
+							th:text="${productCatalog.name}">油品分类</label>
+						<div class="row "
+							th:each="levelTwoCatalog,levelTwoCatalogStat:${productCatalog.childrenCatalogs}">
+							<label class="col-md-1" th:text="${levelTwoCatalog.name}">油品二级分类</label>
+							<div class="col-md-11">
+								<div style="width: 100px; float: left"
+									th:each="levelThreeCatalog,levelThreeCatalogStat:${levelTwoCatalog.childrenCatalogs}">
+									<label th:text="${levelThreeCatalog.name}">油品三级分类</label> <input
+										name="productCatalogIds"
+										th:if="${#arrays.contains(productCatalogIds, levelThreeCatalog.id)}"
+										checked="checked" type="checkbox" th:value="${levelThreeCatalog.id}" />
+									<input name="productCatalogIds"
+										th:unless="${#arrays.contains(productCatalogIds, levelThreeCatalog.id)}"
+										type="checkbox" th:value="${levelThreeCatalog.id}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<label class="col-md-1">区域</label>
+						<div class="col-md-11">
+							<div style="width: 100px; float: left"
+								th:each="area,areaCatalogStat:${areaList}">
+								<label th:text="${area.name}">区域名称</label> 
+								<input name="areaIds"
+									th:if="${#arrays.contains(areaIds, area.id)}" checked=""
+									type="checkbox" th:value="${area.id}" /> 
+								<input
+									name="areaIds" th:unless="${#arrays.contains(areaIds, area.id)}"
+									 type="checkbox" th:value="${area.id}" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-1">
+					<input type="submit" id="search" class="btn  btn-default"
+						name="search" value="确定" />
+				</div>
+			</form>
+		</div>
+		<!-- filter form end -->
+	</div>
+
+
+	<hr />
+	<div class="text-center" th:fragment="footer"
+		th:utext="${application?.configMap?.footerHtml}  "></div>
+	<div th:fragment="jsEnd">
+		<!-- jQuery -->
+		<script
+			src="/resources/plugins/sb-admin/bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script
+			src="/resources/plugins/sb-admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+			
+			
+		<script src="/resources/jsCustom/share.js"></script>	
+	</div>
+</body>
+</html>

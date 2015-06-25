@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layout/auth :: head (title='觅油网登录')">
+</head>
+<body>
+	<!-- wrapper  start -->
+	<div id="wrapper" class="user_wrapper">
+			<!-- header 	start -->
+			<div id="header" th:replace="layout/auth :: header">				
+			</div>
+			<!-- header 	end -->
+		<!-- header  start -->
+		<div class="header">
+			<div class="c_width">
+				<h1 class="logo">
+					<a href="/" title="觅油网">觅油网</a>
+				</h1>
+			</div>
+		</div>
+		<!-- header   end -->
+
+		<!-- login_box  start -->
+
+		<div class="c_width">
+			<div class="login_box login_form_bg">
+				<form id="loginForm" name="f" data-th-action="@{/login}" method="post" class="form  login_form">
+					<div class="login">
+						<h2>会员登录
+							<a href="/auth/registerPage" title="立即注册"  class="register_a fr">立即注册>></a>
+						</h2>
+						<div class="userName clearfix">
+							<label>登录名：</label>
+	                    	<input type="text" tabindex="1" class="user_icon"
+	                    	 required="required" id="mobile" name="username" placeholder="手机"/>
+						</div>
+						<div class="passWord clearfix">
+							<label>密 码：</label>
+							<input tabindex="2" class="password_icon"
+							 type="password" required="required" id="password" name="password"  placeholder="请输入密码"/>
+						</div>
+						<div class="link">
+							<a href="/auth/findPwPage">忘记密码？</a><input
+							 type="checkbox" checked="checked" name="remember-me"  />下次自动登录
+						</div>
+						<div class="btn">
+							<input type="button" id="login_btn" value="登   录"/>
+							<span>
+                        		<img width="20" id="login_loading_img" 
+                        		style="display: none" height="20" src="/resources/images/loading_gray.gif"/>
+                        	</span>
+							<div id="login_error">
+							
+								<div for="mobile" th:if="${param.error}" class="fail">
+									<i class="icon_tip"></i>
+									<span class="text" th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}"></span>
+								</div>
+								<div for="mobile" th:unless="${param.error}" class="fail dp-none">
+									<i class="icon_tip"></i>
+									<span class="text" ></span>
+								</div>
+							</div>
+						</div>
+						<div class="other" style="display:none">
+							<p>合作账号登陆：</p>
+							<ul class="login_list_ul clearfix">
+								<li class="item"><a href="javaScript:void(0)" target="_bank" title="QQ">QQ</a></li>
+								<li class="item"><a href="javaScript:void(0)" target="_bank" title="微信">微信</a></li>
+								<li class="item"><a href="javaScript:void(0)" target="_bank" title="微博">微博</a></li>
+								<li class="item"><a href="javaScript:void(0)" target="_bank" title="知乎">知乎</a></li>
+								<li class="item">
+									<div class="sel_box_login">
+										<a href="javaScript:void(0)" class="sel_a_login"><span class="login_path">请选择</span><i></i></a>
+										<ul class="other_list_men">
+											<li><a href="javaScript:void(0)" title="其他" target="_blank">其他</a></li>
+											<li><a href="javaScript:void(0)" title="淘宝" target="_blank">淘宝</a></li>
+											<li><a href="javaScript:void(0)" title="京东" target="_blank">京东</a></li>
+											<li><a href="javaScript:void(0)" title="人人" target="_blank">人人</a></li>
+											<li><a href="javaScript:void(0)" title="58同城" target="_blank">58同城</a></li>
+											<li><a href="javaScript:void(0)" title="赶集网" target="_blank">赶集网</a></li>
+											<li><a href="javaScript:void(0)" title="豆瓣" target="_blank">豆瓣</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- login_box  end -->
+
+		<!-- footer  start -->
+		<div id="footer" th:replace="layout/auth :: footer">
+		</div>
+		<!-- footer  end -->
+	</div>
+	<!-- wrapper  start -->
+	<script type="text/javascript" src="/resources/js/login.js"></script>
+	<script type="text/javascript"  th:inline="text">
+	   var checkUsernameUrl ="/auth/checkUsername/";
+	   var registerUrl="/auth/register";
+	   var sendFindPwSmsCodeUrl="/auth/sendFindPwSmsCode/";
+	   var resetPasswordUrl="/auth/resetPassword";
+	   var sendRegSmsCodeUrl="/auth/sendRegisterSmsCode/";
+
+	   var usernameError="[[#{username.error}]]";
+	   var passwordError="[[#{password.error}]]";
+	   var registerErrorText="[[#{register.error.text}]]";
+	   var resetPwError="[[#{reset.pw.error}]]";
+	   var successShowText="[[#{success.show.text}]]";
+	   var accountNotExistError="[[#{account.not.exist.error}]]";
+	   var getSmsCode="[[#{get.sms.code}]]";
+	   var successRegisterText="[[#{success.register.text}]]";
+	   var successResetPw="[[#{success.reset.pw}]]";
+	   var usernameFormatError="[[#{username.format.error}]]";
+	</script>
+</body>
+</html>

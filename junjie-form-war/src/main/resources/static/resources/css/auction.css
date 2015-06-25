@@ -1,0 +1,371 @@
+/*auction   start*/
+
+
+/*auction_banner  start*/
+.auction_banner {
+  width: 100%;
+  height: 240px;
+  border-top: 1px solid #f0f0f0;
+  position: relative;
+}
+
+.auction_banner a {
+  position: absolute;
+  width: 100%;
+  height: 240px;
+  background: url("../images/auction_banner.jpg") no-repeat 50% 50%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  z-index: 3;
+  opacity: 1;
+  cursor: pointer;
+}
+/*action_banner  end*/
+
+
+
+/*auction_content  start*/
+.auction_content{
+	  background: #f0f0f0;
+}
+
+.auction_content .container{
+  position: relative;
+}
+
+
+.list_fl {
+  width: 710px;
+  margin-top: 10px;
+  padding: 0 0 20px;
+}
+.list_fl .list_item {
+  margin: 0 0 10px;
+  padding: 20px 30px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  font-size: 14px;
+}
+
+
+
+.list_fl .list_item .info {
+  position: relative;
+  width: 400px;
+  padding: 5px 0 10px;
+  border-right: 1px dashed #e6e6e6;
+}
+
+.list_fl .list_item .info .name {
+  width: 390px;
+  padding: 0 0 15px;
+  font-size: 18px;
+  color: #323232;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.list_fl .list_item .info .name a {
+  color: #323232;
+}
+
+.red {
+  color: #ea544a;
+}
+
+.list_fl .list_item .info .price b {
+  font-size: 30px;
+}
+
+.list_fl .list_item .info .company {
+  padding: 15px 0 20px;
+  color: #5e5e5e;
+}
+
+.list_fl .list_item .info .tag span {
+  display: inline-block;
+  height: 24px;
+  margin: 0 10px 0 0;
+  padding: 0 15px;
+  border: 1px solid #fcae52;
+  border-radius: 2px;
+  line-height: 24px;
+  background: #fff9f2;
+}
+
+.list_fl .list_item .info .tag .yellow a {
+  color: #fcae52;
+}
+
+.list_fl .list_item .info .icon_end {
+  position: absolute;
+  left: 200px;
+  top: 40px;
+  width: 171px;
+  height: 82px;
+  background: url(../images/auction_index.png) no-repeat 0 -186px;
+}
+
+.list_fl .list_item .time {
+  width: 217px;
+  padding: 5px 0 10px 30px;
+}
+
+.list_fl .list_item .time .txt {
+  font-size: 18px;
+  text-align: center;
+}
+
+
+.list_fl .list_item .time .count {
+  margin: 30px 0;
+  line-height: 36px;
+}
+
+.list_fl .list_item .time .count b {
+  display: block;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+}
+
+.list_fl .list_item .time .btn.gray {
+  background-position: 0 -82px;
+}
+
+.list_fl .list_item .time .btn {
+  display: block;
+  width: 215px;
+  height: 40px;
+  line-height: 40px;
+  background: url(../images/auction_index.png) no-repeat;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+}
+
+
+/*rightbar  content  start*/
+.rightbar {
+  width: 270px;
+  padding: 10px 0 10px;
+}
+.rightbar .user {
+  padding: 25px 14px 30px;
+}
+.rightbar .box {
+  margin: 0 0 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+}
+
+.rightbar .user .txt {
+  line-height: 42px;
+  font-size: 30px;
+  color: #474e5d;
+  text-align: center;
+}
+.rightbar .user .txt span {
+  display: block;
+}
+.rightbar .user .btn.redd {
+  margin: 20px 0 0;
+  background: #ea544a;
+}
+.rightbar .user .btn {
+  display: inline-block;
+  width: 240px;
+  height: 38px;
+  border-radius: 2px;
+  line-height: 38px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+.rightbar .news {
+  margin: 0 0 10px;
+}
+.rightbar .news .top {
+  height: 40px;
+  padding: 10px 0 0;
+}
+
+.rightbar .news .top .option a {
+  display: inline-block;
+  width: 15px;
+  height: 23px;
+  margin: 0 0 0 5px;
+  padding: 8px 0 0 5px;
+}
+
+.rightbar .news .top .option .prev .icon_prev {
+  background-position: -226px -231px;
+}
+.rightbar .news .top .option .next .icon_next {
+  background-position: -246px -231px;
+}
+
+.rightbar .news .top .option i {
+  display: block;
+  width: 9px;
+  height: 16px;
+  background: url(../images/auction_index.png) no-repeat;
+  overflow: hidden;
+}
+
+.rightbar h3 {
+  font-size: 24px;
+  font-weight: normal;
+  color: #474e5d;
+}
+
+.rightbar .news .rank {
+  position: relative;
+  padding: 15px 20px;
+  border: 1px solid #e6e6e6;
+  line-height: 36px;
+  background: #fff;
+  color: #1c232e;
+}
+.rightbar .news .rank_box {
+  width: 228px;
+  overflow: hidden;
+}
+.rightbar .news .rank_list {
+  width: 456px;
+
+/*  width: 1374px;
+  margin-right:-458px;*/
+}
+
+.rightbar .news .rank ul {
+  width: 228px;
+}
+.rightbar .news .rank a {
+  color: #1c232e;
+
+/*    width: 160px;
+  display: block;*/
+}
+.rightbar .news .rank .icon_line {
+  position: absolute;
+  left: -1px;
+  bottom: -1px;
+  width: 270px;
+  height: 5px;
+  background: url(../images/auction_index.png) no-repeat 0 -269px;
+  overflow: hidden;
+}
+
+.rightbar .process {
+  padding: 25px 0;
+  text-align: center;
+}
+
+.rightbar .process h3 {
+  margin: 0 0 8px;
+}
+
+.rightbar .process ul {
+  padding: 30px 0 0 20px;
+} 
+
+.rightbar .process li {
+  width: 62px;
+  color: #5e5e5e;
+}
+.rightbar .process li.arrow {
+  width: 21px;
+}
+.rightbar .process .icon_img1 {
+  display: block;
+  width: 62px;
+  height: 62px;
+  margin: 0 0 10px;
+  background: url(../images/auction_index.png) no-repeat 0 -123px;
+}
+.rightbar .process .icon_arrow {
+  display: block;
+  width: 15px;
+  height: 14px;
+  margin: 24px 0 0 3px;
+  background: url(../img/auction_index.png) no-repeat -200px -231px;
+}
+
+.rightbar .process .icon_img2 {
+  display: block;
+  width: 62px;
+  height: 62px;
+  margin: 0 0 10px;
+  background: url(../images/auction_index.png) no-repeat -63px -123px;
+}
+.rightbar .process .icon_img3 {
+  display: block;
+  width: 62px;
+  height: 62px;
+  margin: 0 0 10px;
+  background: url(../images/auction_index.png) no-repeat -126px -123px;
+}
+.rightbar .call {
+  padding: 25px 20px;
+  text-align: center;
+}
+.rightbar .call h3 {
+  margin: 0 0 20px;
+}
+
+.rightbar .call i {
+  display: inline-block;
+  background: url(../images/auction_index.png) no-repeat;
+  overflow: hidden;
+}
+.rightbar .call hr {
+  height: 1px;
+  margin: 20px 0;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+}
+.rightbar .call .icon_call {
+  width: 27px;
+  height: 24px;
+  margin: 0 12px 0 0;
+  background-position: -172px -231px;
+  vertical-align: -2px;
+}
+
+.rightbar .call .icon_call1 {
+  width: 184px;
+  height: 21px;
+  background-position: -172px -186px;
+}
+
+.rightbar .call .icon_qq {
+  width: 24px;
+  height: 24px;
+  margin: 0 12px 0 0;
+  background-position: -189px -123px;
+  vertical-align: -4px;
+}
+
+.rightbar .call .icon_qq1 {
+  width: 159px;
+  height: 22px;
+  background-position: -172px -208px;
+}
+/*rightbar  content  end*/
+
+/*auction_content  end*/
+
+/*auction   end*/
+
+
+.no .icon_prev {
+  background-position: -216px -231px;
+}

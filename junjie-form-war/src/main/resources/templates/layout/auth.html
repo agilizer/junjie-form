@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
+<head th:fragment="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 <title th:text="${title}">title</title>
+<!-- 	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta property="" content="" />
+	<meta property="" content="" />
+	<meta name="renderer" content="webkit" /> -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  -->
+	<link rel="stylesheet" href="/resources/css/global.css"/>
+	<link rel="stylesheet" href="/resources/css/user.css"/>
+	<script type="text/javascript" src="/resources/js/jquery.1.9.1.min.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.md5.js"></script>
+	<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/resources/js/common.js"></script>
+</head>
+<body>
+	<!-- wrapper  start -->
+	<div id="wrapper" class="user_wrapper">
+			<!-- header 	start -->
+			<div id="header"  th:fragment="header">
+				<div class="tNav c_width">
+					<!-- left  topNav  start -->
+					<div class="tNav_fl fl">
+						<ul class="tNav_ul">
+							<li>喵，欢迎来找油</li>
+							<li class="login"><a href="/auth/loginPage" title="请登录">请登录</a></li>
+							<li><a href="/auth/registerPage" title="免费注册">[免费注册]</a></li>
+						</ul>
+					</div>
+					<!-- left  topNav  end -->
+
+					<!-- right  topNav  start -->
+					<div class="tNav_fr fr">
+						<ul class="tNav_ul">
+							<li><a href="/userCenter/index" title="我的觅油网">我的觅油网</a></li>
+							<li class="user_order">
+								<a href="javaScript:void(0)" title="我的订单" class="order_a">我的订单
+									<i class="sel_downArrow sel_active"></i>
+								</a>
+								<div class="nav_select order_sel_ul dp-none">
+									<ul>
+										<li><a href="javaScript:void(0)">商城订单1</a></li>
+										<li><a href="javaScript:void(0)">商城订单2</a></li>
+										<li><a href="javaScript:void(0)">商城订单3</a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="javaScript:void(0)" title="积分商城">积分商城</a></li>
+							<li><a href="javaScript:void(0)" title="在线客服"><i class="kf_icon"></i>在线客服</a></li>
+							<li><span>交易时间：工作日8:30-17:00</span></li>
+						</ul>
+					</div>
+					<!-- right  topNav  end -->
+				</div>
+			</div>
+			<!-- header 	end -->
+
+		<!-- header  start -->
+		<div class="header">
+			<div class="c_width">
+				<h1 class="logo">
+					<a href="javaScript:void(0)" title="觅油网">觅油网</a>
+				</h1>
+			</div>
+		</div>
+		<!-- header   end -->
+
+		<!-- footer  start -->
+		<div id="footer" th:fragment="footer">
+			<div class="link">
+				<a href="javaScript:void(0)" target="_blank">关于我们</a>
+				|	<a href="javaScript:void(0)" target="_blank">联系我们</a>
+				|	<a href="javaScript:void(0)" target="_blank">人才招聘</a>
+				|	<a href="javaScript:void(0)" target="_blank">商家入驻</a>
+				|	<a href="javaScript:void(0)" target="_blank">广告服务</a>
+				|	<a href="javaScript:void(0)" target="_blank">友情链接</a>
+				|	<a href="javaScript:void(0)" target="_blank">销售联盟</a>
+				|	<a href="javaScript:void(0)" target="_blank">公益</a>
+			</div>
+			<div class="text">COPYRIGHT © 觅油网 www.miyouwang.com 沪ICP备 13013915号-3 ICP证：沪B2-20140148</div>
+		</div>
+		<!-- footer  end -->
+	</div>
+	<!-- wrapper  start -->
+</body>
+</html>

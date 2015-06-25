@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wb="http://open.weibo.com/wb">
+<head th:replace="layout/bootstrap :: head (title=${article.title}+'|觅油网')">
+</head>
+<body>
+	<div class="navbar navbar-default"
+		th:replace="layout/bootstrap :: nav1"></div>
+	<div class="container">
+		<div class="row" th:replace="layout/bootstrap :: search"></div>
+		<div class="row" th:replace="layout/bootstrap :: menu (active='news')"></div>
+		<div class="row">
+			<div class="col-md-8">
+				<h2 th:text="${article.title}">title</h2>
+				<h6><span>觅油网</span>&nbsp;<span th:text="${#calendars.format(article?.dateCreated,'yyyy-MM-dd')}">
+				觅油网</span></h6>
+				<hr/>
+				<article th:utext="${article.content}">
+				
+				</article>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+	
+	<hr />
+	<div class="text-center" th:replace="layout/bootstrap :: footer">
+	</div>
+	<div th:replace="layout/bootstrap :: jsEnd"></div>
+</body>
+</html>

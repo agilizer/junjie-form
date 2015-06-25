@@ -1,0 +1,231 @@
+/*--------------------- user_wrapper   start ---------------------*/
+.user_wrapper {
+}
+
+/*--------------------  header  logo  start -------------------- */
+
+.user_wrapper .header h1.logo {
+  padding: 12px 0 0;
+}
+
+.user_wrapper .header .logo a {
+  display: block;
+  width: 357px;
+  height: 56px;
+  background: url(../images/logo.jpg) no-repeat;
+  text-indent: -9999px;
+}
+/*--------------------  header  logo  end -------------------- */
+
+/*-------------------- login_box   start  form  more start --------------------*/
+.login_box {
+}
+
+.login_form_bg {
+  height: 450px;
+  padding: 20px 0 0 620px;
+  background: url(../images/loginform_bg.jpg) no-repeat 10px 50px;
+}
+
+.login_box .login {
+  width: 360px;
+  border: 1px solid #ddd;
+}
+
+.login_box .login h2 {
+  padding: 12px 0 12px 20px;
+  border-bottom: 1px solid #ddd;
+  color: #666;
+  font-size: 14px;
+}
+
+.login_box .login .register_a,.login_box .login .login_a {
+  margin-right: 10px;
+  color: #FF664F;
+}
+
+.login_box .login .userName {
+  position: relative;
+  margin: 20px 0 0 0;
+  background: #fff;
+}
+
+.login_box .login .passWord {
+  position: relative;
+  margin: 25px 0 0 0;
+  background: #fff;
+}
+
+.userName.clearfix {
+  position: relative;
+  margin: 25px 0 0 0;
+  background: #fff;
+}
+
+.login_box .login .userName input,.login_box .login .passWord input ,.login_box .auth_code input {
+  float: left;
+  width: 194px;
+  height: 18px;
+  margin: 0;
+  padding: 9px 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  line-height: 18px;
+  outline: none;
+}
+
+.login_box .auth_code input {
+}
+
+.login_box .login .userName label,.login_box .login .passWord label,.login_box .auth_code label {
+  float: left;
+  display: inline-block;
+  width: 80px;
+  height: 38px;
+  line-height: 38px;
+  text-align: right;
+  color: #333
+}
+
+.login_box .login .auth_code button {
+  display: block;
+  width: 100px;
+  margin: 10px 0 10px 80px;
+  text-align: center;
+  padding: 8px 0;
+  background-color: #3a83e8;
+  color: #fff;
+}
+
+.login_box .login .userName input.user_icon {
+  background: url(../images/input_cion.png) no-repeat 192px -36px;
+}
+
+.login_box .login .passWord input.password_icon {
+  background: url(../images/input_cion.png) no-repeat 192px 2px;
+}
+
+.login_box .login .link {
+  width: 212px;
+  padding: 25px 0 0 80px;
+}
+
+.login_box .login .link a {
+  float: right;
+  display: inline;
+  color: #3a83e8;
+}
+
+.login_box .login .link input {
+  vertical-align: -2px;
+}
+
+.login_box .login .btn {
+  position: relative;
+  margin: 15px 0 0;
+  padding: 0 0 35px 80px;
+}
+
+.login_box .login .btn input {
+  width: 212px;
+  height: 36px;
+  border: none;
+  line-height: 36px;
+  border-radius: 3px;
+  background: #f50;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+/*-------------------- login  error  start--------------------*/
+.login_box .login .fail {
+  position: absolute;
+  top: 44px;
+  left: 80px;
+  height: 27px;
+  line-height: 12px;
+  color: #f94100;
+}
+
+.login_box .login .icon_tip {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0 5px 0 0;
+  background: url(../images/bg.png) no-repeat -24px 0;
+  vertical-align: -2px;
+}
+/*-------------------- login  error  end-------------------- */
+
+.login_box .login .other p {
+  line-height: 30px;
+  padding: 0 0 10px 40px;
+  color: #999;
+}
+
+.login_box .login .other p {
+  line-height: 30px;
+}
+
+.other .login_list_ul {
+  padding: 0 0 10px 40px;
+}
+
+.other .login_list_ul li.item {
+  float: left;
+  line-height: 24px;
+  margin-right: 28px;
+}
+
+.other .login_list_ul li a {
+  display: inline-block;
+}
+
+.sel_box_login {
+  position: relative;
+}
+
+.sel_box_login a.sel_a_login {
+  display: inline-block;
+  line-height: 24px;
+  width: 86px;
+  text-indent: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.sel_box_login a.sel_a_login i {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: red;
+  float: right;
+  margin: 5px 4px 0 0;
+}
+
+.border{
+  border: 1px solid #ddd; 
+}
+.sel_box_login .other_list_men {
+  width: 86px;
+  position: absolute;
+  top: 25px;
+  background: #fff;
+  height: 0px;
+  overflow: hidden;
+}
+
+.sel_box_login .other_list_men li a {
+  display: block;
+  text-indent: 10px;
+}
+
+.sel_box_login .other_list_men li a:hover {
+  background: #FF5500;
+  color: #fff;
+}
+/*-------------------- login_box   start  form  more end --------------------*/
+/*--------------------- user_wrapper   end ---------------------*/

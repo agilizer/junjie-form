@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head th:replace="layout/userCenter :: head (title='用户订单--觅油网用户中心')">
+</head>
+<body>
+	<div id="wrapper">
+		<div class="nav-bar-container" th:replace="layout/userCenter :: nav">
+		</div>
+		<!--.nav-bar-container-->
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div align="center">
+					<h2>我的订单列表</h2>
+				</div>
+				<table class="table">
+				<thead>
+					<tr>
+						<td>订单编号</td>
+						<td>油品名称</td>
+						<td>订单金额</td>
+						<td>联系地址</td>
+						<td>联系电话</td>
+						<td>操作</td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="order,orderStat:${jdbcPage.pageItems}">
+						<td th:text="${order.id}"></td>
+						<td><a th:href="${'/product/show/'+order.product.id}" target="_blank"  th:text="${order.product.name}"></a></td>
+						<td><span th:text="${order.orderNumber}"></span>&nbsp;X&nbsp;<span th:text="${order.product.unitPrice}"></span>=<span th:text="${order.sumPrice}"></span>
+						</td>
+						<td th:text="${order?.orderAddress?.address}"></td>
+						<td th:text="${order?.orderAddress?.tel}"></td>
+						<td th:if="${order.orderStatus.toString()=='LOCK'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">去支付</a>
+						</td>
+						<td th:if="${order.orderStatus.toString()=='CHECK_PAYMENT'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">正在审核付款凭证</a>
+						</td>
+						<td th:if="${order.orderStatus.toString()=='SEND'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">待收货</a>
+						</td>
+						<td th:if="${order.orderStatus.toString()=='PAYMENT'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">去支付</a>
+						</td>
+						<td th:if="${order.orderStatus.toString()=='PAYMENT_FINISH'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">等待发贷</a>
+						</td>
+						<td th:if="${order.orderStatus.toString()=='FINISH'}">
+						<a href="#" th:href="${'/order/show/'+order.id}" target="_blank">交易完成</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<span>当前第:<label th:text="${jdbcPage.pageNumber +1}"></label>页,总计<label
+					th:text="${jdbcPage.pagesAvailable}"></label>页
+				</span>
+			</div>
+		</div>
+	</div>
+	<div th:replace="layout/userCenter :: jsEnd" >
+	</div> 
+</body>
+</html>
