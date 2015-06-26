@@ -22,59 +22,7 @@ import com.datastax.driver.mapping.MappingManager;
 public class FormOptionsImpl implements FormOptions{
 	private static final Logger log = LoggerFactory
 			.getLogger(FormOptionsImpl.class);
-	private Cluster cluster;
-	private Session session;
-	private InitSchema initSchema;
-	private MappingManager mappingManager ; 
-	
-	@Override
-	public Session getSession() {
-		return this.session;
-	}
-
-	@Override
-	public Cluster getCluster() {
-		return this.cluster;
-	}
-	@Override
-	public void init() {
-		if(null==cluster){
-			log.warn("init warn!!!!!! cluster is null load 127.0.0.1 default!");
-			cluster = Cluster.builder().addContactPoint("127.0.0.1").build();
-		}
-		Metadata metadata = cluster.getMetadata();
-		log.info("Connected to cluster: {}\n",
-				metadata.getClusterName());
-		for (Host host : metadata.getAllHosts()) {
-			log.info("Datatacenter: {}; Host: {}; Rack: {}\n",
-					host.getDatacenter(), host.getAddress(), host.getRack());
-		}
-		session = cluster.connect();
-		if(null==initSchema){
-			initSchema = new InitSchemaDefault();
-		}
-		initSchema.init(session);
-		 initMapper();
-	}
-	private void initMapper(){
-		mappingManager = new MappingManager(session);
-		mappingManager.mapper(FormSaas.class);
-		mappingManager.mapper(FormUser.class);
-		mappingManager.mapper(HtmlForm.class);
-		mappingManager.mapper(HtmlInput.class);
-		mappingManager.mapper(InputValue.class);
-		mappingManager.udtMapper(FormListShow.class);
-	}
-	@Override
-	public void init(String node) {
-		Builder builder = Cluster.builder().addContactPoint(node);
-		init(builder);
-	}
-	@Override
-	public void init(Builder builder) {
-		cluster = builder.build();
-		init();
-	}
+	private CassandraTemplate cassandraTemplate;
 
 	@Override
 	public FormSaas createFormSaas() {
@@ -93,7 +41,7 @@ public class FormOptionsImpl implements FormOptions{
 			formSaas.setDateCreated(date);
 			formSaas.setId(saasId);
 			formSaas.setLastUpdated(date);
-			this.save(formSaas);
+			cassandraTemplate.save(formSaas);
 		}
 		return formSaas;
 	}
@@ -159,42 +107,11 @@ public class FormOptionsImpl implements FormOptions{
 	}
 
 	@Override
-	public void close() {
-		if(null!=session){
-			session.close();
-		}
-		if(null!=cluster){
-			cluster.close();
-		}
+	public void setCassandraTemplate(CassandraTemplate cassandraTemplate) {
+		this.cassandraTemplate = cassandraTemplate;
 	}
 
-	@Override
-	public Cluster setCluster(Cluster cluster) {
-		return this.cluster=cluster;
-	}
-
-	@Override
-	public void setInitSchema(InitSchema initSchema) {
-		this.initSchema = initSchema;
-	}
-
-	@Override
-	public MappingManager getMappingManager() {
-		return this.mappingManager;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T save(T object) {
-		mappingManager.mapper((Class<T>)object.getClass()).save(object);
-		return object;
-	}
-
-
-	@Override
-	public <T> T getEntity(Class<T> t, Object id) {
-		return mappingManager.mapper(t).get(id);
-	}
+	
 
 	
 }

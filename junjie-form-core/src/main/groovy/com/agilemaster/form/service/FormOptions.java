@@ -11,23 +11,8 @@ import com.datastax.driver.mapping.MappingManager;
 
 
 public interface FormOptions {
-	public Session getSession();
-	public Cluster getCluster();
-	public Cluster setCluster(Cluster cluster);
-	MappingManager getMappingManager();
-	void setInitSchema(InitSchema initSchma);
-	/**
-	 * note ,must call {@link #setCluser} first.
-	 * if cluster  is null,load localhost default;
-	 */
-	void init();
-	public void init(Builder builder);
-	public void init(String node);
-	void close();
-	<T> T save(T object);
-	<T> T getEntity(Class<T> t,Object id);
+	void setCassandraTemplate(CassandraTemplate cassandraTemplate);
 	FormSaas createFormSaas();
-	
 	FormSaas createFormSass(String saasId);
 	HtmlForm createForm(String saasId,HtmlForm htmlForm);
 	HtmlForm createForm(String saasId,String name,String description);
