@@ -12,6 +12,8 @@ public class HtmlForm implements Serializable{
 	
 	private String id;
 	private String saasId;
+	private String beforeText;
+	private String afterText;
 	/**
 	 * 表单的名称(必填)
 	 */
@@ -57,6 +59,18 @@ public class HtmlForm implements Serializable{
 	}
 	public void setCustomInfo(Map<String, String> customInfo) {
 		this.customInfo = customInfo;
+	}
+	public String getBeforeText() {
+		return beforeText;
+	}
+	public void setBeforeText(String beforeText) {
+		this.beforeText = beforeText;
+	}
+	public String getAfterText() {
+		return afterText;
+	}
+	public void setAfterText(String afterText) {
+		this.afterText = afterText;
 	}
 	
 }

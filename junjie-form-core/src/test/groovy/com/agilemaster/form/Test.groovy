@@ -9,7 +9,6 @@ HtmlForm form = new HtmlForm()
 def formId = UUID.randomUUID().toString()
 form.setId(formId);
 form.setName("测试表单")
-form.setAction("/test")
 form.setBeforeText("表单前文本(可选)")
 form.setAfterText("表单后文本(可选)")
 
