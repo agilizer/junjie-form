@@ -7,12 +7,14 @@ import com.agilemaster.form.domain.InputValue;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.mapping.MappingManager;
 
 
 public interface FormOptions {
 	public Session getSession();
 	public Cluster getCluster();
 	public Cluster setCluster(Cluster cluster);
+	MappingManager getMappingManager();
 	void setInitSchema(InitSchema initSchma);
 	/**
 	 * note ,must call {@link #setCluser} first.
@@ -22,12 +24,14 @@ public interface FormOptions {
 	public void init(Builder builder);
 	public void init(String node);
 	void close();
+	<T> T save(T object);
+	<T> T getEntity(Class<T> t,Object id);
+	FormSaas createFormSaas();
 	
-	FormSaas createFormSass();
 	FormSaas createFormSass(String saasId);
-	HtmlForm createForm(String sassId,HtmlForm htmlForm);
-	HtmlForm createForm(String sassId,String name,String description);
-	HtmlForm createForm(String sassId,String name);
+	HtmlForm createForm(String saasId,HtmlForm htmlForm);
+	HtmlForm createForm(String saasId,String name,String description);
+	HtmlForm createForm(String saasId,String name);
 	boolean updateForm(String fromId,String name,String description);
 	boolean updateForm(String fromId,String name);
 	boolean updateFormDesc(String fromId,String description);

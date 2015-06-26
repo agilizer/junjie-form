@@ -1,8 +1,14 @@
 package com.agilemaster.form.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
+import com.datastax.driver.mapping.EnumType;
+import com.datastax.driver.mapping.annotations.Enumerated;
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
+@Table(keyspace = "junjie_form", name = "HtmlInput")
 public class HtmlInput implements Serializable{
 	/**
 	 * 
@@ -11,6 +17,7 @@ public class HtmlInput implements Serializable{
 	/**
 	 * 唯一标识
 	 */
+	@PartitionKey
 	private String id;
 	
 	private String saasId;
@@ -29,10 +36,11 @@ public class HtmlInput implements Serializable{
 	 * 示例inputType为checkbox，有属性checked默认值提交。
 	 * 	  inputType为text，有属性placeholder提交。
 	 */
-	private Map<String,Object> inputAttrs;
+	private Map<String,String> inputAttrs;
 	/**
 	 * input的类型(必填)
 	 */
+	@Enumerated(EnumType.STRING)
 	private InputType inputType = InputType.text;
 	/**
 	 * 显示的序号(必填),前端处理
@@ -51,9 +59,13 @@ public class HtmlInput implements Serializable{
 	 * 存储select,checkbox,radio选项数据。
 	 */
 	private Map<String,String> selectInfo;
+	@Enumerated(EnumType.STRING)
 	private ValueType valueType = ValueType.STRING;
 	
-	public static enum ValueType{
+	private Date dateCreated;
+	private Date lastUpdated;
+	
+	public  enum ValueType{
 		DOUBLE,
 		STRING,
 		LONG,
@@ -62,7 +74,7 @@ public class HtmlInput implements Serializable{
 	/**
 	 * input类型数据定义
 	 */
-	public static  enum  InputType{
+	public   enum  InputType{
 	    checkbox,
 	    /**
 	     * 单个文件
@@ -120,10 +132,11 @@ public class HtmlInput implements Serializable{
 	public void setInputType(InputType inputType) {
 		this.inputType = inputType;
 	}
-	public Map<String, Object> getInputAttrs() {
+	
+	public Map<String, String> getInputAttrs() {
 		return inputAttrs;
 	}
-	public void setInputAttrs(Map<String, Object> inputAttrs) {
+	public void setInputAttrs(Map<String, String> inputAttrs) {
 		this.inputAttrs = inputAttrs;
 	}
 	public Integer getSequence() {
@@ -162,6 +175,16 @@ public class HtmlInput implements Serializable{
 	public void setSaasId(String saasId) {
 		this.saasId = saasId;
 	}
-	
-	
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 }

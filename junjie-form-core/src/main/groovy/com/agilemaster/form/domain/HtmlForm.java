@@ -1,15 +1,19 @@
 package com.agilemaster.form.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
+@Table(keyspace = "junjie_form", name = "HtmlForm")
 public class HtmlForm implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 440632749764772923L;	
-	
+	@PartitionKey
 	private String id;
 	private String saasId;
 	private String beforeText;
@@ -22,7 +26,9 @@ public class HtmlForm implements Serializable{
 	private String description;
 	
 	private Map<String,String> customInfo;
-	private List<HtmlInput> htmlInputs;
+	private List<String> htmlInputs;
+	private Date dateCreated;
+	private Date lastUpdated;
 	public String getId() {
 		return id;
 	}
@@ -36,12 +42,7 @@ public class HtmlForm implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<HtmlInput> getHtmlInputs() {
-		return htmlInputs;
-	}
-	public void setHtmlInputs(List<HtmlInput> htmlInputs) {
-		this.htmlInputs = htmlInputs;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -72,5 +73,22 @@ public class HtmlForm implements Serializable{
 	public void setAfterText(String afterText) {
 		this.afterText = afterText;
 	}
-	
+	public List<String> getHtmlInputs() {
+		return htmlInputs;
+	}
+	public void setHtmlInputs(List<String> htmlInputs) {
+		this.htmlInputs = htmlInputs;
+	}
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 }
