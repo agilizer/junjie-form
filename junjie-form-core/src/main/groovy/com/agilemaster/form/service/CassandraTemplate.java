@@ -1,11 +1,17 @@
 package com.agilemaster.form.service;
 
 import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Session;
 import com.datastax.driver.core.Cluster.Builder;
+import com.datastax.driver.core.Session;
+import com.datastax.driver.core.querybuilder.Select;
 import com.datastax.driver.mapping.MappingManager;
 
 public interface CassandraTemplate {
+	public void setKeySpace(String keySpace);
+	public String getKeySpace();
+	public Select genSelect(String keySpace,String tableName);
+	Select genSelect(String tableName);
+	
 	public Session getSession();
 	public Cluster getCluster();
 	public Cluster setCluster(Cluster cluster);

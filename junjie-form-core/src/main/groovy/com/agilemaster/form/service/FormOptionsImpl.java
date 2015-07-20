@@ -47,8 +47,14 @@ public class FormOptionsImpl implements FormOptions{
 	}
 
 	@Override
-	public HtmlForm createForm(String sassId, HtmlForm htmlForm) {
-		return null;
+	public HtmlForm createForm(String saasId, HtmlForm htmlForm) {
+		if(null!=htmlForm){
+			//TODO check FormSaas exist
+			htmlForm.setSaasId(saasId);
+			htmlForm.setId( UUID.randomUUID().toString());
+			cassandraTemplate.save(htmlForm);
+		}
+		return htmlForm;
 	}
 
 	@Override
