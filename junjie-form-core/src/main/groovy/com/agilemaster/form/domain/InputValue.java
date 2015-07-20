@@ -3,6 +3,7 @@ package com.agilemaster.form.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.datastax.driver.mapping.annotations.Frozen;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 @Table(keyspace = "junjie_form", name = "InputValue")
@@ -17,7 +18,12 @@ public class InputValue {
 	private Long numberValue;
 	private Double doubleValue;
 	private Date dateValue;
+	/**
+	 * 多选
+	 */
 	private List<String> listValue;
+	 @Frozen("list<frozen<FileInfo>>")
+	private List<FileInfo> fileInfoes;
 	public String getId() {
 		return id;
 	}
@@ -78,4 +84,11 @@ public class InputValue {
 	public void setLabel(String label) {
 		this.label = label;
 	}
+	public List<FileInfo> getFileInfoes() {
+		return fileInfoes;
+	}
+	public void setFileInfoes(List<FileInfo> fileInfoes) {
+		this.fileInfoes = fileInfoes;
+	}
+	
 }    

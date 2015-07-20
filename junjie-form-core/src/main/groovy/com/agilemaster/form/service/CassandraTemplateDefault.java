@@ -3,6 +3,7 @@ package com.agilemaster.form.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.agilemaster.form.domain.FileInfo;
 import com.agilemaster.form.domain.FormListShow;
 import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.domain.FormUser;
@@ -10,9 +11,9 @@ import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.InputValue;
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Host;
 import com.datastax.driver.core.Metadata;
-import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.MappingManager;
 
@@ -61,6 +62,7 @@ public class CassandraTemplateDefault implements CassandraTemplate{
 		mappingManager.mapper(HtmlInput.class);
 		mappingManager.mapper(InputValue.class);
 		mappingManager.udtMapper(FormListShow.class);
+		mappingManager.udtMapper(FileInfo.class);
 	}
 	@Override
 	public void init(String node) {

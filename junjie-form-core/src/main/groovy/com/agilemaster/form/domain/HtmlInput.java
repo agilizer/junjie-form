@@ -2,6 +2,7 @@ package com.agilemaster.form.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import com.datastax.driver.mapping.EnumType;
@@ -62,6 +63,8 @@ public class HtmlInput implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private ValueType valueType = ValueType.STRING;
 	
+	private List<String> rightAnswer;
+	
 	private Date dateCreated;
 	private Date lastUpdated;
 	
@@ -69,7 +72,11 @@ public class HtmlInput implements Serializable{
 		DOUBLE,
 		STRING,
 		LONG,
-		HTML
+		HTML,
+		IMAGE,
+		IMAGES,
+		FILE,
+		FILES
 	}
 	/**
 	 * input类型数据定义
@@ -187,4 +194,12 @@ public class HtmlInput implements Serializable{
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
+	public List<String> getRightAnswer() {
+		return rightAnswer;
+	}
+	public void setRightAnswer(List<String> rightAnswer) {
+		this.rightAnswer = rightAnswer;
+	}
+	
+	
 }
