@@ -5,31 +5,28 @@ import static org.junit.Assert.assertEquals;
 import java.util.UUID;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.agilemaster.form.domain.FormSaas;
-import com.agilemaster.form.service.CassandraTemplate;
-import com.agilemaster.form.service.CassandraTemplateDefault;
 import com.agilemaster.form.service.FormOptions;
 import com.agilemaster.form.service.FormOptionsImpl;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {CassandraConfig.class})
 public class FormOptionsTest {
-	CassandraTemplate cassandraTemplate = new CassandraTemplateDefault();
+	@Autowired
 	FormOptions formOptions = new FormOptionsImpl();
 	@Test
-	public void testInit() {
-		cassandraTemplate.init("127.0.0.1");
-		cassandraTemplate.close();
-	}
-	@Test
 	public void testSave(){
-		cassandraTemplate.init("127.0.0.1");
-		formOptions.setCassandraTemplate(cassandraTemplate);
 		String id = UUID.randomUUID().toString();
 		formOptions.createFormSass(id);
 		System.out.println(id);
-		FormSaas search = cassandraTemplate.getEntity(FormSaas.class, id);
+		FormSaas search = formOptions.createFormSass(id);
 		assertEquals(id,search.getId());
-		cassandraTemplate.close();
 	}
 
 }

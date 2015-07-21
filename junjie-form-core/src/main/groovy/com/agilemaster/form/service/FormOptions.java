@@ -8,15 +8,12 @@ import com.agilemaster.form.domain.InputValue;
 
 public interface FormOptions {
 	/**
-	 * 设置cassandra访问模板 
-	 * @param cassandraTemplate
-	 */
-	void setCassandraTemplate(CassandraTemplate cassandraTemplate);
-	/**
 	 * 创建一个帐号，id随机生成，返回时id有值。
 	 * @return
 	 */
 	FormSaas createFormSaas();
+	
+	FormSaas findFormSaasOne(String id);
 	/**
 	 * 指定id创建formSaas帐号
 	 * @param saasId

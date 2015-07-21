@@ -5,24 +5,26 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.stereotype.Service;
 
-import com.agilemaster.form.domain.FormListShow;
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
-import com.agilemaster.form.domain.FormUser;
 import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.InputValue;
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.Cluster.Builder;
-import com.datastax.driver.core.Host;
-import com.datastax.driver.core.Metadata;
-import com.datastax.driver.core.Session;
-import com.datastax.driver.mapping.MappingManager;
+import com.datastax.driver.core.querybuilder.QueryBuilder;
+import com.datastax.driver.core.querybuilder.Select;
 
+@Service
 public class FormOptionsImpl implements FormOptions{
 	private static final Logger log = LoggerFactory
 			.getLogger(FormOptionsImpl.class);
-	private CassandraTemplate cassandraTemplate;
+	@Qualifier("junjieFormcassandraOperations")
+	@Autowired()
+	private CassandraOperations cassandraOperations;
 
 	@Override
 	public FormSaas createFormSaas() {
@@ -41,7 +43,7 @@ public class FormOptionsImpl implements FormOptions{
 			formSaas.setDateCreated(date);
 			formSaas.setId(saasId);
 			formSaas.setLastUpdated(date);
-			cassandraTemplate.save(formSaas);
+			cassandraOperations.insert(formSaas);
 		}
 		return formSaas;
 	}
@@ -52,7 +54,7 @@ public class FormOptionsImpl implements FormOptions{
 			//TODO check FormSaas exist
 			htmlForm.setSaasId(saasId);
 			htmlForm.setId( UUID.randomUUID().toString());
-			cassandraTemplate.save(htmlForm);
+			cassandraOperations.insert(htmlForm);
 		}
 		return htmlForm;
 	}
@@ -112,11 +114,10 @@ public class FormOptionsImpl implements FormOptions{
 	}
 
 	@Override
-	public void setCassandraTemplate(CassandraTemplate cassandraTemplate) {
-		this.cassandraTemplate = cassandraTemplate;
+	public FormSaas findFormSaasOne(String id) {
+		Select select = QueryBuilder.select().from(JunjieFormConstants.T_FORM_SAAS);
+		select.where(QueryBuilder.eq("id", id));
+		FormSaas formSaas = cassandraOperations.selectOne(select, FormSaas.class);
+		return formSaas;
 	}
-
-	
-
-	
 }
