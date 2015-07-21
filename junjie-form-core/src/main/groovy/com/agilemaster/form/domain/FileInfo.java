@@ -3,7 +3,6 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-
 import com.datastax.driver.mapping.EnumType;
 import com.datastax.driver.mapping.annotations.Enumerated;
 import com.datastax.driver.mapping.annotations.UDT;

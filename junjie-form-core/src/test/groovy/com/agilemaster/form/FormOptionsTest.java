@@ -14,8 +14,7 @@ import com.agilemaster.form.service.FormSaasOptions;
 import com.agilemaster.form.service.FormSaasOptionsImpl;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
-
-public class FormOptionsTest {
+public class FormOptionsTest{
 	FormSaasOptions formOptions ;
 	CassandraTemplate cassandraTemplate ;
 	@Before
