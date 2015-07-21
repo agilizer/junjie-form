@@ -4,24 +4,20 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.datastax.driver.mapping.annotations.Frozen;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
-
 /**
  * 用户回答的表单记录
  * @author asdtiang
  *
  */
-@Table(keyspace = "junjie_form", name = "FormUser")
+//@Table(keyspace = "junjie_form", name = "FormUser")
 public class FormUser implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3642006078357814461L;
-	@PartitionKey
+	//@PartitionKey
 	private String id;
-	 @Frozen("list<frozen<FormListShow>>")
+	// @Frozen("list<frozen<FormListShow>>")
 	private List<FormListShow> formList;
 	private Date dateCreated;
 	private Date lastUpdated;

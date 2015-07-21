@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
+import org.springframework.data.cassandra.config.CassandraEntityClassScanner;
 import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.convert.CassandraConverter;
@@ -39,12 +40,14 @@ public class CassandraConfig {
 	}
 
 	@Bean
-	public CassandraMappingContext mappingContext() {
-		return new BasicCassandraMappingContext();
+	public CassandraMappingContext mappingContext() throws Exception {
+	    BasicCassandraMappingContext bean = new BasicCassandraMappingContext(); 
+	    bean.setInitialEntitySet(CassandraEntityClassScanner.scan(("com.agilemaster.form.domain")));
+	    return bean;
 	}
 
 	@Bean
-	public CassandraConverter converter() {
+	public CassandraConverter converter() throws Exception {
 		return new MappingCassandraConverter(mappingContext());
 	}
 
@@ -54,16 +57,16 @@ public class CassandraConfig {
 		session.setCluster(cluster().getObject());
 		session.setKeyspaceName(env.getProperty("cassandra.keyspace"));
 		session.setConverter(converter());
-		session.setSchemaAction(SchemaAction.NONE);
+		session.setSchemaAction(SchemaAction.RECREATE_DROP_UNUSED);
 		return session;
 	}
 
 	@Bean(name="junjieFormcassandraOperations")
 	public CassandraOperations cassandraTemplate() throws Exception {
 		CassandraOperations operations = new CassandraTemplate(session().getObject());
-		InitSchema initSchema = new InitSchemaDefault();
-		initSchema.setCreateDrop(Boolean.parseBoolean(env.getProperty("create.drop")));
-		initSchema.init(operations.getSession());
+//		InitSchema initSchema = new InitSchemaDefault();
+//		initSchema.setCreateDrop(Boolean.parseBoolean(env.getProperty("create.drop")));
+//		initSchema.init(operations.getSession());
 		return operations;
 	}
 	

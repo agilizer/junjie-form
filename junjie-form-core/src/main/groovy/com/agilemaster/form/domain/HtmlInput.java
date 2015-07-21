@@ -4,12 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import com.datastax.driver.mapping.EnumType;
-import com.datastax.driver.mapping.annotations.Enumerated;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "HtmlInput")
+//@Table(keyspace = "junjie_form", name = "HtmlInput")
 public class HtmlInput implements Serializable{
 	/**
 	 * 
@@ -18,7 +13,7 @@ public class HtmlInput implements Serializable{
 	/**
 	 * 唯一标识
 	 */
-	@PartitionKey
+	//@PartitionKey
 	private String id;
 	
 	private String saasId;
@@ -41,7 +36,7 @@ public class HtmlInput implements Serializable{
 	/**
 	 * input的类型(必填)
 	 */
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	private InputType inputType = InputType.text;
 	/**
 	 * 显示的序号(必填),前端处理
@@ -60,7 +55,7 @@ public class HtmlInput implements Serializable{
 	 * 存储select,checkbox,radio选项数据。
 	 */
 	private Map<String,String> selectInfo;
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	private ValueType valueType = ValueType.STRING;
 	
 	private List<String> rightAnswer;

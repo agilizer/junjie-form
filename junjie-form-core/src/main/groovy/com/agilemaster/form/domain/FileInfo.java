@@ -3,18 +3,11 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-
-import com.datastax.driver.mapping.EnumType;
-import com.datastax.driver.mapping.annotations.Enumerated;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.UDT;
-@UDT (keyspace = "junjie_form", name = "FileInfo")
 public class FileInfo implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5125176334336764053L;
-	@PartitionKey
 	private String  id;
 	private String  authorId;
 	/**
@@ -23,7 +16,6 @@ public class FileInfo implements Serializable{
 	private String storePath;
 	private String description;
 	private Long fileSize;
-	@Enumerated(EnumType.STRING)
 	private FileType fileType;
 	public static long getSerialversionuid() {
 		return serialVersionUID;

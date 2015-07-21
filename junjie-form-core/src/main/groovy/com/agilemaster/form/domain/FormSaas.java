@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.datastax.driver.mapping.annotations.Frozen;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
-
+import org.springframework.data.cassandra.mapping.Column;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.Table;
 /**
  * 租户，一个租户有多个表单。
  * @author asdtiang
  */
-@Table(keyspace = "junjie_form", name = "FormSaas")
+@Table("FormSaas")
 public class FormSaas implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6246700292930185379L;
-	@PartitionKey
+	@PrimaryKey
 	private String  id;
-	 @Frozen("list<frozen<FormListShow>>")
-	private List<FormListShow> formList;
+	private List<String> formList;
+	 @Column
 	private Date dateCreated;
+	 @Column
 	private Date lastUpdated;
 	public String getId() {
 		return id;
@@ -30,12 +30,7 @@ public class FormSaas implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public List<FormListShow> getFormList() {
-		return formList;
-	}
-	public void setFormList(List<FormListShow> formList) {
-		this.formList = formList;
-	}
+	
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -48,5 +43,12 @@ public class FormSaas implements Serializable{
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
+	public List<String> getFormList() {
+		return formList;
+	}
+	public void setFormList(List<String> formList) {
+		this.formList = formList;
+	}
+	
 	
 }

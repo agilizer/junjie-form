@@ -3,8 +3,6 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.datastax.driver.mapping.annotations.UDT;
-
 /**
  * 新定义数据类型，方便列表显示表单。
  * @author asdtiang
@@ -12,7 +10,7 @@ import com.datastax.driver.mapping.annotations.UDT;
  * 当为user时，startTime为表单开始提交时间，endTime为结束提交时间。
  * 意义虽然一样，但程序实现时是不一样的。请注意。
  */
-@UDT (keyspace = "junjie_form", name = "FormListShow")
+//@UDT (keyspace = "junjie_form", name = "FormListShow")
 public class FormListShow   implements Serializable{
 
 	/**

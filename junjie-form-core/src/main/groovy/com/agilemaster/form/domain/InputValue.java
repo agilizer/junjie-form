@@ -2,13 +2,9 @@ package com.agilemaster.form.domain;
 
 import java.util.Date;
 import java.util.List;
-
-import com.datastax.driver.mapping.annotations.Frozen;
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "InputValue")
+//@Table(keyspace = "junjie_form", name = "InputValue")
 public class InputValue {
-	@PartitionKey
+	//@PartitionKey
 	private String id;
 	private String label;
 	private String userId;
@@ -22,7 +18,7 @@ public class InputValue {
 	 * 多选
 	 */
 	private List<String> listValue;
-	 @Frozen("list<frozen<FileInfo>>")
+	// @Frozen("list<frozen<FileInfo>>")
 	private List<FileInfo> fileInfoes;
 	public String getId() {
 		return id;

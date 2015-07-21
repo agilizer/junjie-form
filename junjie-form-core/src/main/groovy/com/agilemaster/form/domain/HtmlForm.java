@@ -4,16 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import com.datastax.driver.mapping.annotations.PartitionKey;
-import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "HtmlForm")
+//@Table(keyspace = "junjie_form", name = "HtmlForm")
 public class HtmlForm implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 440632749764772923L;	
-	@PartitionKey
+	//@PartitionKey
 	private String id;
 	private String saasId;
 	private String beforeText;
