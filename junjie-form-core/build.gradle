@@ -29,13 +29,14 @@ dependencies {
     compile("org.codehaus.groovy:groovy-all:2.4.1")
 	compile('org.apache.commons:commons-lang3:3.3.2')
 	compile('com.datastax.cassandra:cassandra-driver-core:2.1.6')
-	compile('com.datastax.cassandra:cassandra-driver-mapping:2.1.6')
 	compile("com.alibaba:fastjson:1.1.33")
-	
+	compile 'org.springframework:spring-context:4.1.7.RELEASE'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
 	compile 'org.apache.logging.log4j:log4j-core:2.3'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.3'
 	compile fileTree(dir: 'libs',include: '*.jar')
+	compile('org.springframework.data:spring-data-cassandra:1.2.1.RELEASE')
 	testCompile 'junit:junit:4.12'
+	testCompile 'org.springframework:spring-test:4.1.7.RELEASE'
 }
 

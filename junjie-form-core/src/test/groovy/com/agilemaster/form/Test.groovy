@@ -4,6 +4,7 @@ import com.agilemaster.form.domain.HtmlForm
 import com.agilemaster.form.domain.HtmlInput
 import com.agilemaster.form.domain.HtmlInput.InputType
 import com.alibaba.fastjson.JSON
+import com.datastax.driver.core.querybuilder.QueryBuilder
 
 HtmlForm form = new HtmlForm()
 def formId = UUID.randomUUID().toString()
@@ -32,4 +33,5 @@ input.setSequence(5);
 
 form.setHtmlInputs(inputList)
 println JSON.toJSONString(form)
+
 

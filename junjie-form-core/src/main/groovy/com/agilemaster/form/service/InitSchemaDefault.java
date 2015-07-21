@@ -4,7 +4,7 @@ import com.datastax.driver.core.Session;
 
 public class InitSchemaDefault implements InitSchema{
 
-	private boolean createDrop = true;
+	private boolean createDrop =  false;
 	@Override
 	public void init(Session session){
 		if(createDrop){
@@ -14,5 +14,9 @@ public class InitSchemaDefault implements InitSchema{
 		for(String str:InitCql.INIT_CQL){
 			session.execute(str);
 		}
+	}
+	@Override
+	public void setCreateDrop(boolean createDrop) {
+		this.createDrop  = createDrop;
 	}
 }
