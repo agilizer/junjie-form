@@ -1,24 +1,20 @@
 package com.agilemaster.form.service;
 
-import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.Cluster.Builder;
+import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.MappingManager;
 
 public interface CassandraTemplate {
 	public Session getSession();
-	public Cluster getCluster();
-	public Cluster setCluster(Cluster cluster);
 	MappingManager getMappingManager();
-	void setInitSchema(InitSchema initSchma);
-	/**
-	 * note ,must call {@link #setCluser} first.
-	 * if cluster  is null,load localhost default;
-	 */
-	void init();
-	public void init(Builder builder);
-	public void init(String node);
-	void close();
+
+	<T> Mapper<T> getMapper(Class<T> t);
+
 	<T> T save(T object);
-	<T> T getEntity(Class<T> t,Object id);
+
+	<T> T getEntity(Class<T> t, Object id);
+
+	<T> void delete(T object);
+
+	<T> void deleteById(Class<T> t, Object id);
 }

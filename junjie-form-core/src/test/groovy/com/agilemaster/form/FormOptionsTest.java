@@ -4,32 +4,41 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.service.CassandraTemplate;
-import com.agilemaster.form.service.CassandraTemplateDefault;
-import com.agilemaster.form.service.FormOptions;
-import com.agilemaster.form.service.FormOptionsImpl;
+import com.agilemaster.form.service.FormSaasOptions;
+import com.agilemaster.form.service.FormSaasOptionsImpl;
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Cluster.Builder;
 
 public class FormOptionsTest {
-	CassandraTemplate cassandraTemplate = new CassandraTemplateDefault();
-	FormOptions formOptions = new FormOptionsImpl();
-	@Test
-	public void testInit() {
-		cassandraTemplate.init("127.0.0.1");
-		cassandraTemplate.close();
+	FormSaasOptions formOptions ;
+	CassandraTemplate cassandraTemplate ;
+	@Before
+	public void before(){
+		Builder builder = Cluster.builder().addContactPoint("127.0.0.1");
+		CassandraJunjieForm.init(builder);
+		cassandraTemplate = CassandraJunjieForm.getInstance();
+		formOptions =  new FormSaasOptionsImpl();
 	}
+	
+	@After
+	public void after(){
+		CassandraJunjieForm.close();
+	}
+	
 	@Test
 	public void testSave(){
-		cassandraTemplate.init("127.0.0.1");
-		formOptions.setCassandraTemplate(cassandraTemplate);
 		String id = UUID.randomUUID().toString();
-		formOptions.createFormSass(id);
-		System.out.println(id);
-		FormSaas search = cassandraTemplate.getEntity(FormSaas.class, id);
+		FormSaas formSaas = new FormSaas();
+		formSaas.setId(id);
+		formOptions.save(formSaas);
+		FormSaas search = 	cassandraTemplate.getEntity(FormSaas.class, id);
 		assertEquals(id,search.getId());
-		cassandraTemplate.close();
 	}
 
 }

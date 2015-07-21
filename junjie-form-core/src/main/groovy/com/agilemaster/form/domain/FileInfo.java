@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.datastax.driver.mapping.EnumType;
 import com.datastax.driver.mapping.annotations.Enumerated;
-import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.UDT;
 @UDT (keyspace = "junjie_form", name = "FileInfo")
 public class FileInfo implements Serializable{
@@ -14,7 +13,6 @@ public class FileInfo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5125176334336764053L;
-	@PartitionKey
 	private String  id;
 	private String  authorId;
 	/**
