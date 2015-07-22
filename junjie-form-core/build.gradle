@@ -28,7 +28,9 @@ configurations {
 dependencies {
     compile("org.codehaus.groovy:groovy-all:2.4.1")
 	compile('org.apache.commons:commons-lang3:3.3.2')
-	compile('com.datastax.cassandra:cassandra-driver-core:2.1.6')
+	compile('com.datastax.cassandra:cassandra-driver-core:2.1.7')
+	compile 'com.datastax.cassandra:cassandra-driver-mapping:2.1.7'
+	compile  'org.reflections:reflections:0.9.10'
 	compile("com.alibaba:fastjson:1.1.33")
 	compile 'org.springframework:spring-context:4.1.7.RELEASE'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'

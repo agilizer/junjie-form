@@ -1,6 +1,10 @@
-package com.agilemaster.form.service;
+package com.agilemaster.form.option;
+
+import java.util.List;
+import java.util.Map;
 
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.querybuilder.Clause;
 import com.datastax.driver.mapping.Mapper;
 import com.datastax.driver.mapping.MappingManager;
 
@@ -17,4 +21,9 @@ public interface CassandraTemplate {
 	<T> void delete(T object);
 
 	<T> void deleteById(Class<T> t, Object id);
+	
+	boolean update(String tableName, Map<String, Object> updateFields,
+			List<Clause> whereList);
+	boolean execute(String cql,Object... args);
+	
 }

@@ -1,4 +1,4 @@
-package com.agilemaster.form.service;
+package com.agilemaster.form;
 
 import com.datastax.driver.core.Session;
 

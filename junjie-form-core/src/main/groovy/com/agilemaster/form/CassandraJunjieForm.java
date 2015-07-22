@@ -1,25 +1,28 @@
 package com.agilemaster.form;
 
+import java.util.Set;
+
+import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.agilemaster.form.domain.FileInfo;
 import com.agilemaster.form.domain.FormListShow;
-import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.domain.FormUser;
 import com.agilemaster.form.domain.HtmlForm;
+import com.agilemaster.form.domain.HtmlFormCounter;
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.InputValue;
-import com.agilemaster.form.service.CassandraTemplate;
-import com.agilemaster.form.service.CassandraTemplateDefault;
-import com.agilemaster.form.service.InitSchema;
-import com.agilemaster.form.service.InitSchemaDefault;
+import com.agilemaster.form.option.CassandraTemplate;
+import com.agilemaster.form.option.CassandraTemplateDefault;
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.Host;
 import com.datastax.driver.core.Metadata;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.mapping.MappingManager;
+import com.datastax.driver.mapping.annotations.Table;
+import com.datastax.driver.mapping.annotations.UDT;
 
 public class CassandraJunjieForm {
 	private static Cluster cluster;
@@ -27,6 +30,8 @@ public class CassandraJunjieForm {
 	private static InitSchema initSchema;
 	private static MappingManager mappingManager;
 	private static CassandraTemplate cassandraTemplate ;
+	private static String mappingPackage="com.agilemaster.form.domain";
+	private static String KEY_SPACE="junjie_form";
 	private static final Logger log = LoggerFactory
 			.getLogger(CassandraJunjieForm.class);
 	public static CassandraTemplate getInstance(){
@@ -72,15 +77,19 @@ public class CassandraJunjieForm {
 		return cluster;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static void initMapper(){
 		mappingManager = new MappingManager(session);
-		mappingManager.mapper(FormSaas.class);
-		mappingManager.mapper(FormUser.class);
-		mappingManager.mapper(HtmlForm.class);
-		mappingManager.mapper(HtmlInput.class);
-		mappingManager.mapper(InputValue.class);
-		mappingManager.udtMapper(FormListShow.class);
-		mappingManager.udtMapper(FileInfo.class);
+		Reflections reflections = new Reflections(mappingPackage);
+		 Set<Class<?>> tableDomains = reflections.getTypesAnnotatedWith(Table.class);
+		 for(Class t:tableDomains){
+			 mappingManager.mapper(t);
+		 }
+		 
+		 Set<Class<?>> udtDomains = reflections.getTypesAnnotatedWith(UDT.class);
+		 for(Class t:udtDomains){
+			 mappingManager.udtMapper(t);
+		 }
 	}
 
 	public static void close() {
@@ -103,5 +112,23 @@ public class CassandraJunjieForm {
 	public static MappingManager getMappingManager() {
 		return mappingManager;
 	}
+
+	public static String getKEY_SPACE() {
+		return KEY_SPACE;
+	}
+
+	public static void setKEY_SPACE(String kEY_SPACE) {
+		KEY_SPACE = kEY_SPACE;
+	}
+
+	public static String getMappingPackage() {
+		return mappingPackage;
+	}
+
+	public static void setMappingPackage(String mappingPackageInput) {
+		mappingPackage = mappingPackageInput;
+	}
+	
+	
 
 }

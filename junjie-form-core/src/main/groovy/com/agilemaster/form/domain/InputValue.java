@@ -19,7 +19,7 @@ public class InputValue {
 	private Double doubleValue;
 	private Date dateValue;
 	/**
-	 * 多选
+	 * 多选或者多个input
 	 */
 	private List<String> listValue;
 	 @Frozen("list<frozen<FileInfo>>")

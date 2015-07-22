@@ -1,18 +1,23 @@
-package com.agilemaster.form.service;
+package com.agilemaster.form;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.Session;
 
 public class InitSchemaDefault implements InitSchema{
-
+	private static final Logger log = LoggerFactory
+	.getLogger(InitSchemaDefault.class);
 	private boolean createDrop =  false;
 	@Override
 	public void init(Session session){
 		if(createDrop){
+			log.info("<---------------------------Schema createDrop true-------------------->");
 			session.execute(InitCql.DROP_CQL);
 		}
 		session.execute(InitCql.INIT_DEV_KEYSPACE);
-		for(String str:InitCql.INIT_CQL){
-			session.execute(str);
+		InitCql.INIT_CQL.each{
+			session.execute(it);
 		}
 	}
 	@Override

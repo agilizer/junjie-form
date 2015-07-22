@@ -3,6 +3,7 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.datastax.driver.mapping.annotations.Column;
 import com.datastax.driver.mapping.annotations.PartitionKey;
@@ -20,6 +21,8 @@ public class FormSaas implements Serializable{
 	@PartitionKey
 	private String  id;
 	private List<String> formList;
+	private String accessKey;
+	private Map<String,String> attributes;
 	 @Column
 	private Date dateCreated;
 	 @Column
@@ -49,6 +52,17 @@ public class FormSaas implements Serializable{
 	public void setFormList(List<String> formList) {
 		this.formList = formList;
 	}
-	
+	public String getAccessKey() {
+		return accessKey;
+	}
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
+	}
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
+	}
 	
 }

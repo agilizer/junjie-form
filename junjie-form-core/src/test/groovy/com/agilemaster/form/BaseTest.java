@@ -1,15 +1,11 @@
 package com.agilemaster.form;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
@@ -18,7 +14,10 @@ import com.agilemaster.form.option.FormSaasOptions;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
-public class FormOptionsTest{
+
+public class BaseTest {
+	private  final Logger log = LoggerFactory
+			.getLogger(this.getClass());
 	FormSaasOptions formOptions ;
 	CassandraTemplate cassandraTemplate ;
 	@Before
@@ -30,8 +29,6 @@ public class FormOptionsTest{
 		InitSchema initSchema = new InitSchemaDefault();
 		initSchema.setCreateDrop(true);
 		CassandraJunjieForm.setInitSchema(initSchema);
-		
-		
 		CassandraJunjieForm.init(builder);
 		CassandraJunjieForm.setKEY_SPACE(JunjieFormConstants.DEFAULT_KEY_SPACE);
 		cassandraTemplate = CassandraJunjieForm.getInstance();
@@ -43,28 +40,12 @@ public class FormOptionsTest{
 		CassandraJunjieForm.close();
 	}
 	
-	@Test
-	public void testSave(){
+	public FormSaas createFormSaas(){
 		String id = UUID.randomUUID().toString();
 		FormSaas formSaas = new FormSaas();
 		formSaas.setId(id);
 		formOptions.save(formSaas);
-		FormSaas search = 	cassandraTemplate.getEntity(FormSaas.class, id);
-		assertEquals(id,search.getId());
+		return formSaas;
+		
 	}
-	
-	@Test
-	public void testUpdate(){
-		String id = UUID.randomUUID().toString();
-		FormSaas formSaas = new FormSaas();
-		formSaas.setId(id);
-		formOptions.save(formSaas);
-		Map<String,Object> params = new HashMap<String,Object>();
-		Date lastUpdated =  new Date();
-		params.put("lastUpdated",lastUpdated);
-		formOptions.update(id, params);
-		formSaas = formOptions.findOne(id);
-		assertEquals(lastUpdated.getTime(),formSaas.getLastUpdated().getTime());
-	}
-
 }

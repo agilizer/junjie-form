@@ -1,14 +1,24 @@
-package com.agilemaster.form.service;
+package com.agilemaster.form.option;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.agilemaster.form.CassandraJunjieForm;
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
+import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
+import static com.datastax.driver.core.querybuilder.QueryBuilder.set;
+import com.datastax.driver.core.querybuilder.Clause;
 
 public class FormSaasOptionsImpl implements FormSaasOptions{
-
+	private static final Logger log = LoggerFactory
+			.getLogger(FormSaasOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
 	@Override
 	public FormSaas save(FormSaas formSaas) {
@@ -39,9 +49,11 @@ public class FormSaasOptionsImpl implements FormSaasOptions{
 	}
 
 	@Override
-	public FormSaas update(String id, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean update(String id, Map<String, Object> params) {
+		List<Clause> whereList = new ArrayList<Clause>();
+		whereList.add(eq("id",id));
+		cassandraTemplate.update(JunjieFormConstants.T_FORM_SAAS, params, whereList);
+		return true;
 	}
 
 	@Override

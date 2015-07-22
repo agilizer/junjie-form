@@ -30,7 +30,7 @@ public class FileInfo implements Serializable{
 	 */
 	private String originalName;
 	private String storeFileName;
-	private Map<String,String> otherInfo;
+	private Map<String,String> attributes;
 	
 	private    Date dateCreated;
 	private    Date lastUpdated;
@@ -55,9 +55,6 @@ public class FileInfo implements Serializable{
 	}
 	public void setAuthorId(String authorId) {
 		this.authorId = authorId;
-	}
-	public void setOtherInfo(Map<String, String> otherInfo) {
-		this.otherInfo = otherInfo;
 	}
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
@@ -97,9 +94,6 @@ public class FileInfo implements Serializable{
 	public void setStoreFileName(String storeFileName) {
 		this.storeFileName = storeFileName;
 	}
-	public Map<String, String> getOtherInfo() {
-		return otherInfo;
-	}
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -111,6 +105,12 @@ public class FileInfo implements Serializable{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
 	}
 	
 
