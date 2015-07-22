@@ -4,21 +4,19 @@ import static org.junit.Assert.assertEquals
 
 import org.junit.Test
 
-import com.agilemaster.form.BaseTest
-import com.agilemaster.form.constants.JunjieFormConstants
 import com.agilemaster.form.domain.FormSaas
 import com.agilemaster.form.domain.HtmlForm
-import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlFormOptionsImpl
+import com.agilemaster.form.option.HtmlFormOptionsInter
 import com.agilemaster.form.option.counter.FormSaasCounterOptions
 import com.agilemaster.form.option.counter.SaasCounterOptions
+import com.agilemaster.form.test.BaseTest
 
 public class FormSaasCounterOptionsTest extends BaseTest{
 	
 	@Test
 	public void testInc(){
 		FormSaasCounterOptions counter = new FormSaasCounterOptions();
-		HtmlFormOptions htmlFormOptions = new HtmlFormOptionsImpl();
 		FormSaas formSaas = createFormSaas();
 		HtmlForm htmlForm = new HtmlForm();
 		htmlForm.setSaasId(formSaas.getId())

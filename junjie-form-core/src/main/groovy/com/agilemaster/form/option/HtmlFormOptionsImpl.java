@@ -24,10 +24,11 @@ import com.datastax.driver.core.Cluster.Builder;
 import com.datastax.driver.core.querybuilder.Clause;
 import com.datastax.driver.core.Host;
 import com.datastax.driver.core.Metadata;
+import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.MappingManager;
 
-public class HtmlFormOptionsImpl implements HtmlFormOptions{
+public class HtmlFormOptionsImpl implements HtmlFormOptionsInter{
 	private static final Logger log = LoggerFactory
 			.getLogger(HtmlFormOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
@@ -69,7 +70,8 @@ public class HtmlFormOptionsImpl implements HtmlFormOptions{
 	}
 	@Override
 	public long count() {
-		return 0;
+		ResultSet resultSet = cassandraTemplate.execute("select count(*) from "+JunjieFormConstants.DEFAULT_KEY_SPACE+"."+JunjieFormConstants.T_HTML_FORM);
+		return resultSet.one().getLong(0);
 	}
 	
 }

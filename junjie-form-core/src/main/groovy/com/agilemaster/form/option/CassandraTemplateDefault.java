@@ -1,6 +1,5 @@
 package com.agilemaster.form.option;
 
-import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.set;
 
 import java.util.List;
@@ -114,12 +113,13 @@ public class CassandraTemplateDefault implements CassandraTemplate {
 	}
 
 	@Override
-	public boolean execute(String cql, Object... args) {
+	public ResultSet execute(String cql, Object... args) {
+		ResultSet result = null;
 		if(null==args){
-			session.execute(cql);
+			result = session.execute(cql);
 		}else{
-			session.execute(cql, args);
+			result = session.execute(cql, args);
 		}
-		return true;
+		return result;
 	}
 }

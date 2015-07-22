@@ -12,11 +12,14 @@ import org.slf4j.LoggerFactory;
 import com.agilemaster.form.CassandraJunjieForm;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
+
 import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 import static com.datastax.driver.core.querybuilder.QueryBuilder.set;
+
+import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.querybuilder.Clause;
 
-public class FormSaasOptionsImpl implements FormSaasOptions{
+public class FormSaasOptionsImpl implements FormSaasOptionsInter{
 	private static final Logger log = LoggerFactory
 			.getLogger(FormSaasOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
@@ -63,8 +66,8 @@ public class FormSaasOptionsImpl implements FormSaasOptions{
 
 	@Override
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		ResultSet resultSet = cassandraTemplate.execute("select count(*) from "+JunjieFormConstants.DEFAULT_KEY_SPACE+"."+JunjieFormConstants.T_FORM_SAAS);
+		return resultSet.one().getLong(0);
 	}
 	
 }

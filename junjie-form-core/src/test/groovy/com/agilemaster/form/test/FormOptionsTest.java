@@ -1,4 +1,4 @@
-package com.agilemaster.form;
+package com.agilemaster.form.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,15 +11,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.agilemaster.form.CassandraJunjieForm;
+import com.agilemaster.form.InitSchema;
+import com.agilemaster.form.InitSchemaDefault;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.option.CassandraTemplate;
-import com.agilemaster.form.option.FormSaasOptions;
+import com.agilemaster.form.option.FormSaasOptionsInter;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 public class FormOptionsTest{
-	FormSaasOptions formOptions ;
+	FormSaasOptionsInter formOptions ;
 	CassandraTemplate cassandraTemplate ;
 	@Before
 	public void before(){

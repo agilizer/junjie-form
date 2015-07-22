@@ -4,7 +4,8 @@ import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
 /**
- * saas counter
+ * saas counter,有多少个saas用户，即FormSaas的数据条数。
+ * 暂时没有使用select count(*) from FormSaas实现（这样实现数据量大时返回有限制）。
  * @author asdtiang
  *
  */

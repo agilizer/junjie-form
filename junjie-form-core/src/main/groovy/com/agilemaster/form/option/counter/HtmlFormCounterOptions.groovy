@@ -35,7 +35,7 @@ public class HtmlFormCounterOptions implements CounterOptionsInterface{
 		HtmlFormCounter counter = cassandraTemplate.getEntity(HtmlFormCounter.class, id);
 		long result = 0;
 		if(counter){
-			result = counter.getSubmitCounter();
+			result = counter.getCounterValue();
 		}
 		return result;
 	}

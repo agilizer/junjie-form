@@ -2,7 +2,7 @@ package com.agilemaster.form.option;
 
 import java.util.Map;
 
-public interface CassandraDomainBaseOptions<T> {
+public interface BaseOptionsInter<T> {
 
 	T save(T domain);
 

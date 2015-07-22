@@ -1,4 +1,4 @@
-package com.agilemaster.form
+package com.agilemaster.form.test
 
 import com.agilemaster.form.domain.HtmlForm
 import com.agilemaster.form.domain.HtmlInput

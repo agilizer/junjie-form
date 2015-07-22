@@ -1,4 +1,4 @@
-package com.agilemaster.form;
+package com.agilemaster.form.test;
 
 import java.util.UUID;
 
@@ -7,18 +7,25 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.agilemaster.form.CassandraJunjieForm;
+import com.agilemaster.form.InitSchema;
+import com.agilemaster.form.InitSchemaDefault;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
+import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.option.CassandraTemplate;
-import com.agilemaster.form.option.FormSaasOptions;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
+import com.agilemaster.form.option.FormSaasOptionsInter;
+import com.agilemaster.form.option.HtmlFormOptionsImpl;
+import com.agilemaster.form.option.HtmlFormOptionsInter;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 
 public class BaseTest {
 	private  final Logger log = LoggerFactory
 			.getLogger(this.getClass());
-	FormSaasOptions formOptions ;
+	FormSaasOptionsInter formOptions ;
+	HtmlFormOptionsInter htmlFormOptions;
 	CassandraTemplate cassandraTemplate ;
 	@Before
 	public void before(){
@@ -33,6 +40,7 @@ public class BaseTest {
 		CassandraJunjieForm.setKEY_SPACE(JunjieFormConstants.DEFAULT_KEY_SPACE);
 		cassandraTemplate = CassandraJunjieForm.getInstance();
 		formOptions =  new FormSaasOptionsImpl();
+		htmlFormOptions = new HtmlFormOptionsImpl();
 	}
 	
 	@After
@@ -46,6 +54,12 @@ public class BaseTest {
 		formSaas.setId(id);
 		formOptions.save(formSaas);
 		return formSaas;
-		
+	}
+	public HtmlForm createHtmlForm(){
+		FormSaas formSaas = createFormSaas();
+		HtmlForm htmlForm = new HtmlForm();
+		htmlForm.setSaasId(formSaas.getId());
+		htmlForm = htmlFormOptions.save(htmlForm);
+		return htmlForm;
 	}
 }

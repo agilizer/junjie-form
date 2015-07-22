@@ -3,6 +3,7 @@ package com.agilemaster.form.option;
 import java.util.List;
 import java.util.Map;
 
+import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.querybuilder.Clause;
 import com.datastax.driver.mapping.Mapper;
@@ -24,6 +25,6 @@ public interface CassandraTemplate {
 	
 	boolean update(String tableName, Map<String, Object> updateFields,
 			List<Clause> whereList);
-	boolean execute(String cql,Object... args);
+	ResultSet execute(String cql,Object... args);
 	
 }
