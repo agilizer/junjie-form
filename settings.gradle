@@ -1,0 +1,4 @@
+include 'junjie-form-core'
+include 'junjie-form-war'
+rootProject.name = 'junjie-form'
+
