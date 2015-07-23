@@ -7,17 +7,17 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.agilemaster.form.CassandraJunjieForm;
-import com.agilemaster.form.InitSchema;
-import com.agilemaster.form.InitSchemaDefault;
+import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.InitSchema;
+import com.agilemaster.cassandra.option.CassandraTemplate;
+import com.agilemaster.form.InitSchemaForm;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.domain.HtmlForm;
-import com.agilemaster.form.option.CassandraTemplate;
-import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.agilemaster.form.option.FormSaasOptions;
-import com.agilemaster.form.option.HtmlFormOptionsImpl;
+import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.agilemaster.form.option.HtmlFormOptions;
+import com.agilemaster.form.option.HtmlFormOptionsImpl;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 
@@ -33,11 +33,13 @@ public class BaseTest {
 		/**
 		 * 设置为删除创建
 		 */
-		InitSchema initSchema = new InitSchemaDefault();
+		InitSchema initSchema = new InitSchemaForm();
 		initSchema.setCreateDrop(true);
 		CassandraJunjieForm.setInitSchema(initSchema);
+		CassandraJunjieForm.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
+		CassandraJunjieForm.setMappingPackage("com.agilemaster.form.domain");
 		CassandraJunjieForm.init(builder);
-		CassandraJunjieForm.setKEY_SPACE(JunjieFormConstants.DEFAULT_KEY_SPACE);
+		
 		cassandraTemplate = CassandraJunjieForm.getInstance();
 		formOptions =  new FormSaasOptionsImpl();
 		htmlFormOptions = new HtmlFormOptionsImpl();

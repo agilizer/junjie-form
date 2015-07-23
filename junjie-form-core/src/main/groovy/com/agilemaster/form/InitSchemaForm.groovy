@@ -1,13 +1,14 @@
 package com.agilemaster.form;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-import com.datastax.driver.core.Session;
+import com.agilemaster.cassandra.InitSchema
+import com.datastax.driver.core.Session
 
-public class InitSchemaDefault implements InitSchema{
+public class InitSchemaForm implements InitSchema{
 	private static final Logger log = LoggerFactory
-	.getLogger(InitSchemaDefault.class);
+	.getLogger(InitSchemaForm.class);
 	private boolean createDrop =  false;
 	@Override
 	public void init(Session session){

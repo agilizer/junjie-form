@@ -1,4 +1,12 @@
 include 'junjie-form-core'
 include 'junjie-form-war'
+include 'junjie-cassandra'
 rootProject.name = 'junjie-form'
+rootProject.children.each {project ->
+if(project.name=='junjie-cassandra'){
+		
+	project.projectDir = new File(settingsDir.getParent(), project.name)
+}
+   
+}
 

@@ -3,10 +3,8 @@ package com.agilemaster.form.option.counter;
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import com.agilemaster.form.CassandraJunjieForm
 import com.agilemaster.form.constants.JunjieFormConstants
 import com.agilemaster.form.domain.FormSaasCounter
-import com.agilemaster.form.option.CassandraTemplate
 
 public class FormSaasCounterOptions extends BaseCounterOptions implements CounterOptionsInterface{
 	private static final Logger log = LoggerFactory

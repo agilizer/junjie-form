@@ -11,7 +11,8 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.agilemaster.form.CassandraJunjieForm;
+import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormListShow;
 import com.agilemaster.form.domain.FormSaas;
