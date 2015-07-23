@@ -2,6 +2,9 @@
 springMvc进行web开发,工程可以使用groovy java代码.
 详细可以访问:    http://start.spring.io/
 
+相关开发文档： http://git.oschina.net/asdtiang/spring-boot-jpa-security-groovy doc目录
+
+
 use groovy and java code in one project,Enjoy the dynamic language.
 
 #开发工具
@@ -11,12 +14,7 @@ use groovy and java code in one project,Enjoy the dynamic language.
 可以使用eclipse 或者 sts 或者idea.我使用的是sts.gvm安装 springboot,groovy,gradle.<br>
 导入工程为gradle,第一次导入时由于要下载jar包,可能会花一些时间,请耐心等待.<br>
 
-集成:spring security ,spring data.淘宝druid<br>
-
-#集成地址
-http://42.62.104.73:9099 
-
-
+集成:spring security 
 
 
 
@@ -31,20 +29,11 @@ jar包已经下载到devLib目录<br>
 
 #环境相关配置
 环境主要有默认,dev,production,test等.把默认设置为生产环境.<br>
-hibernate不同环境配置处理.<br>
-在vm加入参数指定添加的hibernate配置文件.该配置文件会覆盖hibernate.properties中对应配置.<br>
-参数名为: db.conf.value<br>
-例如vm加入参数    -Ddb.conf.value=dev<br>
-则对应的增加配置文件名为: hibernate-dev.properties<br>
+
 #开发环境应该加入以下参数
 -javaagent:path/springloaded-1.2.3.RELEASE.jar  -noverify   -Dspring.profiles.active=dev  -Ddb.conf.value=dev
 
 #项目启动
-直接运行com.agilemaster.asdtiang.study.GroovyAndJavaApplication
+直接运行com.agilemaster.form.war.JunjieFormWarApplication
 可以run as Groovy Script 或者 run as Java Application
 
-#quartz
-doc目录spring framework里搜索quartz有相关示例
-
-#add thymeleaf spring security tag
-url:https://github.com/thymeleaf/thymeleaf-extras-springsecurity
