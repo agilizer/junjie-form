@@ -2,7 +2,7 @@ package com.agilemaster.form.option;
 
 import java.util.Map;
 
-public interface BaseOptionsInter<T> {
+public interface BaseOptions<T> {
 
 	T save(T domain);
 

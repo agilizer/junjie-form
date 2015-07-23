@@ -15,17 +15,17 @@ import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.option.CassandraTemplate;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
-import com.agilemaster.form.option.FormSaasOptionsInter;
+import com.agilemaster.form.option.FormSaasOptions;
 import com.agilemaster.form.option.HtmlFormOptionsImpl;
-import com.agilemaster.form.option.HtmlFormOptionsInter;
+import com.agilemaster.form.option.HtmlFormOptions;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 
 public class BaseTest {
 	private  final Logger log = LoggerFactory
 			.getLogger(this.getClass());
-	FormSaasOptionsInter formOptions ;
-	HtmlFormOptionsInter htmlFormOptions;
+	FormSaasOptions formOptions ;
+	HtmlFormOptions htmlFormOptions;
 	CassandraTemplate cassandraTemplate ;
 	@Before
 	public void before(){

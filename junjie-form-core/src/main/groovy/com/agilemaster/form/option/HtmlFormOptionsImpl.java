@@ -28,7 +28,7 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.mapping.MappingManager;
 
-public class HtmlFormOptionsImpl implements HtmlFormOptionsInter{
+public class HtmlFormOptionsImpl implements HtmlFormOptions{
 	private static final Logger log = LoggerFactory
 			.getLogger(HtmlFormOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();

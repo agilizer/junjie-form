@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.agilemaster.form.CassandraJunjieForm;
+import com.agilemaster.form.constants.FormCoreStaticMethod;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
 
@@ -19,7 +20,7 @@ import static com.datastax.driver.core.querybuilder.QueryBuilder.set;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.querybuilder.Clause;
 
-public class FormSaasOptionsImpl implements FormSaasOptionsInter{
+public class FormSaasOptionsImpl implements FormSaasOptions{
 	private static final Logger log = LoggerFactory
 			.getLogger(FormSaasOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
@@ -27,9 +28,9 @@ public class FormSaasOptionsImpl implements FormSaasOptionsInter{
 	public FormSaas save(FormSaas formSaas) {
 		if(null!=formSaas){
 			if(null==formSaas.getId()){
-				String id = UUID.randomUUID().toString();
-				formSaas.setId(id);
+				formSaas.setId(FormCoreStaticMethod.genUUID());
 			}
+			formSaas.setAccessKey(FormCoreStaticMethod.genUUID());
 			Date date = new Date();
 			formSaas.setDateCreated(date);
 			formSaas.setLastUpdated(date);

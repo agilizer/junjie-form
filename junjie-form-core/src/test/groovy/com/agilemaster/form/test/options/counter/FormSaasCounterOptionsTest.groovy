@@ -7,7 +7,7 @@ import org.junit.Test
 import com.agilemaster.form.domain.FormSaas
 import com.agilemaster.form.domain.HtmlForm
 import com.agilemaster.form.option.HtmlFormOptionsImpl
-import com.agilemaster.form.option.HtmlFormOptionsInter
+import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.counter.FormSaasCounterOptions
 import com.agilemaster.form.option.counter.SaasCounterOptions
 import com.agilemaster.form.test.BaseTest
