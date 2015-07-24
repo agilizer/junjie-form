@@ -20,6 +20,7 @@ public class HtmlInput implements Serializable{
 	 */
 	@PartitionKey
 	private String id;
+	private String formId;
 	
 	private String saasId;
 	/**
@@ -199,6 +200,12 @@ public class HtmlInput implements Serializable{
 	}
 	public void setRightAnswer(List<String> rightAnswer) {
 		this.rightAnswer = rightAnswer;
+	}
+	public String getFormId() {
+		return formId;
+	}
+	public void setFormId(String formId) {
+		this.formId = formId;
 	}
 	
 	

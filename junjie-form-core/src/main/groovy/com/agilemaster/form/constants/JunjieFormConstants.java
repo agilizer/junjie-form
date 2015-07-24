@@ -9,7 +9,7 @@ public interface JunjieFormConstants {
 	String T_HTML_FORM="HtmlForm";
 	String T_FILE_INFO="FileInfo";
 	String T_INPUT_VALUE="InputValue";
-	String T_FORM_LIST_SHOW="FormListShow";
+	String T_FORM_SUBMIT="FormSubmit";
 	String T_FORM_USER="FormUser";
 	String T_FORM_SAAS_COUNTER="FormSaasCounter";
 	String T_HTML_FORM_COUNTER="HtmlFormCounter";

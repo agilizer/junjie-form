@@ -11,6 +11,7 @@ public class InputValue {
 	@PartitionKey
 	private String id;
 	private String label;
+	private String formSubmitId;
 	private String userId;
 	private String formId;
 	private  String htmlInputId;
@@ -89,6 +90,12 @@ public class InputValue {
 	}
 	public void setFileInfoes(List<FileInfo> fileInfoes) {
 		this.fileInfoes = fileInfoes;
+	}
+	public String getFormSubmitId() {
+		return formSubmitId;
+	}
+	public void setFormSubmitId(String formSubmitId) {
+		this.formSubmitId = formSubmitId;
 	}
 	
 }    

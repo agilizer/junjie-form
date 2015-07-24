@@ -3,26 +3,24 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.datastax.driver.mapping.annotations.UDT;
+import com.datastax.driver.mapping.annotations.PartitionKey;
+import com.datastax.driver.mapping.annotations.Table;
 
 /**
- * 新定义数据类型，方便列表显示表单。
  * @author asdtiang
- * 当为saas时，startTime为表单开始回答时间，endTime为结束回答时间。
- * 当为user时，startTime为表单开始提交时间，endTime为结束提交时间。
- * 意义虽然一样，但程序实现时是不一样的。请注意。
  */
-@UDT (keyspace = "junjie_form", name = "FormListShow")
-public class FormListShow   implements Serializable{
-
-	/**
-	 * 
-	 */
+@Table (keyspace = "junjie_form", name = "FormSubmit")
+public class FormSubmit   implements Serializable{
 	private static final long serialVersionUID = -5497177824207251105L;
+	@PartitionKey
+	private String id;
 	private String formId;
+	private String userId;
 	private String name;
 	private Date dateCreated;
-	
+	private boolean finish; 
+	private int answerCount;
+	private int expectCount;
 	private Date startTime;
 	private Date endTime;
 	private long answerTime;
@@ -62,4 +60,36 @@ public class FormListShow   implements Serializable{
 	public void setAnswerTime(long answerTime) {
 		this.answerTime = answerTime;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public boolean isFinish() {
+		return finish;
+	}
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getAnswerCount() {
+		return answerCount;
+	}
+	public void setAnswerCount(int answerCount) {
+		this.answerCount = answerCount;
+	}
+	public int getExpectCount() {
+		return expectCount;
+	}
+	public void setExpectCount(int expectCount) {
+		this.expectCount = expectCount;
+	}
+	
+	
 }

@@ -26,7 +26,11 @@ public class HtmlForm implements Serializable{
 	private String description;
 	
 	private Map<String,String> customInfo;
-	private List<String> htmlInputs;
+	private boolean finish; 
+	private long answerCount;
+	private long expectCount;
+	private Date startTime;
+	private Date endTime;
 	private Date dateCreated;
 	private Date lastUpdated;
 	public String getId() {
@@ -73,12 +77,6 @@ public class HtmlForm implements Serializable{
 	public void setAfterText(String afterText) {
 		this.afterText = afterText;
 	}
-	public List<String> getHtmlInputs() {
-		return htmlInputs;
-	}
-	public void setHtmlInputs(List<String> htmlInputs) {
-		this.htmlInputs = htmlInputs;
-	}
 	public Date getDateCreated() {
 		return dateCreated;
 	}
@@ -91,4 +89,35 @@ public class HtmlForm implements Serializable{
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
+	public boolean isFinish() {
+		return finish;
+	}
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+	public long getAnswerCount() {
+		return answerCount;
+	}
+	public void setAnswerCount(long answerCount) {
+		this.answerCount = answerCount;
+	}
+	public long getExpectCount() {
+		return expectCount;
+	}
+	public void setExpectCount(long expectCount) {
+		this.expectCount = expectCount;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	
 }

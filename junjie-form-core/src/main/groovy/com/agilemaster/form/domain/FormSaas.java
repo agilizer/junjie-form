@@ -2,7 +2,6 @@ package com.agilemaster.form.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import com.datastax.driver.mapping.annotations.Column;
@@ -20,7 +19,6 @@ public class FormSaas implements Serializable{
 	private static final long serialVersionUID = 6246700292930185379L;
 	@PartitionKey
 	private String  id;
-	private List<String> formList;
 	private String accessKey;
 	private Map<String,String> attributes;
 	 @Column
@@ -46,12 +44,7 @@ public class FormSaas implements Serializable{
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-	public List<String> getFormList() {
-		return formList;
-	}
-	public void setFormList(List<String> formList) {
-		this.formList = formList;
-	}
+	
 	public String getAccessKey() {
 		return accessKey;
 	}
