@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.InitSchema;
 import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.InitSchemaForm;
@@ -35,19 +35,19 @@ public class BaseTest {
 		 */
 		InitSchema initSchema = new InitSchemaForm();
 		initSchema.setCreateDrop(true);
-		CassandraJunjieForm.setInitSchema(initSchema);
-		CassandraJunjieForm.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
-		CassandraJunjieForm.setMappingPackage("com.agilemaster.form.domain");
-		CassandraJunjieForm.init(builder);
+		CassandraJunjieConfig.setInitSchema(initSchema);
+		CassandraJunjieConfig.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
+		CassandraJunjieConfig.setMappingPackage("com.agilemaster.form.domain");
+		CassandraJunjieConfig.init(builder);
 		
-		cassandraTemplate = CassandraJunjieForm.getInstance();
+		cassandraTemplate = CassandraJunjieConfig.getInstance();
 		formOptions =  new FormSaasOptionsImpl();
 		htmlFormOptions = new HtmlFormOptionsImpl();
 	}
 	
 	@After
 	public void after(){
-		CassandraJunjieForm.close();
+		CassandraJunjieConfig.close();
 	}
 	
 	public FormSaas createFormSaas(){

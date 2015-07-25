@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.InitSchema;
 import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.InitSchemaForm;
@@ -35,11 +35,11 @@ public class BootstrapService {
 		 */
 		InitSchema initSchema = new InitSchemaForm();
 		initSchema.setCreateDrop(true);
-		CassandraJunjieForm.setInitSchema(initSchema);
-		CassandraJunjieForm.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
-		CassandraJunjieForm.setMappingPackage("com.agilemaster.form.domain");
-		CassandraJunjieForm.init(builder);
-		cassandraTemplate = CassandraJunjieForm.getInstance();
+		CassandraJunjieConfig.setInitSchema(initSchema);
+		CassandraJunjieConfig.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
+		CassandraJunjieConfig.setMappingPackage("com.agilemaster.form.domain");
+		CassandraJunjieConfig.init(builder);
+		cassandraTemplate = CassandraJunjieConfig.getInstance();
 	}
 	@Bean
 	public CassandraTemplate initCassandraTemplate(){
@@ -55,6 +55,6 @@ public class BootstrapService {
 	
 	@PreDestroy
 	public void destory(){
-		CassandraJunjieForm.close();
+		CassandraJunjieConfig.close();
 	}
 }

@@ -3,7 +3,7 @@ package com.agilemaster.form.option.counter;
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import com.agilemaster.cassandra.CassandraJunjieForm
+import com.agilemaster.cassandra.CassandraJunjieConfig
 import com.agilemaster.cassandra.option.CassandraTemplate
 import com.agilemaster.form.constants.JunjieFormConstants
 import com.agilemaster.form.domain.HtmlFormCounter
@@ -11,7 +11,7 @@ import com.agilemaster.form.domain.HtmlFormCounter
 public class HtmlFormCounterOptions implements CounterOptionsInterface{
 	private static final Logger log = LoggerFactory
 	.getLogger(HtmlFormCounterOptions.class);
-	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
+	private CassandraTemplate cassandraTemplate = CassandraJunjieConfig.getInstance();
 	@Override
 	public void inc(String id) {
 		inc(id,1);

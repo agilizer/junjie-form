@@ -11,7 +11,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.HtmlForm;
@@ -21,7 +21,7 @@ import com.datastax.driver.core.querybuilder.Clause;
 public class HtmlFormOptionsImpl implements HtmlFormOptions{
 	private static final Logger log = LoggerFactory
 			.getLogger(HtmlFormOptionsImpl.class);
-	private CassandraTemplate cassandraTemplate = CassandraJunjieForm.getInstance();
+	private CassandraTemplate cassandraTemplate = CassandraJunjieConfig.getInstance();
 	@Override
 	public HtmlForm save(HtmlForm htmlForm) {
 		if(null!=htmlForm){
