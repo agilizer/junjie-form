@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.agilemaster.cassandra.CassandraJunjieForm;
+import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.InitSchema;
 import com.agilemaster.cassandra.InitSchemaDefault;
 import com.agilemaster.cassandra.option.CassandraTemplate;
