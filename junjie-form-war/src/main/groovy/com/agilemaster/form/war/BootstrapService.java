@@ -12,6 +12,7 @@ import com.agilemaster.cassandra.InitSchema;
 import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.InitSchemaForm;
 import com.agilemaster.form.constants.JunjieFormConstants;
+import com.agilemaster.form.domain.FormSaas;
 import com.agilemaster.form.option.FormSaasOptions;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.agilemaster.form.option.HtmlFormOptions;
@@ -24,8 +25,22 @@ public class BootstrapService {
 	private  final Logger log = LoggerFactory
 			.getLogger(this.getClass());
 	private CassandraTemplate cassandraTemplate ;
+	FormSaasOptions formOptions ;
+	private static String saasKey="946c4eea-15cb-4dfb-8f8d-91b99fe78939";
+	private static String accessKey="c8d47cffb16e4668bc84b3b4f9f72023";
 	@PostConstruct
 	public  void init(){
+		formOptions =  new FormSaasOptionsImpl();
+		FormSaas formSaas = formOptions.findOne(saasKey);
+		if(formSaas==null){
+			formSaas = new FormSaas();
+			formSaas.setId(saasKey);
+			formSaas.setAccessKey(accessKey);
+			formOptions.save(formSaas);
+		}
+	}
+	@Bean
+	public CassandraTemplate initCassandraTemplate(){
 		/**
 		 * init cassandra 
 		 */
@@ -40,9 +55,6 @@ public class BootstrapService {
 		CassandraJunjieConfig.setMappingPackage("com.agilemaster.form.domain");
 		CassandraJunjieConfig.init(builder);
 		cassandraTemplate = CassandraJunjieConfig.getInstance();
-	}
-	@Bean
-	public CassandraTemplate initCassandraTemplate(){
 		return cassandraTemplate;
 	}
 	@Bean 

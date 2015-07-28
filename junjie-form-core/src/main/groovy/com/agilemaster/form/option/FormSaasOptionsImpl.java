@@ -31,7 +31,10 @@ public class FormSaasOptionsImpl implements FormSaasOptions{
 			if(null==formSaas.getId()){
 				formSaas.setId(FormCoreStaticMethod.genUUID());
 			}
-			formSaas.setAccessKey(FormCoreStaticMethod.genUUID());
+			if(formSaas.getAccessKey()==null){
+				formSaas.setAccessKey(FormCoreStaticMethod.genUUID());
+			}
+		
 			Date date = new Date();
 			formSaas.setDateCreated(date);
 			formSaas.setLastUpdated(date);
