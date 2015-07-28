@@ -5,6 +5,7 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import com.agilemaster.cassandra.CassandraJunjieConfig;
@@ -28,18 +29,8 @@ public class BootstrapService {
 	FormSaasOptions formOptions ;
 	private static String saasKey="946c4eea-15cb-4dfb-8f8d-91b99fe78939";
 	private static String accessKey="c8d47cffb16e4668bc84b3b4f9f72023";
-	@PostConstruct
-	public  void init(){
-		formOptions =  new FormSaasOptionsImpl();
-		FormSaas formSaas = formOptions.findOne(saasKey);
-		if(formSaas==null){
-			formSaas = new FormSaas();
-			formSaas.setId(saasKey);
-			formSaas.setAccessKey(accessKey);
-			formOptions.save(formSaas);
-		}
-	}
-	@Bean
+	
+	@Bean(name="cassandraTemplate")
 	public CassandraTemplate initCassandraTemplate(){
 		/**
 		 * init cassandra 
@@ -55,12 +46,22 @@ public class BootstrapService {
 		CassandraJunjieConfig.setMappingPackage("com.agilemaster.form.domain");
 		CassandraJunjieConfig.init(builder);
 		cassandraTemplate = CassandraJunjieConfig.getInstance();
+		formOptions =  new FormSaasOptionsImpl();
+		FormSaas formSaas = formOptions.findOne(saasKey);
+		if(formSaas==null){
+			formSaas = new FormSaas();
+			formSaas.setId(saasKey);
+			formSaas.setAccessKey(accessKey);
+			formOptions.save(formSaas);
+		}
 		return cassandraTemplate;
 	}
 	@Bean 
+	@DependsOn("cassandraTemplate")
 	public FormSaasOptions formSaasOptions(){
 		return new FormSaasOptionsImpl(); 
 	}
+	@DependsOn("cassandraTemplate")
 	@Bean HtmlFormOptions htmlFormOptions(){
 		return new HtmlFormOptionsImpl();
 	}
