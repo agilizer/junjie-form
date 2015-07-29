@@ -40,4 +40,5 @@ public class ShareServiceImpl implements ShareService , ApplicationContextAware{
 		return isDev;
 	}
 
+
 }

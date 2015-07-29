@@ -27,8 +27,8 @@ public class HtmlForm implements Serializable{
 	
 	private Map<String,String> customInfo;
 	private boolean finish; 
-	private long answerCount;
-	private long expectCount;
+	private int answerCount;
+	private int expectCount;
 	private Date startTime;
 	private Date endTime;
 	private Date dateCreated;
@@ -95,18 +95,6 @@ public class HtmlForm implements Serializable{
 	public void setFinish(boolean finish) {
 		this.finish = finish;
 	}
-	public long getAnswerCount() {
-		return answerCount;
-	}
-	public void setAnswerCount(long answerCount) {
-		this.answerCount = answerCount;
-	}
-	public long getExpectCount() {
-		return expectCount;
-	}
-	public void setExpectCount(long expectCount) {
-		this.expectCount = expectCount;
-	}
 	public Date getStartTime() {
 		return startTime;
 	}
@@ -118,6 +106,18 @@ public class HtmlForm implements Serializable{
 	}
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+	public int getAnswerCount() {
+		return answerCount;
+	}
+	public void setAnswerCount(int answerCount) {
+		this.answerCount = answerCount;
+	}
+	public int getExpectCount() {
+		return expectCount;
+	}
+	public void setExpectCount(int expectCount) {
+		this.expectCount = expectCount;
 	}
 	
 }

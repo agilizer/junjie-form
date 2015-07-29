@@ -1,3 +1,4 @@
+env = System.getProperty("env")?:"dev"
 buildscript {
 	ext { springBootVersion = '1.2.5.RELEASE' }
 	repositories { mavenCentral() }
@@ -30,6 +31,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-mobile")
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.springframework.boot:spring-boot-starter-websocket")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	compile("org.codehaus.groovy:groovy")
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.3'
 	compile 'org.apache.logging.log4j:log4j-core:2.3'

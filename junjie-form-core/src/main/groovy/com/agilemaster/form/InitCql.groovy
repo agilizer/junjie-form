@@ -34,14 +34,13 @@ CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieForm
 (id text PRIMARY KEY,
 afterText text,
 beforeText text,
-customInfo  map<text,text>,
+customInfo  map<varchar,varchar>,
 description text,
 name text,
 saasId text,
-formId text,
 finish boolean,
 answerCount int,
-exceptCount int,
+expectCount int,
 endTime timestamp,
 startTime timestamp,
 dateCreated timestamp,
@@ -94,6 +93,7 @@ dateCreated timestamp,
 lastUpdated timestamp
 );
 """,
+"""CREATE INDEX accessKey_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS} ( accessKey );""",
 """
 CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS_COUNTER}  
 (id text PRIMARY KEY,

@@ -1,9 +1,9 @@
 package com.agilemaster.form.war;
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,8 @@ public class BootstrapService {
 	FormSaasOptions formOptions ;
 	private static String saasKey="946c4eea-15cb-4dfb-8f8d-91b99fe78939";
 	private static String accessKey="c8d47cffb16e4668bc84b3b4f9f72023";
+	@Value("#${app.name}")
+	private String appName;
 	
 	@Bean(name="cassandraTemplate")
 	public CassandraTemplate initCassandraTemplate(){
@@ -54,6 +56,7 @@ public class BootstrapService {
 			formSaas.setAccessKey(accessKey);
 			formOptions.save(formSaas);
 		}
+		log.info("appName--------------------------------->"+appName);
 		return cassandraTemplate;
 	}
 	@Bean 
@@ -70,4 +73,11 @@ public class BootstrapService {
 	public void destory(){
 		CassandraJunjieConfig.close();
 	}
+	public String getAppName() {
+		return appName;
+	}
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+	
 }
