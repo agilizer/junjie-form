@@ -37,3 +37,17 @@ jar包已经下载到devLib目录<br>
 直接运行com.agilemaster.form.war.JunjieFormWarApplication
 可以run as Groovy Script 或者 run as Java Application
 
+
+#项目说明
+
+相关文档查看：http://domain/htmlFormTest/index
+
+接口都以路径: /api/v1/ 开始。
+
+关于认证：
+每一个请求都要提交参数saasId和accessKey。服务器判断这两个值是否相等，如果不等，直接返回状态码403.
+默认的saasId和accessKey值为：
+private static String saasKey="946c4eea-15cb-4dfb-8f8d-91b99fe78939";
+private static String accessKey="c8d47cffb16e4668bc84b3b4f9f72023";
+
+
