@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/api/v1/htmlInput/create" method="post">
+		saasId<input type="text" name="saasId"
+			value="946c4eea-15cb-4dfb-8f8d-91b99fe78939" /> accessKey<input
+			type="text" name="accessKey" value="c8d47cffb16e4668bc84b3b4f9f72023" />
+		formId<input type="text" name="formId" value="" /> 
+		labelBefore<input type="text"
+			name="labelBefore" value="labelBefore" /> labelAfter<input
+			type="text" name="labelAfter" value="labelAfter" />
+			 sequence<input
+			type="number" name="sequence" value="10" />
+		<hr />
+		inputAttrs,目前支持："max","maxlength","minlength","placeholder","required"<br/>
+		max:<input type="text" name="max" value="100" /> placeholder：<input
+			type="text" name="placeholder" value="placeholder" />
+		<hr />
+		inputType <select name="inputType">
+			<option>checkbox</option>
+			<option>file</option>
+			<option>files</option>
+			<option>hidden</option>
+			<option>image</option>
+			<option>images</option>
+			<option>date</option>
+			<option>password</option>
+			<option>radio</option>
+			<option>text</option>
+			<option>textarea</option>
+			<option>html</option>
+			<option>number</option>
+			<option>select</option>
+		</select> 
+		<hr/>
+		selectValues，checkbox、radio、radio时的列表<br/>
+		<input type="text" name="selectValues"  value="selectValues1" />
+		<input type="text" name="selectValues"  value="selectValues2" />
+		<input type="text" name="selectValues"  value="selectValues3" />
+			<hr/>
+		rightAnswers，checkbox、radio、radio时的列表,可为空，值应该为selectValues的一个子集，用户输入答案除外。<br/>
+		<input type="text" name="rightAnswers"  value="selectValues1" />
+		<input type="text" name="rightAnswers"  value="selectValues2" />
+		
+		<input type="submit" name="submit" />
+	</form>
+</body>
+</html>

@@ -14,5 +14,6 @@ public interface JunjieFormConstants {
 	String T_FORM_SAAS_COUNTER="FormSaasCounter";
 	String T_HTML_FORM_COUNTER="HtmlFormCounter";
 	String T_SAAS_COUNTER="SaasCounter";
+	String[] INPUT_ATTRS=new String[]{"max","maxlength","minlength","placeholder","required"};
 
 }

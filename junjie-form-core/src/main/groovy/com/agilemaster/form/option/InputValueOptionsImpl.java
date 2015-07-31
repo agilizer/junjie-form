@@ -14,67 +14,65 @@ import org.slf4j.LoggerFactory;
 import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.constants.JunjieFormConstants;
-import com.agilemaster.form.domain.HtmlForm;
+import com.agilemaster.form.domain.HtmlInput;
+import com.agilemaster.form.domain.InputValue;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.querybuilder.Clause;
 
-public class HtmlFormOptionsImpl implements HtmlFormOptions {
+public class InputValueOptionsImpl implements InputValueOptions{
 	private static final Logger log = LoggerFactory
-			.getLogger(HtmlFormOptionsImpl.class);
-	private CassandraTemplate cassandraTemplate = CassandraJunjieConfig
-			.getInstance();
-
+			.getLogger(InputValueOptionsImpl.class);
+	private CassandraTemplate cassandraTemplate = CassandraJunjieConfig.getInstance();
 	@Override
-	public HtmlForm save(HtmlForm htmlForm) {
-		if (null != htmlForm) {
-			if (null == htmlForm.getId()) {
+	public InputValue save(InputValue domain) {
+		if (null != domain) {
+			if (null == domain.getId()) {
 				String id = UUID.randomUUID().toString();
-				htmlForm.setId(id);
+				domain.setId(id);
 			}
 			Date date = new Date();
-			htmlForm.setDateCreated(date);
-			htmlForm.setLastUpdated(date);
+			domain.setDateCreated(date);
 			try {
-				cassandraTemplate.save(htmlForm);
+				cassandraTemplate.save(domain);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else {
-			throw new NullPointerException("save htmlForm is null!");
+			throw new NullPointerException("save InputValue is null!");
 		}
-		return htmlForm;
+		return domain;
 	}
 
 	@Override
-	public HtmlForm delete(HtmlForm domain) {
+	public InputValue delete(InputValue domain) {
 		cassandraTemplate.delete(domain);
 		return domain;
 	}
 
 	@Override
 	public void delete(String id) {
-		cassandraTemplate.deleteById(HtmlForm.class, id);
+		cassandraTemplate.deleteById(InputValue.class,id);
 	}
 
 	@Override
 	public boolean update(String id, Map<String, Object> params) {
 		List<Clause> whereList = new ArrayList<Clause>();
 		whereList.add(eq("id", id));
-		cassandraTemplate.update(JunjieFormConstants.T_HTML_FORM, params,
+		cassandraTemplate.update(JunjieFormConstants.T_INPUT_VALUE, params,
 				whereList);
 		return true;
 	}
 
 	@Override
-	public HtmlForm findOne(Object id) {
-		return cassandraTemplate.getEntity(HtmlForm.class, id);
+	public InputValue findOne(Object id) {
+		return cassandraTemplate.getEntity(InputValue.class, id);
 	}
 
 	@Override
 	public long count() {
 		ResultSet resultSet = cassandraTemplate.execute("select count(*) from "
 				+ JunjieFormConstants.DEFAULT_KEY_SPACE + "."
-				+ JunjieFormConstants.T_HTML_FORM);
+				+ JunjieFormConstants.T_INPUT_VALUE);
 		return resultSet.one().getLong(0);
 	}
 

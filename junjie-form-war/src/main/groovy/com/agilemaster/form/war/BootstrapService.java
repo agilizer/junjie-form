@@ -14,10 +14,16 @@ import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.InitSchemaForm;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
+import com.agilemaster.form.option.FileInfoOptions;
+import com.agilemaster.form.option.FileInfoOptionsImpl;
 import com.agilemaster.form.option.FormSaasOptions;
 import com.agilemaster.form.option.FormSaasOptionsImpl;
 import com.agilemaster.form.option.HtmlFormOptions;
 import com.agilemaster.form.option.HtmlFormOptionsImpl;
+import com.agilemaster.form.option.HtmlInputOptions;
+import com.agilemaster.form.option.HtmlInputOptionsImpl;
+import com.agilemaster.form.option.InputValueOptions;
+import com.agilemaster.form.option.InputValueOptionsImpl;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Cluster.Builder;
 
@@ -67,6 +73,18 @@ public class BootstrapService {
 	@DependsOn("cassandraTemplate")
 	@Bean HtmlFormOptions htmlFormOptions(){
 		return new HtmlFormOptionsImpl();
+	}
+	@DependsOn("cassandraTemplate")
+	@Bean InputValueOptions inputValueOptions(){
+		return new InputValueOptionsImpl();
+	}
+	@DependsOn("cassandraTemplate")
+	@Bean HtmlInputOptions htmlInputOptions(){
+		return new HtmlInputOptionsImpl();
+	}
+	@DependsOn("cassandraTemplate")
+	@Bean FileInfoOptions fileInfoOptions(){
+		return new FileInfoOptionsImpl();
 	}
 	
 	@PreDestroy

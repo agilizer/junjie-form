@@ -48,6 +48,7 @@ public class HtmlFormController {
 		if (htmlForm != null&&htmlForm.getId()!=null) {
 			htmlForm.setStartTime(startDate);
 			htmlForm.setEndTime(endDate);
+			htmlForm.setLastUpdated(new Date());
 			String updateId = htmlForm.getId();
 			htmlFormOptions.delete(updateId);
 			htmlFormOptions.save(htmlForm);

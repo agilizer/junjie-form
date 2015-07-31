@@ -24,7 +24,7 @@ public class HtmlInput implements Serializable{
 	
 	private String saasId;
 	/**
-	 * input前显示的文本(可选)
+	 * input前显示的文本(required)
 	 */
 	private String labelBefore; 
 	/**
@@ -34,8 +34,7 @@ public class HtmlInput implements Serializable{
 	private String labelAfter;
 	/**
 	 * (可选)
-	 * json存储input的其它html属性，map类型
-	 * 示例inputType为checkbox，有属性checked默认值提交。
+	 *map类型
 	 * 	  inputType为text，有属性placeholder提交。
 	 */
 	private Map<String,String> inputAttrs;
@@ -52,7 +51,7 @@ public class HtmlInput implements Serializable{
 	 * 字段分为显示给用户，和不显示给用户。
 	 * 不显示给用户时表单创建者可以对这个值进行更改。
 	 */
-	private Boolean showToUser;
+	private Boolean showToUser = true;
 	/**
 	 * 列表查询时显示
 	 */
@@ -60,29 +59,16 @@ public class HtmlInput implements Serializable{
 	/**
 	 * 存储select,checkbox,radio选项数据。
 	 */
-	private Map<String,String> selectInfo;
-	@Enumerated(EnumType.STRING)
-	private ValueType valueType = ValueType.STRING;
-	
-	private List<String> rightAnswer;
+	private List<String> selectValues;
+	private List<String> rightAnswers;
 	
 	private Date dateCreated;
 	private Date lastUpdated;
 	
-	public  enum ValueType{
-		DOUBLE,
-		STRING,
-		LONG,
-		HTML,
-		IMAGE,
-		IMAGES,
-		FILE,
-		FILES
-	}
 	/**
 	 * input类型数据定义
 	 */
-	public   enum  InputType{
+	public static   enum  InputType{
 	    checkbox,
 	    /**
 	     * 单个文件
@@ -114,7 +100,8 @@ public class HtmlInput implements Serializable{
 	    date,
 	    textarea,
 	    html,
-	    number
+	    number,
+	    select
 	}
 	public String getId() {
 		return id;
@@ -165,18 +152,6 @@ public class HtmlInput implements Serializable{
 	public void setListShow(Boolean listShow) {
 		this.listShow = listShow;
 	}
-	public Map<String, String> getSelectInfo() {
-		return selectInfo;
-	}
-	public void setSelectInfo(Map<String, String> selectInfo) {
-		this.selectInfo = selectInfo;
-	}
-	public ValueType getValueType() {
-		return valueType;
-	}
-	public void setValueType(ValueType valueType) {
-		this.valueType = valueType;
-	}
 	public String getSaasId() {
 		return saasId;
 	}
@@ -195,17 +170,23 @@ public class HtmlInput implements Serializable{
 	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
-	public List<String> getRightAnswer() {
-		return rightAnswer;
+	public List<String> getRightAnswers() {
+		return rightAnswers;
 	}
-	public void setRightAnswer(List<String> rightAnswer) {
-		this.rightAnswer = rightAnswer;
+	public void setRightAnswers(List<String> rightAnswers) {
+		this.rightAnswers = rightAnswers;
 	}
 	public String getFormId() {
 		return formId;
 	}
 	public void setFormId(String formId) {
 		this.formId = formId;
+	}
+	public List<String> getSelectValues() {
+		return selectValues;
+	}
+	public void setSelectValues(List<String> selectValues) {
+		this.selectValues = selectValues;
 	}
 	
 	

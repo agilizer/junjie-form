@@ -13,7 +13,7 @@ public class FileInfo implements Serializable{
 	 */
 	private static final long serialVersionUID = 5125176334336764053L;
 	private String  id;
-	private String  authorId;
+	private String  saasId;
 	/**
 	 * include path and name';
 	 */
@@ -31,16 +31,14 @@ public class FileInfo implements Serializable{
 	private String originalName;
 	private String storeFileName;
 	private Map<String,String> attributes;
-	
 	private    Date dateCreated;
-	private    Date lastUpdated;
-	
 	public static enum FileType{
 		EXCEL,
 		WORD,
 		TEXT,
 		PDF,
-		IMG
+		IMG,
+		OTHERS
 	}
 	
 	
@@ -50,17 +48,15 @@ public class FileInfo implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAuthorId() {
-		return authorId;
+
+	public String getSaasId() {
+		return saasId;
 	}
-	public void setAuthorId(String authorId) {
-		this.authorId = authorId;
+	public void setSaasId(String saasId) {
+		this.saasId = saasId;
 	}
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
 	}
 	public String getStorePath() {
 		return storePath;
@@ -96,9 +92,6 @@ public class FileInfo implements Serializable{
 	}
 	public Date getDateCreated() {
 		return dateCreated;
-	}
-	public Date getLastUpdated() {
-		return lastUpdated;
 	}
 	public String getDescription() {
 		return description;

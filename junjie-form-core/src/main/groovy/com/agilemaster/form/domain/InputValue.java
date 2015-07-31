@@ -11,14 +11,13 @@ public class InputValue {
 	@PartitionKey
 	private String id;
 	private String label;
-	private String formSubmitId;
-	private String userId;
+	private String answerId;
 	private String formId;
 	private  String htmlInputId;
 	private String strValue;
 	private Long numberValue;
-	private Double doubleValue;
 	private Date dateValue;
+	private Date dateCreated;
 	/**
 	 * 多选或者多个input
 	 */
@@ -31,11 +30,11 @@ public class InputValue {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUserId() {
-		return userId;
+	public String getAnswerId() {
+		return answerId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setAnswerId(String answerId) {
+		this.answerId = answerId;
 	}
 	public String getFormId() {
 		return formId;
@@ -61,12 +60,6 @@ public class InputValue {
 	public void setNumberValue(Long numberValue) {
 		this.numberValue = numberValue;
 	}
-	public Double getDoubleValue() {
-		return doubleValue;
-	}
-	public void setDoubleValue(Double doubleValue) {
-		this.doubleValue = doubleValue;
-	}
 	public Date getDateValue() {
 		return dateValue;
 	}
@@ -91,11 +84,10 @@ public class InputValue {
 	public void setFileInfoes(List<FileInfo> fileInfoes) {
 		this.fileInfoes = fileInfoes;
 	}
-	public String getFormSubmitId() {
-		return formSubmitId;
+	public Date getDateCreated() {
+		return dateCreated;
 	}
-	public void setFormSubmitId(String formSubmitId) {
-		this.formSubmitId = formSubmitId;
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
-	
 }    

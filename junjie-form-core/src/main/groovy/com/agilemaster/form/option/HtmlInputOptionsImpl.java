@@ -6,75 +6,69 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.agilemaster.cassandra.CassandraJunjieConfig;
 import com.agilemaster.cassandra.option.CassandraTemplate;
+import com.agilemaster.form.constants.FormCoreStaticMethod;
 import com.agilemaster.form.constants.JunjieFormConstants;
-import com.agilemaster.form.domain.HtmlForm;
+import com.agilemaster.form.domain.HtmlInput;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.querybuilder.Clause;
 
-public class HtmlFormOptionsImpl implements HtmlFormOptions {
+public class HtmlInputOptionsImpl implements HtmlInputOptions{
 	private static final Logger log = LoggerFactory
-			.getLogger(HtmlFormOptionsImpl.class);
+			.getLogger(HtmlInputOptionsImpl.class);
 	private CassandraTemplate cassandraTemplate = CassandraJunjieConfig
 			.getInstance();
-
 	@Override
-	public HtmlForm save(HtmlForm htmlForm) {
-		if (null != htmlForm) {
-			if (null == htmlForm.getId()) {
-				String id = UUID.randomUUID().toString();
-				htmlForm.setId(id);
+	public HtmlInput save(HtmlInput domain) {
+		if(null!=domain){
+			Date now = new Date();
+			domain.setDateCreated(now);
+			domain.setLastUpdated(now);
+			if(null==domain.getId()){
+				domain.setId(FormCoreStaticMethod.genUUID());
 			}
-			Date date = new Date();
-			htmlForm.setDateCreated(date);
-			htmlForm.setLastUpdated(date);
-			try {
-				cassandraTemplate.save(htmlForm);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			throw new NullPointerException("save htmlForm is null!");
+			cassandraTemplate.save(domain);
+		}else{
+			throw new NullPointerException("save HtmlInput is null!");
 		}
-		return htmlForm;
+		return domain;
 	}
 
 	@Override
-	public HtmlForm delete(HtmlForm domain) {
+	public HtmlInput delete(HtmlInput domain) {
 		cassandraTemplate.delete(domain);
 		return domain;
 	}
 
 	@Override
 	public void delete(String id) {
-		cassandraTemplate.deleteById(HtmlForm.class, id);
+		cassandraTemplate.deleteById(HtmlInput.class,id);
 	}
 
 	@Override
 	public boolean update(String id, Map<String, Object> params) {
 		List<Clause> whereList = new ArrayList<Clause>();
 		whereList.add(eq("id", id));
-		cassandraTemplate.update(JunjieFormConstants.T_HTML_FORM, params,
+		cassandraTemplate.update(JunjieFormConstants.T_HTML_INPUT, params,
 				whereList);
 		return true;
 	}
 
 	@Override
-	public HtmlForm findOne(Object id) {
-		return cassandraTemplate.getEntity(HtmlForm.class, id);
+	public HtmlInput findOne(Object id) {
+		return cassandraTemplate.getEntity(HtmlInput.class, id);
 	}
 
 	@Override
 	public long count() {
 		ResultSet resultSet = cassandraTemplate.execute("select count(*) from "
 				+ JunjieFormConstants.DEFAULT_KEY_SPACE + "."
-				+ JunjieFormConstants.T_HTML_FORM);
+				+ JunjieFormConstants.T_HTML_INPUT);
 		return resultSet.one().getLong(0);
 	}
 

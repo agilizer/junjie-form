@@ -23,13 +23,15 @@ inputType varchar,
 labelAfter text,
 labelBefore text,
 listShow boolean,
-saasId uuid,
-selectInfo map<text,text>,
+saasId text,
+selectValues list<varchar>,
+rightAnswers list<varchar>,
 sequence int,
 showToUser boolean,
-valueType varchar,
 dateCreated timestamp,
-lastUpdated timestamp);""","""
+lastUpdated timestamp);""",
+"""CREATE INDEX input_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_INPUT} ( formId );""",
+"""
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_FORM}  
 (id text PRIMARY KEY,
 afterText text,
@@ -57,20 +59,19 @@ description text,
 originalName varchar,
 storeFileName varchar,
 storePath varchar,
-attributes map<text,text>);"""
+attributes map<varchar,varchar>);"""
 ,"""
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_INPUT_VALUE}  
-(id text PRIMARY KEY,
+(id varchar PRIMARY KEY,
 dateValue timestamp,
-doubleValue double,
-formId text,
-formSubmitId text,
-htmlInputId text,
+formId varchar,
+htmlInputId varchar,
 label text,
-listValue list<text>,
+listValue list<varchar>,
 numberValue bigint,
 strValue text,
-userId text,
+dateCreated timestamp,
+anwserId varchar,
 fileInfoes list<frozen<${JunjieFormConstants.T_FILE_INFO}  >>);""","""
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SUBMIT}
 (id text PRIMARY KEY,
