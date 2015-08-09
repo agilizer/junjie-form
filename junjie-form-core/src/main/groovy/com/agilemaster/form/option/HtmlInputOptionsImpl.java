@@ -16,6 +16,7 @@ import com.agilemaster.form.constants.FormCoreStaticMethod;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.HtmlInput;
 import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.Row;
 import com.datastax.driver.core.querybuilder.Clause;
 
 public class HtmlInputOptionsImpl implements HtmlInputOptions{
@@ -72,4 +73,16 @@ public class HtmlInputOptionsImpl implements HtmlInputOptions{
 		return resultSet.one().getLong(0);
 	}
 
+	@Override
+	public void deleteByFormId(String formId) {
+		ResultSet resultSet = cassandraTemplate.execute("select id from "
+				+ JunjieFormConstants.DEFAULT_KEY_SPACE + "."
+				+ JunjieFormConstants.T_HTML_INPUT +" where formId = ?",formId);
+		List<Row> result = resultSet.all();
+		if(null!=result&&result.size()>0){
+			for(Row row:result){
+				delete(row.getString(0));
+			}
+		}
+	}
 }

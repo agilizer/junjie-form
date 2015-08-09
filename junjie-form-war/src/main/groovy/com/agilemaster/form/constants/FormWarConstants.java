@@ -9,6 +9,7 @@ public interface FormWarConstants {
 	String CON_SITE_URL="siteUrl";
 	String ERROR_MSG="errorMsg";
 	String ERROR_CODE="errorCode";
+	int ERROR_CODE_NOT_FOUND=1;
 	/**
 	 * 短信替换
 	 */

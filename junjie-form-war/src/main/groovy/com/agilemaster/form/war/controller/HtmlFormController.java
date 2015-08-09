@@ -7,14 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agilemaster.form.constants.FormWarConstants;
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.option.HtmlFormOptions;
+import com.agilemaster.form.war.service.HtmlFormDataConvert;
 import com.agilemaster.form.war.util.StaticMethod;
 
 @RestController
@@ -23,7 +26,9 @@ public class HtmlFormController {
 
 	@Autowired
 	HtmlFormOptions htmlFormOptions;
-
+	@Autowired
+	@Qualifier("htmlFormDataConvertFormBuilder")
+	HtmlFormDataConvert htmlFormDataConvert;
 	@ResponseBody
 	@RequestMapping("/create")
 	public Map<String, Object> create(HtmlForm htmlForm,
@@ -31,12 +36,32 @@ public class HtmlFormController {
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
 		Map<String, Object> result = StaticMethod.genResult();
-		if (htmlForm != null && htmlForm.getSaasId() != null) {
+		if (htmlForm != null) {
 			htmlForm.setStartTime(startDate);
 			htmlForm.setEndTime(endDate);
 			htmlForm = htmlFormOptions.save(htmlForm);
 			result.put(FormWarConstants.SUCCESS, true);
 			result.put(FormWarConstants.DATA, htmlForm);
+		}else{
+			result.put(FormWarConstants.ERROR_MSG, "信息不正确");
+			result.put(FormWarConstants.DATA, htmlForm);
+		}
+		return result;
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("/createFormBuilder")
+	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
+			HttpServletRequest request,HttpServletResponse response) {
+		Map<String, Object> result = StaticMethod.genResult();
+		HtmlForm htmlForm= htmlFormDataConvert.convert(htmlFormId, jsonContent);
+		if(null!=htmlForm){
+			result.put(FormWarConstants.SUCCESS, true);
+			result.put(FormWarConstants.DATA, htmlForm);
+		}else{
+			result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NOT_FOUND);
 		}
 		return result;
 	}

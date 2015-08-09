@@ -38,6 +38,8 @@ public class HtmlInput implements Serializable{
 	 * 	  inputType为text，有属性placeholder提交。
 	 */
 	private Map<String,String> inputAttrs;
+	
+	private Map<String,String> otherInfo;
 	/**
 	 * input的类型(必填)
 	 */
@@ -187,6 +189,12 @@ public class HtmlInput implements Serializable{
 	}
 	public void setSelectValues(List<String> selectValues) {
 		this.selectValues = selectValues;
+	}
+	public Map<String, String> getOtherInfo() {
+		return otherInfo;
+	}
+	public void setOtherInfo(Map<String, String> otherInfo) {
+		this.otherInfo = otherInfo;
 	}
 	
 	
