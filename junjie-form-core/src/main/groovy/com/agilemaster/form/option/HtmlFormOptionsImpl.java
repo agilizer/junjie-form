@@ -78,4 +78,12 @@ public class HtmlFormOptionsImpl implements HtmlFormOptions {
 		return resultSet.one().getLong(0);
 	}
 
+	@Override
+	public void update(String id, String jsonContent, int inputCount) {
+		cassandraTemplate.execute("update "
+				+ JunjieFormConstants.DEFAULT_KEY_SPACE + "."
+				+ JunjieFormConstants.T_HTML_FORM +" set jsonContent=?, inputCount = ? where id = ?;",
+				jsonContent,inputCount,id);
+	}
+
 }

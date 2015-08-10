@@ -110,4 +110,15 @@ public class HtmlFormController {
 		}
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/showFormrender")
+	public Map<String, Object> showFormrender(String saasId,String htmlFormId) {
+		Map<String, Object> result = StaticMethod.genResult();
+		if (null != saasId && htmlFormId != null) {
+			HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
+			result.put(FormWarConstants.DATA,htmlForm);
+			result.put(FormWarConstants.SUCCESS, true);
+		}
+		return result;
+	}
 }

@@ -55,6 +55,7 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 			HtmlInput htmlInput = null
 			int sequence = 1;
 			htmlInputOptions.deleteByFormId(htmlFormId);
+			int inputCount = 0;
 			array.each {
 				htmlInputDataConvert = null
 				htmlInput = null
@@ -72,12 +73,15 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 				}
 				if(htmlInputDataConvert){
 					htmlInput = htmlInputDataConvert.convert(inputType, it);
+					it.put("cid", htmlInput.getId())
 					htmlInput.setSequence(sequence*5);
 					sequence = sequence +1;
 					htmlInput.setFormId(htmlForm.getId())
 					htmlInputOptions.save(htmlInput)
 				}
+				inputCount++;
 			}
+			htmlFormOptions.update(htmlFormId, JSON.toJSONString(object), inputCount);
 		}else{
 			log.warn("htmlFormId not found : {}",htmlFormId)
 		}

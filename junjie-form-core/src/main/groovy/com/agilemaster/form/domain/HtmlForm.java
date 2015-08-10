@@ -19,6 +19,10 @@ public class HtmlForm implements Serializable{
 	private String beforeText;
 	private String afterText;
 	/**
+	 * 前端传入的整个form json字符串。
+	 */
+	private String jsonContent;
+	/**
 	 * 表单的名称(必填)
 	 */
 	private String name;
@@ -29,6 +33,7 @@ public class HtmlForm implements Serializable{
 	private boolean finish; 
 	private int answerCount;
 	private int expectCount;
+	private int inputCount;
 	private Date startTime;
 	private Date endTime;
 	private Date dateCreated;
@@ -118,6 +123,18 @@ public class HtmlForm implements Serializable{
 	}
 	public void setExpectCount(int expectCount) {
 		this.expectCount = expectCount;
+	}
+	public String getJsonContent() {
+		return jsonContent;
+	}
+	public void setJsonContent(String jsonContent) {
+		this.jsonContent = jsonContent;
+	}
+	public int getInputCount() {
+		return inputCount;
+	}
+	public void setInputCount(int inputCount) {
+		this.inputCount = inputCount;
 	}
 	
 }
