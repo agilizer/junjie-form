@@ -9,7 +9,7 @@ junjie表单基础jar包实现。
 * jar包实现，基于spring。springMvc层只做测试，jar包可以独立发布，加上springMvc后可发布成war项目。
 * 存储架构采用cassandra。
 
-此项目路线图：开发->零点项目实践用->功能改善->开源-> 发布表单功能服务以及api。
+此项目路线图：开发->项目实践用->功能改善->开源-> 发布表单功能服务以及api。
 
 #junjie-form-war
 
