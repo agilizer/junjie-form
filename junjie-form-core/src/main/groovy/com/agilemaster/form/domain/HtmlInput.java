@@ -71,7 +71,7 @@ public class HtmlInput implements Serializable{
 	 * input类型数据定义
 	 */
 	public static   enum  InputType{
-	    checkbox,
+		checkboxes,
 	    /**
 	     * 单个文件
 	     */
@@ -105,7 +105,9 @@ public class HtmlInput implements Serializable{
 	    textarea,
 	    html,
 	    number,
-	    select
+	    select,
+	    paragraph,
+	    section_break
 	}
 	public String getId() {
 		return id;

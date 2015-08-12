@@ -15,6 +15,7 @@ import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.war.convert.formbuilder.CheckboxesAndRadiosInputConvert
 import com.agilemaster.form.war.convert.formbuilder.NumberInputConvert
+import com.agilemaster.form.war.convert.formbuilder.SectionBreakConvert
 import com.agilemaster.form.war.convert.formbuilder.TextInputConvert
 import com.agilemaster.form.war.vo.FiledType
 import com.alibaba.fastjson.JSON
@@ -36,14 +37,16 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 	HtmlInputOptions htmlInputOptions;
 	@Autowired
 	CassandraTemplate cassandraTemplate;
-	private Map<InputType,HtmlInputDataConvert> inputDataConvertMap = new HashMap<InputType,HtmlInputDataConvert>();
+	private Map<String,HtmlInputDataConvert> inputDataConvertMap = new HashMap<String,HtmlInputDataConvert>();
 	
 	@PostConstruct
 	public void initInputDataConvert(){
 		inputDataConvertMap.put(InputType.text, new TextInputConvert())
+		inputDataConvertMap.put(InputType.section_break, new SectionBreakConvert())
+		inputDataConvertMap.put(InputType.paragraph, new TextInputConvert())
 		inputDataConvertMap.put(InputType.email, new TextInputConvert())
 		inputDataConvertMap.put(InputType.website, new TextInputConvert())
-		inputDataConvertMap.put(InputType.checkbox, new CheckboxesAndRadiosInputConvert())
+		inputDataConvertMap.put(InputType.checkboxes, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.radio, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.number, new NumberInputConvert())
 	}
