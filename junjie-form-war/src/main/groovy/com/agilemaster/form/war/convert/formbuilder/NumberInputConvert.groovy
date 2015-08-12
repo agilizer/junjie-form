@@ -1,22 +1,18 @@
-package com.agilemaster.form.war.convert.formbuilder;
+package com.agilemaster.form.war.convert.formbuilder
 
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.HtmlInput.InputType;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- *  "size": "small",
-        "description": "adsfasfasdfadsfasdfsadf",
-        "minlength": "20",
-        "maxlength": "30",
-        "min_max_length_units": "characters"
+ * "field_options":{"units":"unit","min":"23","max":"45","integer_only":true}
  * @author asdtiang
  *
  */
-public class TextInputConvert extends FormBuilderInputConvert{
+class NumberInputConvert  extends FormBuilderInputConvert{
 	
-	def INFO_ATTR_NAMES=["size","min_max_length_units"]
-	def INPUT_ATTR_NAMES = ["minlength","maxlength","placeholder"]
+	def INFO_ATTR_NAMES=["units","integer_only"]
+	def INPUT_ATTR_NAMES = ["min","max"]
 	public  HtmlInput convertOtherData(HtmlInput htmlInput,InputType inputType,JSONObject jsonObject){
 		def otherInfo = [:]
 		def inputAttrs=[:]

@@ -81,6 +81,8 @@ public class HtmlInput implements Serializable{
 	     */
 	    files,
 	    hidden,
+	    email,
+	    website,
 	    /**
 	     * 单个图像
 	     */

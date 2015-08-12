@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 import com.agilemaster.cassandra.option.CassandraTemplate
-import com.agilemaster.form.constants.JunjieFormConstants
 import com.agilemaster.form.domain.HtmlForm
 import com.agilemaster.form.domain.HtmlInput
 import com.agilemaster.form.domain.HtmlInput.InputType
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.war.convert.formbuilder.CheckboxesAndRadiosInputConvert
+import com.agilemaster.form.war.convert.formbuilder.NumberInputConvert
 import com.agilemaster.form.war.convert.formbuilder.TextInputConvert
 import com.agilemaster.form.war.vo.FiledType
 import com.alibaba.fastjson.JSON
@@ -41,8 +41,11 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 	@PostConstruct
 	public void initInputDataConvert(){
 		inputDataConvertMap.put(InputType.text, new TextInputConvert())
+		inputDataConvertMap.put(InputType.email, new TextInputConvert())
+		inputDataConvertMap.put(InputType.website, new TextInputConvert())
 		inputDataConvertMap.put(InputType.checkbox, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.radio, new CheckboxesAndRadiosInputConvert())
+		inputDataConvertMap.put(InputType.number, new NumberInputConvert())
 	}
 	@Override
 	public HtmlForm convert(String htmlFormId, String jsonContent) {
@@ -59,19 +62,10 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 			array.each {
 				htmlInputDataConvert = null
 				htmlInput = null
-				if(FiledType.text.toString()==it.field_type){
-					inputType = InputType.text
+				inputType  = null
+				inputType = InputType.valueOf(it.field_type)
+				if(inputType!=null){
 					htmlInputDataConvert = inputDataConvertMap.get(inputType)
-				}
-				if(FiledType.checkboxes.toString()==it.field_type){
-					inputType = InputType.checkbox
-					htmlInputDataConvert = inputDataConvertMap.get(inputType)
-				}
-				if(FiledType.radio.toString()==it.field_type){
-					inputType = InputType.radio
-					htmlInputDataConvert = inputDataConvertMap.get(inputType)
-				}
-				if(htmlInputDataConvert){
 					htmlInput = htmlInputDataConvert.convert(inputType, it);
 					htmlInput.setSequence(sequence*5);
 					sequence = sequence +1;
@@ -79,8 +73,8 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 					htmlInputOptions.save(htmlInput)
 					it.put("cid", htmlInput.getId())
 					it.put("id", htmlInput.getId())
+					inputCount++;
 				}
-				inputCount++;
 			}
 			htmlFormOptions.update(htmlFormId, JSON.toJSONString(object), inputCount);
 		}else{
