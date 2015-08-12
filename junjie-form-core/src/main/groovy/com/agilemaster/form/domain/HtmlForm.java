@@ -33,6 +33,9 @@ public class HtmlForm implements Serializable{
 	private boolean finish; 
 	private int answerCount;
 	private int expectCount;
+	/**
+	 * htmlInput 计数
+	 */
 	private int inputCount;
 	private Date startTime;
 	private Date endTime;

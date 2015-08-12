@@ -73,11 +73,12 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 				}
 				if(htmlInputDataConvert){
 					htmlInput = htmlInputDataConvert.convert(inputType, it);
-					it.put("cid", htmlInput.getId())
 					htmlInput.setSequence(sequence*5);
 					sequence = sequence +1;
 					htmlInput.setFormId(htmlForm.getId())
 					htmlInputOptions.save(htmlInput)
+					it.put("cid", htmlInput.getId())
+					it.put("id", htmlInput.getId())
 				}
 				inputCount++;
 			}
