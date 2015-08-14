@@ -10,6 +10,7 @@ public interface FormWarConstants {
 	String ERROR_MSG="errorMsg";
 	String ERROR_CODE="errorCode";
 	int ERROR_CODE_NOT_FOUND=1;
+	int ERROR_CODE_NULL=2;
 	/**
 	 * 短信替换
 	 */

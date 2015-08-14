@@ -17,6 +17,7 @@ import com.agilemaster.form.constants.FormWarConstants;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.HtmlForm;
 import com.agilemaster.form.option.HtmlFormOptions;
+import com.agilemaster.form.option.HtmlInputOptions;
 import com.agilemaster.form.war.service.HtmlFormDataConvert;
 import com.agilemaster.form.war.util.StaticMethod;
 
@@ -26,6 +27,8 @@ public class HtmlFormController {
 
 	@Autowired
 	HtmlFormOptions htmlFormOptions;
+	@Autowired
+	HtmlInputOptions htmlInputOptions;
 	@Autowired
 	@Qualifier("htmlFormDataConvertFormBuilder")
 	HtmlFormDataConvert htmlFormDataConvert;
@@ -107,6 +110,30 @@ public class HtmlFormController {
 			HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
 			result.put(FormWarConstants.DATA,htmlForm);
 			result.put(FormWarConstants.SUCCESS, true);
+		}else{
+			result.put(FormWarConstants.ERROR_MSG, "saasId和htmlFormId不能为空");
+			result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NULL);
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/copy")
+	public Map<String, Object> copy(String saasId,String htmlFormId) {
+		Map<String, Object> result = StaticMethod.genResult();
+		if (null != saasId && htmlFormId != null) {
+			HtmlForm htmlForm = htmlFormOptions.copyAndSave(htmlFormId);
+			if(htmlForm!=null){
+				htmlInputOptions.copyHtmlInputs(htmlFormId, htmlForm.getId());
+				result.put(FormWarConstants.DATA,htmlForm);
+				result.put(FormWarConstants.SUCCESS, true);
+			}else{
+				result.put(FormWarConstants.ERROR_MSG, "没有找到相关数据");
+				result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NOT_FOUND);
+			}
+		}else{
+			result.put(FormWarConstants.ERROR_MSG, "saasId和htmlFormId不能为空");
+			result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NULL);
 		}
 		return result;
 	}
@@ -121,4 +148,5 @@ public class HtmlFormController {
 		}
 		return result;
 	}
+	
 }

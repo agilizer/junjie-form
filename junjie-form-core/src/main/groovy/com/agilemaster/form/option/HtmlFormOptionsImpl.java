@@ -86,4 +86,24 @@ public class HtmlFormOptionsImpl implements HtmlFormOptions {
 				jsonContent,inputCount,id);
 	}
 
+	@Override
+	public HtmlForm copyAndSave(String formId) {
+		HtmlForm htmlFormNew = null;
+		if(null!=formId){
+			HtmlForm htmlForm = findOne(formId);
+			if(null!=htmlForm){
+				htmlForm.setId(null);
+				Date date = new Date();
+				htmlForm.setDateCreated(date);
+				htmlForm.setLastUpdated(date);
+				htmlFormNew = save(htmlForm);
+			}else{
+				log.warn("formId {} not found!!!!"+formId);
+			}
+		}else{
+			log.warn("formId is null!!!!!!!!!!!!!");
+		}
+		return htmlFormNew;
+	}
+
 }

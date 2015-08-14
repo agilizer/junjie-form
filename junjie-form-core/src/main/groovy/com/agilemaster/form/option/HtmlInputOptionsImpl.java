@@ -15,6 +15,7 @@ import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.constants.FormCoreStaticMethod;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.HtmlInput;
+import com.agilemaster.form.domain.HtmlInputAccessor;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.querybuilder.Clause;
@@ -84,5 +85,24 @@ public class HtmlInputOptionsImpl implements HtmlInputOptions{
 				delete(row.getString(0));
 			}
 		}
+	}
+
+	@Override
+	public List<HtmlInput> listByFormId(String formId) {
+		HtmlInputAccessor htmlInputAccessor = cassandraTemplate.getAccessorMapper(HtmlInputAccessor.class);
+		return htmlInputAccessor.listByFormId(formId).all();
+	}
+
+	@Override
+	public int copyHtmlInputs(String oldFormId, String newFormId) {
+		List<HtmlInput> inputs = listByFormId(oldFormId);
+		int result = 0;
+		for(HtmlInput input:inputs){
+			input.setId(newFormId);
+			save(input);
+			result++;
+		}
+		log.info("oldFormId {}   newFormId {}  copy htmlInput count {}",oldFormId,newFormId,result);
+		return result;
 	}
 }
