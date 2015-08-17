@@ -14,6 +14,7 @@ import com.agilemaster.form.domain.HtmlInput.InputType
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.war.convert.formbuilder.CheckboxesAndRadiosInputConvert
+import com.agilemaster.form.war.convert.formbuilder.HtmlInputDataConvert;
 import com.agilemaster.form.war.convert.formbuilder.NumberInputConvert
 import com.agilemaster.form.war.convert.formbuilder.SectionBreakConvert
 import com.agilemaster.form.war.convert.formbuilder.TextInputConvert
@@ -37,6 +38,7 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 	HtmlInputOptions htmlInputOptions;
 	@Autowired
 	CassandraTemplate cassandraTemplate;
+	
 	private Map<String,HtmlInputDataConvert> inputDataConvertMap = new HashMap<String,HtmlInputDataConvert>();
 	
 	@PostConstruct

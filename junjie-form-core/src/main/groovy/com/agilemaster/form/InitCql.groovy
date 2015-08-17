@@ -69,11 +69,14 @@ CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieForm
 dateValue timestamp,
 formId varchar,
 htmlInputId varchar,
+answerId varchar,
+answerRight boolean,
 label text,
 listValue list<varchar>,
 numberValue bigint,
 strValue text,
 dateCreated timestamp,
+lastUpdated timestamp,
 anwserId varchar,
 fileInfoes list<frozen<${JunjieFormConstants.T_FILE_INFO}  >>);""","""
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SUBMIT}
@@ -102,6 +105,15 @@ lastUpdated timestamp
 CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS_COUNTER}  
 (id text PRIMARY KEY,
 counterValue counter
+);
+""",
+"""
+CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_ANSWER_CACHE}  
+(id varchar PRIMARY KEY,
+formRenderCache text,
+finish boolean,
+startAnswerTime timestamp,
+endAnswerTime timestamp
 );
 """,
 """

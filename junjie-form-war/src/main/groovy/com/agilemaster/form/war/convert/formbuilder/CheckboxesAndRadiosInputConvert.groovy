@@ -4,7 +4,7 @@ import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.HtmlInput.InputType;
 import com.alibaba.fastjson.JSONObject;
 
-public class CheckboxesAndRadiosInputConvert extends FormBuilderInputConvert{
+public class CheckboxesAndRadiosInputConvert extends FormBuilderInputConvertAbstract{
 	String OPTIONS="options";
 	String LABEL="label";
 	String CHECKED="checked";

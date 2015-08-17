@@ -5,7 +5,7 @@ import com.agilemaster.form.domain.HtmlInput.InputType;
 import com.alibaba.fastjson.JSONObject;
 
 
-class SectionBreakConvert extends FormBuilderInputConvert{
+class SectionBreakConvert extends FormBuilderInputConvertAbstract{
 	
 	def INFO_ATTR_NAMES=["description","min_max_length_units"]
 	public  HtmlInput convertOtherData(HtmlInput htmlInput,InputType inputType,JSONObject jsonObject){

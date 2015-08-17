@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSONObject;
  * @author asdtiang
  *
  */
-public class TextInputConvert extends FormBuilderInputConvert{
+public class TextInputConvert extends FormBuilderInputConvertAbstract{
 	
 	def INFO_ATTR_NAMES=["size","min_max_length_units"]
 	def INPUT_ATTR_NAMES = ["minlength","maxlength","placeholder"]

@@ -2,10 +2,9 @@ package com.agilemaster.form.war.convert.formbuilder;
 
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.HtmlInput.InputType;
-import com.agilemaster.form.war.service.HtmlInputDataConvert;
 import com.alibaba.fastjson.JSONObject;
 
-public abstract class FormBuilderInputConvert implements HtmlInputDataConvert{
+public abstract class FormBuilderInputConvertAbstract implements HtmlInputDataConvert{
 
 //	"label": "公司地址",
 //	"field_type": "website",

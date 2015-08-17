@@ -14,6 +14,8 @@ import com.agilemaster.cassandra.option.CassandraTemplate;
 import com.agilemaster.form.InitSchemaForm;
 import com.agilemaster.form.constants.JunjieFormConstants;
 import com.agilemaster.form.domain.FormSaas;
+import com.agilemaster.form.option.AnswerCacheOptions;
+import com.agilemaster.form.option.AnswerCacheOptionsImpl;
 import com.agilemaster.form.option.FileInfoOptions;
 import com.agilemaster.form.option.FileInfoOptionsImpl;
 import com.agilemaster.form.option.FormSaasOptions;
@@ -70,6 +72,12 @@ public class BootstrapService {
 	public FormSaasOptions formSaasOptions(){
 		return new FormSaasOptionsImpl(); 
 	}
+	@Bean 
+	@DependsOn("cassandraTemplate")
+	public AnswerCacheOptions answerCacheOptions(){
+		return new AnswerCacheOptionsImpl(); 
+	}
+	
 	@DependsOn("cassandraTemplate")
 	@Bean HtmlFormOptions htmlFormOptions(){
 		return new HtmlFormOptionsImpl();

@@ -18,6 +18,8 @@ public class InputValue {
 	private Long numberValue;
 	private Date dateValue;
 	private Date dateCreated;
+	private Date lastUpdated;
+	private boolean answerRight = false;
 	/**
 	 * 多选或者多个input
 	 */
@@ -90,4 +92,18 @@ public class InputValue {
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
+	public Date getLastUpdated() {
+		return lastUpdated;
+	}
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
+	public boolean isAnswerRight() {
+		return answerRight;
+	}
+	public void setAnswerRight(boolean answerRight) {
+		this.answerRight = answerRight;
+	}
+	
+	
 }    

@@ -9,15 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agilemaster.form.constants.FormWarConstants;
-import com.agilemaster.form.constants.JunjieFormConstants;
+import com.agilemaster.form.domain.AnswerCache;
 import com.agilemaster.form.domain.HtmlForm;
+import com.agilemaster.form.option.AnswerCacheOptions;
 import com.agilemaster.form.option.HtmlFormOptions;
 import com.agilemaster.form.option.HtmlInputOptions;
+import com.agilemaster.form.util.MD5Util;
 import com.agilemaster.form.war.service.HtmlFormDataConvert;
 import com.agilemaster.form.war.util.StaticMethod;
 
@@ -29,6 +32,8 @@ public class HtmlFormController {
 	HtmlFormOptions htmlFormOptions;
 	@Autowired
 	HtmlInputOptions htmlInputOptions;
+	@Autowired
+	AnswerCacheOptions answerCacheOptions;
 	@Autowired
 	@Qualifier("htmlFormDataConvertFormBuilder")
 	HtmlFormDataConvert htmlFormDataConvert;
@@ -137,6 +142,25 @@ public class HtmlFormController {
 		}
 		return result;
 	}
+	@ResponseBody
+	@RequestMapping("/showFormrender/{answerId}")
+	public Map<String, Object> showFormrender(String saasId,String htmlFormId,@PathVariable("answerId") String answerId) {
+		Map<String, Object> result = StaticMethod.genResult();
+		if (null != saasId && htmlFormId != null) {
+			String answerCacheId = MD5Util.MD5(saasId+htmlFormId+answerId);
+			AnswerCache answerCache = answerCacheOptions.findOne(answerCacheId);
+			if(answerCache == null){
+				HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
+				if(htmlForm!=null){
+					answerCache = answerCacheOptions.save(saasId, htmlFormId, answerId,htmlForm.getJsonContent());
+				}
+			}
+			result.put(FormWarConstants.DATA,answerCache);
+			result.put(FormWarConstants.SUCCESS, true);
+		}
+		return result;
+	}
+	
 	@ResponseBody
 	@RequestMapping("/showFormrender")
 	public Map<String, Object> showFormrender(String saasId,String htmlFormId) {

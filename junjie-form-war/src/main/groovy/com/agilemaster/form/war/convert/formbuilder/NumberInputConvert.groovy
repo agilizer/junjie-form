@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject;
  * @author asdtiang
  *
  */
-class NumberInputConvert  extends FormBuilderInputConvert{
+class NumberInputConvert  extends FormBuilderInputConvertAbstract{
 	
 	def INFO_ATTR_NAMES=["units","integer_only"]
 	def INPUT_ATTR_NAMES = ["min","max"]

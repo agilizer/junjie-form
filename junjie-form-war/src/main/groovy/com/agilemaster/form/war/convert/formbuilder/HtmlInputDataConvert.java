@@ -1,4 +1,4 @@
-package com.agilemaster.form.war.service;
+package com.agilemaster.form.war.convert.formbuilder;
 
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.HtmlInput.InputType;
