@@ -1,6 +1,7 @@
 package com.agilemaster.form.war.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class HtmlFormController {
 	HtmlFormDataConvert htmlFormDataConvert;
 	@ResponseBody
 	@RequestMapping("/create")
-	public Map<String, Object> create(HtmlForm htmlForm,
+	public Map<String, Object> create(HtmlForm htmlForm,String parentHtmlFormId,
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
@@ -48,6 +49,11 @@ public class HtmlFormController {
 			htmlForm.setStartTime(startDate);
 			htmlForm.setEndTime(endDate);
 			htmlForm = htmlFormOptions.save(htmlForm);
+			if(null!=parentHtmlFormId&&!"".equals(parentHtmlFormId.trim())){
+				Map<String,Object> updateMap = new HashMap<String,Object>();
+				updateMap.put("childrenFormId", htmlForm.getId());
+				htmlFormOptions.update(parentHtmlFormId, updateMap);
+			}
 			result.put(FormWarConstants.SUCCESS, true);
 			result.put(FormWarConstants.DATA, htmlForm);
 		}else{

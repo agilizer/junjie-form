@@ -18,6 +18,10 @@ public class HtmlForm implements Serializable{
 	private String beforeText;
 	private String afterText;
 	/**
+	 * 实现 {@link HtmlForm} 的链式关系，简单实现表单流程。
+	 */
+	private String childrenFormId;
+	/**
 	 * 前端传入的整个form json字符串。
 	 */
 	private String jsonContent;
@@ -32,6 +36,10 @@ public class HtmlForm implements Serializable{
 	private boolean finish; 
 	private int answerCount;
 	private int expectCount;
+	/**
+	 * 是否完全回答正确再进入下一个表单。
+	 */
+	private boolean allRightNext = false;
 	/**
 	 * htmlInput 计数
 	 */
@@ -138,5 +146,18 @@ public class HtmlForm implements Serializable{
 	public void setInputCount(int inputCount) {
 		this.inputCount = inputCount;
 	}
+	public String getChildrenFormId() {
+		return childrenFormId;
+	}
+	public void setChildrenFormId(String childrenFormId) {
+		this.childrenFormId = childrenFormId;
+	}
+	public boolean isAllRightNext() {
+		return allRightNext;
+	}
+	public void setAllRightNext(boolean allRightNext) {
+		this.allRightNext = allRightNext;
+	}
+	
 	
 }

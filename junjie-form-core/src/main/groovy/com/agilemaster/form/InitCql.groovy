@@ -38,6 +38,8 @@ CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieForm
 afterText text,
 beforeText text,
 customInfo  map<varchar,varchar>,
+childrenFormId varchar,
+allRightNext boolean,
 description text,
 name text,
 jsonContent text,
