@@ -95,10 +95,12 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 				}
 			}
 			def updateMap = ["formRenderCache":JSON.toJSONString(jsonAnswerCacheObject)]
-			if(jsonAnswerMap.empty){
-				answerCache.setFinish(true);
+			if(jsonAnswerMap.size()==0){
+				updateMap.put("finish", true);
+				updateMap.put("endAnswerTime", new Date());
 			}
 			log.info("bootstrapData====>"+updateMap)
+			log.info("answerCache====>isFinis-->"+answerCache.isFinish()+"   ---jsonAnswerMap "+jsonAnswerMap.size())
 			answerCacheOptions.update(answerCacheId, updateMap)
 			result.put(FormWarConstants.SUCCESS, true)
 		}else{
