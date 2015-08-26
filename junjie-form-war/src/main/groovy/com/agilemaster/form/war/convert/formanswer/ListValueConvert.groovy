@@ -35,7 +35,7 @@ class ListValueConvert extends FormRenderInputConvertAbstract{
 		}
 		inputValue.setListValue(answerValues);
 		inputValue.setStrValue(answerStr);
-		jsonAnswerCache.put(VALUE, );
+		jsonAnswerCache.put(VALUE, answerObject);
 		return inputValue;
 	}
 }
