@@ -63,8 +63,6 @@ public class HtmlFormController {
 		return result;
 	}
 	
-	
-	
 	@ResponseBody
 	@RequestMapping("/createFormBuilder")
 	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
@@ -89,7 +87,10 @@ public class HtmlFormController {
 			htmlForm.setEndTime(endDate);
 			htmlForm.setLastUpdated(new Date());
 			String updateId = htmlForm.getId();
+			HtmlForm oldForm = htmlFormOptions.findOne(htmlForm.getId());
+			htmlForm.setJsonContent(oldForm.getJsonContent());
 			htmlFormOptions.delete(updateId);
+			htmlForm.setId(updateId);
 			htmlFormOptions.save(htmlForm);
 			result.put(FormWarConstants.SUCCESS, true);
 			result.put(FormWarConstants.DATA, htmlForm);
@@ -178,5 +179,4 @@ public class HtmlFormController {
 		}
 		return result;
 	}
-	
 }

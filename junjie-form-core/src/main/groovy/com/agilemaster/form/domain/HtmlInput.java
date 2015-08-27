@@ -99,6 +99,10 @@ public class HtmlInput implements Serializable{
 	     **/
 	    dateTime,
 	    /**
+	     * 评分
+	     */
+	    progress,
+	    /**
 	     * 日期
 	     */
 	    date,

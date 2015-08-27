@@ -14,11 +14,11 @@ import com.agilemaster.form.domain.HtmlInput.InputType
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.war.convert.formbuilder.CheckboxesAndRadiosInputConvert
-import com.agilemaster.form.war.convert.formbuilder.HtmlInputDataConvert;
+import com.agilemaster.form.war.convert.formbuilder.HtmlInputDataConvert
 import com.agilemaster.form.war.convert.formbuilder.NumberInputConvert
+import com.agilemaster.form.war.convert.formbuilder.ProgressConvert
 import com.agilemaster.form.war.convert.formbuilder.SectionBreakConvert
 import com.agilemaster.form.war.convert.formbuilder.TextInputConvert
-import com.agilemaster.form.war.vo.FiledType
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONArray
 import com.alibaba.fastjson.JSONObject
@@ -49,8 +49,10 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 		inputDataConvertMap.put(InputType.email, new TextInputConvert())
 		inputDataConvertMap.put(InputType.website, new TextInputConvert())
 		inputDataConvertMap.put(InputType.checkboxes, new CheckboxesAndRadiosInputConvert())
+		inputDataConvertMap.put(InputType.select, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.radio, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.number, new NumberInputConvert())
+		inputDataConvertMap.put(InputType.progress, new ProgressConvert())
 	}
 	@Override
 	public HtmlForm convert(String htmlFormId, String jsonContent) {
