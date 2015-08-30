@@ -50,4 +50,8 @@ jar包已经下载到devLib目录<br>
 private static String saasKey="946c4eea-15cb-4dfb-8f8d-91b99fe78939";
 private static String accessKey="c8d47cffb16e4668bc84b3b4f9f72023";
 
+#Cassandra 启动
+
+./cassandra -f 测试和开发环境。
+
 
