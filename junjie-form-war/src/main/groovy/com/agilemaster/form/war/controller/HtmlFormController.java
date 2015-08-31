@@ -54,6 +54,9 @@ public class HtmlFormController {
 				updateMap.put("childrenFormId", htmlForm.getId());
 				htmlFormOptions.update(parentHtmlFormId, updateMap);
 			}
+			if(htmlForm.getJsonContent()!=null){
+				htmlForm= htmlFormDataConvert.convert(htmlForm.getId(), htmlForm.getJsonContent());
+			}
 			result.put(FormWarConstants.SUCCESS, true);
 			result.put(FormWarConstants.DATA, htmlForm);
 		}else{
@@ -149,6 +152,13 @@ public class HtmlFormController {
 		}
 		return result;
 	}
+	/**
+	 * AnswerCache id 必须重先计算，保证saas唯一性。
+	 * @param saasId
+	 * @param htmlFormId
+	 * @param answerId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("/showFormrender/{answerId}")
 	public Map<String, Object> showFormrender(String saasId,String htmlFormId,@PathVariable("answerId") String answerId) {
