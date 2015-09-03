@@ -16,7 +16,6 @@ import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.war.convert.formbuilder.CheckboxesAndRadiosInputConvert
 import com.agilemaster.form.war.convert.formbuilder.HtmlInputDataConvert
 import com.agilemaster.form.war.convert.formbuilder.NumberInputConvert
-import com.agilemaster.form.war.convert.formbuilder.ProgressConvert
 import com.agilemaster.form.war.convert.formbuilder.SectionBreakConvert
 import com.agilemaster.form.war.convert.formbuilder.TextInputConvert
 import com.alibaba.fastjson.JSON
@@ -52,7 +51,7 @@ public class HtmlFormDataConvertFormBuilder implements HtmlFormDataConvert{
 		inputDataConvertMap.put(InputType.select, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.radio, new CheckboxesAndRadiosInputConvert())
 		inputDataConvertMap.put(InputType.number, new NumberInputConvert())
-		inputDataConvertMap.put(InputType.progress, new ProgressConvert())
+		inputDataConvertMap.put(InputType.progress, new NumberInputConvert())
 	}
 	@Override
 	public HtmlForm convert(String htmlFormId, String jsonContent) {
