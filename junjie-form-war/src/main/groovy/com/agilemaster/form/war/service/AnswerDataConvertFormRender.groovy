@@ -55,6 +55,7 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 		inputValutConvertMap.put(InputType.checkboxes, new ListValueConvert())
 		inputValutConvertMap.put(InputType.radio, new TextValueConvert())
 		inputValutConvertMap.put(InputType.number, new NumberValueConvert())
+		inputValutConvertMap.put(InputType.progress, new NumberValueConvert())
 	}
 	@Override
 	public Map<String, Object> answerForm(String saasId,String htmlFormId,String answerId,String jsonAnswer) {
