@@ -76,4 +76,17 @@ public class InputValueOptionsImpl implements InputValueOptions{
 		return resultSet.one().getLong(0);
 	}
 
+	@Override
+	public List<?> listByHtmlForm(String htmlFormId) {
+		ResultSet resultSet = cassandraTemplate.execute("select answerId,htmlInputId,strValue,answerRight from "
+				+ JunjieFormConstants.DEFAULT_KEY_SPACE + "."
+				+ JunjieFormConstants.T_INPUT_VALUE +" where formId=?",htmlFormId);
+		if(resultSet!=null){
+			return resultSet.all();
+		}else{
+			return null;
+		}
+		
+	}
+
 }

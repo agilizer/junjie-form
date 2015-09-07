@@ -80,7 +80,10 @@ strValue text,
 dateCreated timestamp,
 lastUpdated timestamp,
 anwserId varchar,
-fileInfoes list<frozen<${JunjieFormConstants.T_FILE_INFO}  >>);""","""
+fileInfoes list<frozen<${JunjieFormConstants.T_FILE_INFO}  >>);""",
+"""CREATE INDEX input_value_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_INPUT_VALUE} ( formId );"""
+,
+"""
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SUBMIT}
 (id text PRIMARY KEY,
 formId text,
