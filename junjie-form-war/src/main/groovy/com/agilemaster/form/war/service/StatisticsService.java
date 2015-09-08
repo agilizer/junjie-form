@@ -1,8 +1,8 @@
 package com.agilemaster.form.war.service;
 
-import java.util.List;
+import java.util.Map;
 
 
 public interface StatisticsService {
-	List listValueByInputValueVo(String[] htmlFormId);
+	Map listValueByInputValueVo(String[] htmlFormId);
 }

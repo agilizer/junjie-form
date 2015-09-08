@@ -30,7 +30,7 @@ public class StatisticsContorller {
 	@Autowired
 	AnswerCacheOptions answerCacheOptions;
 	@Autowired
-	StatisticsService StatisticsService;
+	StatisticsService statisticsService;
 	@ResponseBody
 	@RequestMapping("/formAnswerData")
 	public Map<String, Object> createFormBuilder(String htmlFormIds,
@@ -38,9 +38,9 @@ public class StatisticsContorller {
 		Map<String, Object> result = StaticMethod.genResult();
 		if(null!=htmlFormIds){
 			String[] htmlFormIdArray = htmlFormIds.split(" ");
-			List<?> resultList = StatisticsService.listValueByInputValueVo(htmlFormIdArray);
+			Map resultMap = statisticsService.listValueByInputValueVo(htmlFormIdArray);
 			result.put(FormWarConstants.SUCCESS, true);
-			result.put(FormWarConstants.DATA, resultList);
+			result.put(FormWarConstants.DATA, resultMap);
 		}else{
 			result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NOT_FOUND);
 		}

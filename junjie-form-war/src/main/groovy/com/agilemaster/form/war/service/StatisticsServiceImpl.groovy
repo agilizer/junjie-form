@@ -24,42 +24,35 @@ public class StatisticsServiceImpl  implements StatisticsService{
 	@Autowired
 	HtmlInputOptions htmlInputOptions;
 	@Override
-	public List listValueByInputValueVo(String[] htmlFormIds) {
-		def resultList = []
+	public Map listValueByInputValueVo(String[] htmlFormIds) {
+		def resultMap = [:] ////key answerId value answerRow
+		def inputMap = [:]
+		def answerRow = null
+		def answerId = ""
+		def htmlInputId = ""
 		htmlFormIds.each{htmlFormId->
 			if(htmlFormId&&htmlFormId.trim()!=""){
 				List<Row> inputValueList = inputValueOptions.listByHtmlForm(htmlFormId)
 				if(inputValueList){
 					//select answerId,htmlInputId,strValue,answerRight
 					List<HtmlInput> inputs = htmlInputOptions.listByFormId(htmlFormId)
-					def inputMap = [:]
 					inputs.each{HtmlInput input->
 						inputMap.put(input.getId(), input.getLabelBefore());
 					}
-					def answerMap = [:]   //key answerId value answerRow
-					def answerRow = [:] //
-					def inputValue = [:]//key is htmlInputId ,value is answerRow
-					def answerId = ""
-					def htmlInputId = ""
 					inputValueList.each {row->
 						answerId = row.getString("answerId")
-						htmlInputId = row.getString("htmlInputId")
-						answerRow = [i:answerId,
-							h:htmlInputId,
-							s:row.getString("strValue")
-							]
-						inputValue = answerMap.get(answerId)
-						if(inputValue == null){
-							inputValue	=	[:]
-							answerMap.put(answerId, inputValue)
+						answerRow = resultMap.get(answerId)
+						if(answerRow==null){
+							answerRow = [:]
+							resultMap.put(answerId, answerRow)
 						}
-						inputValue.put(htmlInputId,answerRow)
+						htmlInputId = row.getString("htmlInputId")
+						answerRow.put(htmlInputId, row.getString("strValue"))
 					}
-					answerMap.put("htmlInputInfo", inputMap);
-					resultList.add(answerMap)
 				}
 			}
 		}
-		return resultList;
+		resultMap.put("htmlInputInfo", inputMap);
+		return resultMap;
 	}
 }
