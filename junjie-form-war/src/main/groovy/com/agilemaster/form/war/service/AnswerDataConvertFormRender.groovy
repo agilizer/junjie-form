@@ -19,9 +19,10 @@ import com.agilemaster.form.option.FileInfoOptions
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.option.InputValueOptions
+import com.agilemaster.form.war.convert.formanswer.CheckListValueConvert
 import com.agilemaster.form.war.convert.formanswer.InputValueConvert
-import com.agilemaster.form.war.convert.formanswer.ListValueConvert
 import com.agilemaster.form.war.convert.formanswer.NumberValueConvert
+import com.agilemaster.form.war.convert.formanswer.RadioValueConvert
 import com.agilemaster.form.war.convert.formanswer.TextValueConvert
 import com.agilemaster.form.war.util.MD5Util
 import com.agilemaster.form.war.util.StaticMethod
@@ -52,8 +53,8 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 		inputValutConvertMap.put(InputType.paragraph, new TextValueConvert())
 		inputValutConvertMap.put(InputType.email, new TextValueConvert())
 		inputValutConvertMap.put(InputType.website, new TextValueConvert())
-		inputValutConvertMap.put(InputType.checkboxes, new ListValueConvert())
-		inputValutConvertMap.put(InputType.radio, new TextValueConvert())
+		inputValutConvertMap.put(InputType.checkboxes, new CheckListValueConvert())
+		inputValutConvertMap.put(InputType.radio, new RadioValueConvert())
 		inputValutConvertMap.put(InputType.number, new NumberValueConvert())
 		inputValutConvertMap.put(InputType.progress, new NumberValueConvert())
 	}
@@ -63,7 +64,8 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 		HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
 		if(null!=htmlForm){
 			//{"9efe468630df4e0ea87094e0ac42b04c":"木",
-			//"aad908afb01742e9a2bc58a649b7fb22":"工 ","2a99da85940f4631a8a31ac1c4608415":{"0":"on","1":false}}
+			//"aad908afb01742e9a2bc58a649b7fb22":"工 ",
+			//"2a99da85940f4631a8a31ac1c4608415":{"0":"on","1":false}}
 			JSONObject jsonAnswerObject = JSON.parseObject(jsonAnswer);
 			List<HtmlInput> inputs = htmlInputOptions.listByFormId(htmlFormId);
 			String answerCacheId = MD5Util.MD5(saasId+htmlFormId+answerId);
@@ -90,7 +92,8 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 					}
 					InputValueConvert convert = inputValutConvertMap.get(input.getInputType());
 					if(convert){
-						inputValue = convert.convert(input, answerId, inputValueId, answerResult, dateCreated,jsonAnswerMap.remove(htmlInputId));
+						inputValue = convert.convert(input, answerId, inputValueId,
+							 answerResult, dateCreated,jsonAnswerMap.remove(htmlInputId));
 						inputValueOptions.save(inputValue);
 					}
 				}
@@ -101,7 +104,6 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 				updateMap.put("endAnswerTime", new Date());
 			}
 			log.info("bootstrapData====>"+updateMap)
-			log.info("answerCache====>isFinis-->"+answerCache.isFinish()+"   ---jsonAnswerMap "+jsonAnswerMap.size())
 			answerCacheOptions.update(answerCacheId, updateMap)
 			result.put(FormWarConstants.SUCCESS, true)
 		}else{

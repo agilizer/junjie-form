@@ -16,7 +16,7 @@ public abstract class FormRenderInputConvertAbstract implements InputValueConver
 	public static String VALUE="value";
 	@Override
 	public InputValue convert(HtmlInput htmlInput, String answerId,String inputValueId,
-			Object answerObject,Date dateCreated,JSONObject jsonAnswerCache) {
+			Object answerObject,Date dateCreated,JSONObject jsonAnswerField) {
 		InputValue inputValue = new InputValue();
 		inputValue.setId(inputValueId);
 		inputValue.setAnswerId(answerId);
@@ -28,9 +28,18 @@ public abstract class FormRenderInputConvertAbstract implements InputValueConver
 		inputValue.setLabel(htmlInput.getLabelBefore());
 		inputValue.setFormId(htmlInput.getFormId());
 		inputValue.setHtmlInputId(htmlInput.getId());
-		convertValue(htmlInput,inputValue,answerObject,jsonAnswerCache);
+		convertValue(htmlInput,inputValue,answerObject,jsonAnswerField);
 		return inputValue;
 	}
-	public abstract InputValue convertValue(HtmlInput htmlInput, InputValue inputValue,Object answerObject,JSONObject jsonAnswerCache);
+	/**
+	 * 
+	 * @param htmlInput
+	 * @param inputValue
+	 * @param answerObject
+	 * @param jsonAnswerCache 一个input元素jsonObject
+	 * @return
+	 */
+	public abstract InputValue convertValue(HtmlInput htmlInput, InputValue inputValue,
+			Object answerObject,JSONObject jsonAnswerField);
 
 }

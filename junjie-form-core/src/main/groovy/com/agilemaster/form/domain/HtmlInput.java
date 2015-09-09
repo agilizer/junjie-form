@@ -63,6 +63,7 @@ public class HtmlInput implements Serializable{
 	 */
 	private List<String> selectValues;
 	private List<String> rightAnswers;
+	private String rightAnswer;
 	
 	private Date dateCreated;
 	private Date lastUpdated;
@@ -118,6 +119,13 @@ public class HtmlInput implements Serializable{
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getRightAnswer() {
+		return rightAnswer;
+	}
+	public void setRightAnswer(String rightAnswer) {
+		this.rightAnswer = rightAnswer;
 	}
 	public String getLabelBefore() {
 		return labelBefore;
