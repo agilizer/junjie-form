@@ -14,6 +14,7 @@ public abstract class FormBuilderInputConvertAbstract implements HtmlInputDataCo
 	String LABEL_BEFORE="label";
 	String REQUIRED="required";
 	String FIELD_OPTIONS = "field_options";
+	String RIGHT_VALUE="right_value";
 	public HtmlInput convert(InputType inputType,JSONObject jsonObject ){
 		HtmlInput htmlInput = new HtmlInput();
 		htmlInput.setInputType(inputType);
@@ -21,6 +22,9 @@ public abstract class FormBuilderInputConvertAbstract implements HtmlInputDataCo
 		def attrs = [:]
 		if(jsonObject.getBoolean(REQUIRED)){
 			attrs.put(REQUIRED, "true");
+		}
+		if(jsonObject.getString(RIGHT_VALUE)){
+			htmlInput.setRightAnswer(jsonObject.getString(RIGHT_VALUE));
 		}
 		if(attrs.size()>0){
 			htmlInput.setInputAttrs(attrs)

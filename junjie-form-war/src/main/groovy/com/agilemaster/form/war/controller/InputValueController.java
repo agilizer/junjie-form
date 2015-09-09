@@ -25,6 +25,7 @@ import com.agilemaster.form.option.HtmlFormOptions;
 import com.agilemaster.form.option.HtmlInputOptions;
 import com.agilemaster.form.option.InputValueOptions;
 import com.agilemaster.form.war.service.AnswerDataConvert;
+import com.agilemaster.form.war.service.StatisticsService;
 import com.agilemaster.form.war.util.MD5Util;
 import com.agilemaster.form.war.util.StaticMethod;
 
@@ -44,7 +45,6 @@ public class InputValueController {
 	HtmlFormOptions htmlFormOptions;
 	@Autowired
 	AnswerDataConvert answerDataConvert;
-	
 	
 	@ResponseBody
 	@RequestMapping("/create")
@@ -120,6 +120,7 @@ public class InputValueController {
 		log.info(result.toString());
 		return result;
 	}
+	
 	
 	
 	

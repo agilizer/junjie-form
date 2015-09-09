@@ -13,17 +13,12 @@ public class CheckboxesAndRadiosInputConvert extends FormBuilderInputConvertAbst
 		def selectValues = []
 		def rightAnswers=[]
 		def optionsArray = jsonObject.getJSONArray(OPTIONS)
-		def removeIndex = -1
 		optionsArray.eachWithIndex { item,index->
 			selectValues.add(item.label)
 			if(true==item.checked){
 				rightAnswers.add(item.label)
 			}
-			if(item.label=='不限'){
-				removeIndex = index
-			}
 		}
-		
 		def otherInfo = [:]
 		if(jsonObject.get(include_other_option)){
 			otherInfo.put(include_other_option, "true");
@@ -31,9 +26,6 @@ public class CheckboxesAndRadiosInputConvert extends FormBuilderInputConvertAbst
 		}
 		htmlInput.setSelectValues(selectValues)
 		htmlInput.setRightAnswers(rightAnswers)
-		if(removeIndex>0){
-			optionsArray.remove(removeIndex)
-		}
 		return htmlInput
 	}
 	

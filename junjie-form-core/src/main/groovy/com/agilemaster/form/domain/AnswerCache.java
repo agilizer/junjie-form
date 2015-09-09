@@ -26,9 +26,11 @@ public class AnswerCache  implements Serializable{
 	private boolean finish;
 	private Date startAnswerTime;
 	private Date endAnswerTime;
+	private boolean allRight  = false;
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -56,4 +58,13 @@ public class AnswerCache  implements Serializable{
 	public void setEndAnswerTime(Date endAnswerTime) {
 		this.endAnswerTime = endAnswerTime;
 	}
+
+	public boolean isAllRight() {
+		return allRight;
+	}
+
+	public void setAllRight(boolean allRight) {
+		this.allRight = allRight;
+	}
+	
 }

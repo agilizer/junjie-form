@@ -14,6 +14,7 @@ public abstract class FormRenderInputConvertAbstract implements InputValueConver
 	protected Logger log = LoggerFactory
 			.getLogger(this.getClass());
 	public static String VALUE="value";
+	public static String RIGHT_VALUE_ALL="不限";
 	@Override
 	public InputValue convert(HtmlInput htmlInput, String answerId,String inputValueId,
 			Object answerObject,Date dateCreated,JSONObject jsonAnswerField) {

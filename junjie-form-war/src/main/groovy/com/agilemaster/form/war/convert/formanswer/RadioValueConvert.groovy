@@ -10,9 +10,9 @@ class RadioValueConvert extends FormRenderInputConvertAbstract{
 	@Override
 	public InputValue convertValue(HtmlInput htmlInput, InputValue inputValue, 
 		Object answerObject,JSONObject jsonAnswerField) {
+		answerObject = answerObject.toString().trim()
 		inputValue.setStrValue(answerObject.toString());
 		List<String> rightValues = htmlInput.getRightAnswers();
-		boolean checkRight =  null==rightValues?false:true
 		List<String> answerValues = new ArrayList<String>();
 		println jsonAnswerField.toJSONString()
 		log.info("answerObject-->"+answerObject.getClass().getName());
@@ -26,16 +26,17 @@ class RadioValueConvert extends FormRenderInputConvertAbstract{
 				println"---------------------->true"
 			}
 		}
-		if(checkRight){
-			if(rightValues.empty){
-				inputValue.setAnswerRight(true);
+		def rightValue = htmlInput.getRightAnswer()
+		if(rightValue){
+			if(RIGHT_VALUE_ALL==rightValue){
+				inputValue.setAnswerRight(true)
 			}
-			rightValues.each {
-				if(it=="不限"){
-					inputValue.setAnswerRight(true);
+			else{
+				if(rightValue.indexOf(answerObject)>=0){
+					inputValue.setAnswerRight(true)
 				}
 			}
-		}
+		}		
 		inputValue.setListValue(answerValues);
 		return inputValue;
 	}

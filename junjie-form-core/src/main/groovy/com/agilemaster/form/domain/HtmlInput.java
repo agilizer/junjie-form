@@ -112,7 +112,7 @@ public class HtmlInput implements Serializable{
 	    number,
 	    select,
 	    paragraph,
-	    section_break
+	    section_break,
 	}
 	public String getId() {
 		return id;

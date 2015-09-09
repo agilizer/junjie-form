@@ -5,11 +5,13 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import com.agilemaster.form.domain.AnswerCache
 import com.agilemaster.form.domain.HtmlInput
+import com.agilemaster.form.option.AnswerCacheOptions;
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.option.InputValueOptions
-import com.agilemaster.form.war.vo.InputValueVo
+import com.agilemaster.form.war.util.MD5Util
 import com.datastax.driver.core.Row
 
 @Service
@@ -23,6 +25,8 @@ public class StatisticsServiceImpl  implements StatisticsService{
 	HtmlFormOptions htmlFormOptions;
 	@Autowired
 	HtmlInputOptions htmlInputOptions;
+	@Autowired
+	AnswerCacheOptions answerCacheOptions;
 	@Override
 	public Map listValueByInputValueVo(String[] htmlFormIds) {
 		def resultMap = [:] ////key answerId value answerRow
@@ -54,5 +58,12 @@ public class StatisticsServiceImpl  implements StatisticsService{
 		}
 		resultMap.put("htmlInputInfo", inputMap);
 		return resultMap;
+	}
+	@Override
+	public boolean checkRight(String saasId, String htmlFormId, String answerId) {
+		// TODO JUST select allRight field
+		String answerCacheId = MD5Util.MD5(saasId+htmlFormId+answerId);
+		AnswerCache answerCache = answerCacheOptions.findOne(answerCacheId);
+		return answerCache.isAllRight();
 	}
 }

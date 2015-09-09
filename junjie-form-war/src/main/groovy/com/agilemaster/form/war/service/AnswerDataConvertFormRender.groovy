@@ -80,6 +80,7 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 				jsonAnswerMap.put(it.id, it);
 			}
 			String htmlInputId = ""
+			Boolean answerIsRight = true;
 			for(HtmlInput input:inputs){
 				Object answerResult = jsonAnswerObject.get(input.getId());
 				if(null!= answerResult){
@@ -94,6 +95,9 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 					if(convert){
 						inputValue = convert.convert(input, answerId, inputValueId,
 							 answerResult, dateCreated,jsonAnswerMap.remove(htmlInputId));
+						 if(false==inputValue.answerRight){
+							 answerIsRight = false;
+						 }
 						inputValueOptions.save(inputValue);
 					}
 				}
@@ -102,6 +106,8 @@ public class AnswerDataConvertFormRender implements AnswerDataConvert{
 			if(jsonAnswerMap.size()==0){
 				updateMap.put("finish", true);
 				updateMap.put("endAnswerTime", new Date());
+				updateMap.put("allRight", answerIsRight);
+				result.put(FormWarConstants.DATA, updateMap)
 			}
 			log.info("bootstrapData====>"+updateMap)
 			answerCacheOptions.update(answerCacheId, updateMap)

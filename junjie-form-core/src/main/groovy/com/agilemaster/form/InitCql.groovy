@@ -27,6 +27,7 @@ listShow boolean,
 saasId text,
 selectValues list<varchar>,
 rightAnswers list<varchar>,
+rightAnswer varchar,
 sequence int,
 showToUser boolean,
 dateCreated timestamp,
@@ -117,6 +118,7 @@ CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFor
 (id varchar PRIMARY KEY,
 formRenderCache text,
 finish boolean,
+allRight boolean,
 startAnswerTime timestamp,
 endAnswerTime timestamp
 );
