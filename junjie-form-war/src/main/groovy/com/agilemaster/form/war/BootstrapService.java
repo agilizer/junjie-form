@@ -50,7 +50,7 @@ public class BootstrapService {
 		 * 设置为删除创建
 		 */
 		InitSchema initSchema = new InitSchemaForm();
-		initSchema.setCreateDrop(true);
+		initSchema.setCreateDrop(false);
 		CassandraJunjieConfig.setInitSchema(initSchema);
 		CassandraJunjieConfig.setKeySpace(JunjieFormConstants.DEFAULT_KEY_SPACE);
 		CassandraJunjieConfig.setMappingPackage("com.agilemaster.form.domain");

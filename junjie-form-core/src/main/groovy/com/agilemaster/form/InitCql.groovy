@@ -32,7 +32,7 @@ sequence int,
 showToUser boolean,
 dateCreated timestamp,
 lastUpdated timestamp);""",
-"""CREATE INDEX input_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_INPUT} ( formId );""",
+"""CREATE INDEX   IF NOT EXISTS  input_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_INPUT} ( formId );""",
 """
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_FORM}  
 (id text PRIMARY KEY,
@@ -82,7 +82,7 @@ dateCreated timestamp,
 lastUpdated timestamp,
 anwserId varchar,
 fileInfoes list<frozen<${JunjieFormConstants.T_FILE_INFO}  >>);""",
-"""CREATE INDEX input_value_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_INPUT_VALUE} ( formId );"""
+"""CREATE INDEX   IF NOT EXISTS  input_value_formId_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_INPUT_VALUE} ( formId );"""
 ,
 """
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SUBMIT}
@@ -106,7 +106,7 @@ dateCreated timestamp,
 lastUpdated timestamp
 );
 """,
-"""CREATE INDEX accessKey_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS} ( accessKey );""",
+"""CREATE INDEX  IF NOT EXISTS accessKey_index ON  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS} ( accessKey );""",
 """
 CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_FORM_SAAS_COUNTER}  
 (id text PRIMARY KEY,
@@ -134,10 +134,6 @@ CREATE TABLE IF NOT EXISTS  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFor
 (id text PRIMARY KEY,
 counterValue counter
 );
-""",
-"""
-update  ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_SAAS_COUNTER}  
-set counterValue=counterValue+1 where id='${JunjieFormConstants.SAAS_COUNT_ID}';
 """
 ]
 	
