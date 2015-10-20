@@ -1,11 +1,15 @@
 package com.agilemaster.form.war.convert.formanswer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.domain.InputValue;
 import com.alibaba.fastjson.JSONObject;
 
 public class TextValueConvert extends FormRenderInputConvertAbstract {
-
+	protected Logger log = LoggerFactory
+			.getLogger(this.getClass());
 	@Override
 	public InputValue convertValue(HtmlInput htmlInput, InputValue inputValue,
 			Object answerObject, JSONObject jsonAnswerCache) {
@@ -13,11 +17,11 @@ public class TextValueConvert extends FormRenderInputConvertAbstract {
 		inputValue.setStrValue(answerTrim);
 		jsonAnswerCache.put(VALUE, answerTrim);
 		String rightAnswer = htmlInput.getRightAnswer();
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa-------------------------------->>>>>>"+htmlInput.getRightAnswer());
+		log.info("aaaaaaaaaaaaaaaaaaaaaaaaa-------------------------------->>>>>>"+htmlInput.getRightAnswer());
 		if (null != rightAnswer) {
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa------"+answerTrim.toString()+rightAnswer.indexOf(answerTrim.toString()) );
-			if (rightAnswer.indexOf(answerTrim.toString().trim()) >= 0) {
-				System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbb-------------------------------->>>>>>"+htmlInput.getRightAnswer());
+			log.info("aaaaaaaaaaaaaaaaaaaaaaaaa------"+answerTrim.toString()+rightAnswer.indexOf(answerTrim.toString()) );
+			if (rightAnswer.indexOf(answerTrim.toString().trim()) >= 0||rightAnswer.equals("不限")) {
+				log.info("bbbbbbbbbbbbbbbbbbbbbbbbb-------------------------------->>>>>>"+htmlInput.getRightAnswer());
 				inputValue.setAnswerRight(true);
 			}
 		}
