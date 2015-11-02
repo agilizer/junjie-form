@@ -15,6 +15,7 @@ public abstract class FormBuilderInputConvertAbstract implements HtmlInputDataCo
 	String REQUIRED="required";
 	String FIELD_OPTIONS = "field_options";
 	String RIGHT_VALUE="right_value";
+	String SEQUENCE="sequence";
 	public HtmlInput convert(InputType inputType,JSONObject jsonObject ){
 		HtmlInput htmlInput = new HtmlInput();
 		htmlInput.setInputType(inputType);
@@ -25,6 +26,9 @@ public abstract class FormBuilderInputConvertAbstract implements HtmlInputDataCo
 		}
 		if(jsonObject.getString(RIGHT_VALUE)){
 			htmlInput.setRightAnswer(jsonObject.getString(RIGHT_VALUE));
+		}
+		if(jsonObject.getInteger(SEQUENCE)){
+			htmlInput.setSequence(jsonObject.getInteger(SEQUENCE));
 		}
 		if(attrs.size()>0){
 			htmlInput.setInputAttrs(attrs)

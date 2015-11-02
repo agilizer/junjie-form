@@ -153,7 +153,7 @@ public class HtmlFormController {
 		return result;
 	}
 	/**
-	 * AnswerCache id 必须重先计算，保证saas唯一性。
+	 * AnswerCache id 必须重新计算，保证saas唯一性。
 	 * @param saasId
 	 * @param htmlFormId
 	 * @param answerId
