@@ -12,7 +12,7 @@ public interface HtmlInputOptions extends BaseOptions<HtmlInput> {
 	 * 返回复制的 {@link HtmlInput } 个数
 	 * @param oldFormId
 	 * @param newFormId
-	 * @return
+	 * @return 新的{@link HtmlInput }  list
 	 */
-	int copyHtmlInputs(String oldFormId,String newFormId);
+	List<HtmlInput> copyHtmlInputs(String oldFormId,String newFormId);
 }

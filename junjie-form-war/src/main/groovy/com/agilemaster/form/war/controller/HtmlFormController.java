@@ -2,11 +2,14 @@ package com.agilemaster.form.war.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,19 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.agilemaster.form.constants.FormWarConstants;
 import com.agilemaster.form.domain.AnswerCache;
 import com.agilemaster.form.domain.HtmlForm;
+import com.agilemaster.form.domain.HtmlInput;
 import com.agilemaster.form.option.AnswerCacheOptions;
 import com.agilemaster.form.option.HtmlFormOptions;
 import com.agilemaster.form.option.HtmlInputOptions;
 import com.agilemaster.form.util.MD5Util;
+import com.agilemaster.form.war.service.FormWarService;
 import com.agilemaster.form.war.service.HtmlFormDataConvert;
 import com.agilemaster.form.war.util.StaticMethod;
 
 @RestController
 @RequestMapping("/api/v1/htmlForm")
 public class HtmlFormController {
-
+	private static final Logger log = LoggerFactory
+			.getLogger(HtmlFormController.class);
 	@Autowired
 	HtmlFormOptions htmlFormOptions;
+	@Autowired
+	FormWarService formWarService;
 	@Autowired
 	HtmlInputOptions htmlInputOptions;
 	@Autowired
@@ -45,6 +53,7 @@ public class HtmlFormController {
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
 		Map<String, Object> result = StaticMethod.genResult();
+		log.info("create-parentHtmlFormId--> "+parentHtmlFormId+"\n"+htmlForm.getJsonContent());
 		if (htmlForm != null) {
 			htmlForm.setStartTime(startDate);
 			htmlForm.setEndTime(endDate);
@@ -70,6 +79,7 @@ public class HtmlFormController {
 	@RequestMapping("/createFormBuilder")
 	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
 			HttpServletRequest request,HttpServletResponse response) {
+		log.info("createFormBuilder---> "+htmlFormId+"\n"+jsonContent);
 		Map<String, Object> result = StaticMethod.genResult();
 		HtmlForm htmlForm= htmlFormDataConvert.convert(htmlFormId, jsonContent);
 		if(null!=htmlForm){
@@ -139,7 +149,8 @@ public class HtmlFormController {
 		if (null != saasId && htmlFormId != null) {
 			HtmlForm htmlForm = htmlFormOptions.copyAndSave(htmlFormId);
 			if(htmlForm!=null){
-				htmlInputOptions.copyHtmlInputs(htmlFormId, htmlForm.getId());
+				List<HtmlInput> htmlInputList = htmlInputOptions.copyHtmlInputs(htmlFormId, htmlForm.getId());
+				formWarService.updateJsonContentAfterCopy(htmlForm, htmlInputList);
 				result.put(FormWarConstants.DATA,htmlForm);
 				result.put(FormWarConstants.SUCCESS, true);
 			}else{

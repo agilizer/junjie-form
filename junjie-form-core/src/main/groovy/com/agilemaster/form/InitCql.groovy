@@ -18,6 +18,7 @@ CREATE KEYSPACE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE} WITH repl
 CREATE TABLE IF NOT EXISTS ${JunjieFormConstants.DEFAULT_KEY_SPACE}.${JunjieFormConstants.T_HTML_INPUT} 
 (id text PRIMARY KEY,
 formId text,
+parentId text,
 inputAttrs  map<varchar,varchar>,
 otherInfo map<varchar,varchar>,
 inputType varchar,

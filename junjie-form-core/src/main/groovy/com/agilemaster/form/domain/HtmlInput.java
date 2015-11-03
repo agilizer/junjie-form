@@ -21,7 +21,7 @@ public class HtmlInput implements Serializable{
 	@PartitionKey
 	private String id;
 	private String formId;
-	
+	private String parentId;
 	private String saasId;
 	/**
 	 * input前显示的文本(required)
@@ -211,6 +211,12 @@ public class HtmlInput implements Serializable{
 	}
 	public void setOtherInfo(Map<String, String> otherInfo) {
 		this.otherInfo = otherInfo;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 	
 	

@@ -34,15 +34,22 @@ public class StatisticsServiceImpl  implements StatisticsService{
 		def answerRow = null
 		def answerId = ""
 		def htmlInputId = ""
+		def headerInfo = []
 		htmlFormIds.each{htmlFormId->
 			if(htmlFormId&&htmlFormId.trim()!=""){
 				List<Row> inputValueList = inputValueOptions.listByHtmlForm(htmlFormId)
 				if(inputValueList){
 					//select answerId,htmlInputId,strValue,answerRight
 					List<HtmlInput> inputs = htmlInputOptions.listByFormId(htmlFormId)
+					def inputIdMap = [:]
 					inputs.each{HtmlInput input->
 						inputMap.put(input.getId(), input.getLabelBefore());
+						inputIdMap.putAt(input.getId(),input.getSequence())
 					}
+					inputIdMap = inputIdMap.sort{a,b->b.value <=> a.value}
+					def headerMap = [:]
+					headerMap.put(htmlFormId, inputIdMap.keySet())
+					headerInfo.add(headerMap)
 					inputValueList.each {row->
 						answerId = row.getString("answerId")
 						answerRow = resultMap.get(answerId)
@@ -56,9 +63,11 @@ public class StatisticsServiceImpl  implements StatisticsService{
 				}
 			}
 		}
+		resultMap.put("headerInfo", headerInfo)
 		resultMap.put("htmlInputInfo", inputMap);
 		return resultMap;
 	}
+	
 	@Override
 	public boolean checkRight(String saasId, String htmlFormId, String answerId) {
 		// TODO JUST select allRight field

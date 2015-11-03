@@ -94,15 +94,18 @@ public class HtmlInputOptionsImpl implements HtmlInputOptions{
 	}
 
 	@Override
-	public int copyHtmlInputs(String oldFormId, String newFormId) {
+	public List<HtmlInput> copyHtmlInputs(String oldFormId, String newFormId) {
 		List<HtmlInput> inputs = listByFormId(oldFormId);
 		int result = 0;
+		List<HtmlInput> resultList = new ArrayList<HtmlInput>();
 		for(HtmlInput input:inputs){
-			input.setId(newFormId);
-			save(input);
+			input.setParentId(input.getId());
+			input.setId(null);
+			input.setFormId(newFormId);
+			resultList.add(save(input));
 			result++;
 		}
 		log.info("oldFormId {}   newFormId {}  copy htmlInput count {}",oldFormId,newFormId,result);
-		return result;
+		return resultList;
 	}
 }
