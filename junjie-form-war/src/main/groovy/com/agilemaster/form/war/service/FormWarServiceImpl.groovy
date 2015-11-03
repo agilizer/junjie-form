@@ -25,12 +25,13 @@ class FormWarServiceImpl  implements FormWarService{
 			def tempMap = [:]
 			htmlInputList.each {
 				tempMap = [cid:it.id,field_type:it.inputType,id:it.id,
-						field_options:[size:"small"],label:it.labelBefore]
+						field_options:[size:"small"],label:it.labelBefore,sequence:it.sequence]
 				if(it.inputAttrs&&it.inputAttrs.containsKey("required")){
 					tempMap.put("required", true)
 				}
 				fieldList.add(tempMap)
 			}
+			fieldList = fieldList.sort{a,b->a.sequence <=> b.sequence}
 			def jsoObject = [fields:fieldList]
 			def jsonContent = JSON.toJSONString(jsoObject)
 			htmlFormOptions.update(htmlForm.getId(),jsonContent, fieldList.size())

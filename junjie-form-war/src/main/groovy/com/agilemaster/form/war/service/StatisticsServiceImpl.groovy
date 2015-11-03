@@ -46,7 +46,7 @@ public class StatisticsServiceImpl  implements StatisticsService{
 						inputMap.put(input.getId(), input.getLabelBefore());
 						inputIdMap.putAt(input.getId(),input.getSequence())
 					}
-					inputIdMap = inputIdMap.sort{a,b->b.value <=> a.value}
+					inputIdMap = inputIdMap.sort{a,b->a.value <=> b.value}
 					def headerMap = [:]
 					headerMap.put(htmlFormId, inputIdMap.keySet())
 					headerInfo.add(headerMap)
