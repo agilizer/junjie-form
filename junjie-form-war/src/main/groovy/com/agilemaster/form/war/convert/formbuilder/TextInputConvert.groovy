@@ -17,6 +17,7 @@ public class TextInputConvert extends FormBuilderInputConvertAbstract{
 	
 	def INFO_ATTR_NAMES=["size","min_max_length_units"]
 	def INPUT_ATTR_NAMES = ["minlength","maxlength","placeholder"]
+	
 	public  HtmlInput convertOtherData(HtmlInput htmlInput,InputType inputType,JSONObject jsonObject){
 		def otherInfo = [:]
 		def inputAttrs=[:]
@@ -33,6 +34,8 @@ public class TextInputConvert extends FormBuilderInputConvertAbstract{
 				inputAttrs.put(it,tempValue)
 			}
 		}
+		
+		
 		if(otherInfo.size()>0){
 			htmlInput.setOtherInfo(otherInfo);
 		}

@@ -23,9 +23,21 @@ class FormWarServiceImpl  implements FormWarService{
 			 */
 			def fieldList = []
 			def tempMap = [:]
+			def field_options = [:]
 			htmlInputList.each {
-				tempMap = [cid:it.id,field_type:it.inputType,id:it.id,
+				field_options = [:]
+				if(it.inputAttrs){
+					field_options.putAll(it.inputAttrs)
+				}
+				if(it.otherInfo){
+					field_options.putAll(it.otherInfo)
+				}
+				
+				tempMap = [cid:it.id,field_type:it.inputType,id:it.id,description:it.getLabelAfter(),
 						field_options:[size:"small"],label:it.labelBefore,sequence:it.sequence]
+				if(field_options.size()>0){
+					tempMap.put("field_options", field_options);
+				}
 				if(it.inputAttrs&&it.inputAttrs.containsKey("required")){
 					tempMap.put("required", true)
 				}
