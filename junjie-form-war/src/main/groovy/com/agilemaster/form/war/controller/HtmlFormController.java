@@ -1,5 +1,9 @@
 package com.agilemaster.form.war.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Contact;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +35,8 @@ import com.agilemaster.form.war.service.FormWarService;
 import com.agilemaster.form.war.service.HtmlFormDataConvert;
 import com.agilemaster.form.war.util.StaticMethod;
 
+
+@Api(value = "htmlForm-api")  
 @RestController
 @RequestMapping("/api/v1/htmlForm")
 public class HtmlFormController {
@@ -46,9 +53,14 @@ public class HtmlFormController {
 	@Autowired
 	@Qualifier("htmlFormDataConvertFormBuilder")
 	HtmlFormDataConvert htmlFormDataConvert;
+	
+	
+	
+	
+	@ApiOperation(value = "创建用户", notes = "返回创建结果对象", response = Contact.class)  
 	@ResponseBody
-	@RequestMapping("/create")
-	public Map<String, Object> create(HtmlForm htmlForm,String parentHtmlFormId,
+	@RequestMapping(value ="/create",method = {RequestMethod.POST,RequestMethod.GET})
+	public Map<String, Object> create(HtmlForm htmlForm,String parentHtmlFormId,String saasId,String accessKey, 
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
 			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
@@ -76,7 +88,7 @@ public class HtmlFormController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/createFormBuilder")
+	@RequestMapping(value="/createFormBuilder"  ,method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
 			HttpServletRequest request,HttpServletResponse response) {
 		log.info("createFormBuilder---> "+htmlFormId+"\n"+jsonContent);
@@ -91,7 +103,7 @@ public class HtmlFormController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping("/update")
+	@RequestMapping(value="/update",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> update( HtmlForm htmlForm,@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate) {
 		Map<String, Object> result = StaticMethod.genResult();
@@ -111,7 +123,7 @@ public class HtmlFormController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping("/delete")
+	@RequestMapping(value="/delete",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> delete(String saasId, String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
@@ -121,14 +133,14 @@ public class HtmlFormController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping("/list")
+	@RequestMapping(value="/list",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> list(String saasId,Long max,Long offset) {
 		Map<String, Object> result = StaticMethod.genResult();
 		//TODO 
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping("/show")
+	@RequestMapping(value="/show",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> show(String saasId,String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
@@ -143,7 +155,7 @@ public class HtmlFormController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/copy")
+	@RequestMapping(value="/copy",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> copy(String saasId,String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
@@ -171,7 +183,7 @@ public class HtmlFormController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/showFormrender/{answerId}")
+	@RequestMapping(value="/showFormrender/{answerId}",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> showFormrender(String saasId,String htmlFormId,@PathVariable("answerId") String answerId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
@@ -190,7 +202,7 @@ public class HtmlFormController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/showFormrender")
+	@RequestMapping(value="/showFormrender",method = {RequestMethod.POST,RequestMethod.GET})
 	public Map<String, Object> showFormrender(String saasId,String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {

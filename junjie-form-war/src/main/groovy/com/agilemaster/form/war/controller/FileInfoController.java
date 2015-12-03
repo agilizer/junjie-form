@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 import com.agilemaster.form.constants.FormWarConstants;
 import com.agilemaster.form.domain.FileInfo;
 import com.agilemaster.form.option.FileInfoOptions;
 import com.agilemaster.form.war.util.StaticMethod;
-
+@ApiIgnore
 @RestController
 @RequestMapping("/api/v1/fileInfo")
 public class FileInfoController {
