@@ -1,5 +1,7 @@
 package com.agilemaster.form.war;
 
+import static springfox.documentation.schema.AlternateTypeRules.newRule;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.WildcardType;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
@@ -36,7 +39,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import com.agilemaster.form.war.service.ShareService;
 import com.fasterxml.classmate.TypeResolver;
-import static springfox.documentation.schema.AlternateTypeRules.*;
 
 @Configuration
 @EnableWebMvc
@@ -87,17 +89,16 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public Docket petApi() {
-		List<ApiKey> apiKeys = new ArrayList<ApiKey>();
-		apiKeys.add(new ApiKey("saasKeyaaa", "saasKey", "header"));
-		apiKeys.add(new ApiKey("accessKeya", "accessKey", "header"));
-
+		
 		List<SecurityContext> securityConList = new ArrayList<SecurityContext>();
 		securityConList.add(securityContext());
+		ApiInfo apiInfo  = new ApiInfo("junjie-form api", "junjie 表单系统api", "0.1", "www.agilemaster.com.cn", "asdtiangxia@163.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0.html");
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
 				.build()
+				.apiInfo(apiInfo)
 				.pathMapping("/")
 				.directModelSubstitute(LocalDate.class, String.class)
 				.genericModelSubstitutes(ResponseEntity.class)
@@ -106,8 +107,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 								typeResolver.resolve(ResponseEntity.class,
 										WildcardType.class)), typeResolver
 								.resolve(WildcardType.class)))
-				.useDefaultResponseMessages(false).securitySchemes(apiKeys)
-				.securityContexts(securityConList).enableUrlTemplating(true);
+				.useDefaultResponseMessages(false).enableUrlTemplating(true);
 	}
 
 	private SecurityContext securityContext() {
@@ -117,9 +117,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		authorizationScopes[0] = authorizationScope;
 		List<SecurityReference> securityRef = new ArrayList<SecurityReference>();
 		securityRef
-				.add(new SecurityReference("saasKeyaaa", authorizationScopes));
-		securityRef
-				.add(new SecurityReference("accessKeya", authorizationScopes));
+				.add(new SecurityReference("accessKey", authorizationScopes));
 		return SecurityContext.builder().securityReferences(securityRef)
 				.forPaths(PathSelectors.regex("/api/v1/*")).build();
 	}

@@ -24,17 +24,19 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public boolean auth(ServletRequest req) {
 		boolean result = false;
-		String saasId = req.getParameter("saasId");
+		String saasId = "";
 		String accessKey = req.getParameter("accessKey");
-		if (null != saasId) {
+		if (null != accessKey) {
 			ResultSet resultSet = cassandraTemplate.execute(
-					"select accessKey from "
+					"select id from "
 							+ CassandraJunjieConfig.getKeySpace() + "."
-							+ JunjieFormConstants.T_FORM_SAAS + " where id=?",
-					saasId);
+							+ JunjieFormConstants.T_FORM_SAAS + " where accessKey=?",
+							accessKey);
 			Row row = resultSet.one();
-			if (null != row && row.getString(0).equals(accessKey)) {
+			if (null != row) {
 				result = true;
+				saasId = row.getString(0);
+				req.setAttribute("saasId", saasId);
 			}
 		}
 		log.info("auth saasId:{},accessKey:{}  result {}", saasId, accessKey,

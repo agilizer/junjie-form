@@ -17,7 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +41,7 @@ import com.agilemaster.form.war.util.StaticMethod;
 
 @Api(value = "htmlForm-api")  
 @RestController
-@RequestMapping("/api/v1/htmlForm")
+@RequestMapping("/api/v1/")
 public class HtmlFormController {
 	private static final Logger log = LoggerFactory
 			.getLogger(HtmlFormController.class);
@@ -54,15 +57,14 @@ public class HtmlFormController {
 	@Qualifier("htmlFormDataConvertFormBuilder")
 	HtmlFormDataConvert htmlFormDataConvert;
 	
-	
-	
-	
 	@ApiOperation(value = "创建用户", notes = "返回创建结果对象", response = Contact.class)  
 	@ResponseBody
-	@RequestMapping(value ="/create",method = {RequestMethod.POST,RequestMethod.GET})
-	public Map<String, Object> create(HtmlForm htmlForm,String parentHtmlFormId,String saasId,String accessKey, 
-			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
-			@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
+	@RequestMapping(value ="/form",method = {RequestMethod.POST},produces = MediaType.ALL_VALUE,
+            consumes = MediaType.ALL_VALUE)
+	public Map<String, Object> create( @ModelAttribute HtmlForm htmlForm, @ModelAttribute String parentHtmlFormId,@ModelAttribute String saasId,
+			@ModelAttribute String accessKey, 
+			@ModelAttribute @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
+			@ModelAttribute @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
 		Map<String, Object> result = StaticMethod.genResult();
 		log.info("create-parentHtmlFormId--> "+parentHtmlFormId+"\n"+htmlForm.getJsonContent());
@@ -88,7 +90,7 @@ public class HtmlFormController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/createFormBuilder"  ,method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/formCreateByJsonContent"  ,method = {RequestMethod.POST})
 	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
 			HttpServletRequest request,HttpServletResponse response) {
 		log.info("createFormBuilder---> "+htmlFormId+"\n"+jsonContent);
@@ -123,7 +125,7 @@ public class HtmlFormController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value="/delete",method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/form",method = {RequestMethod.DELETE})
 	public Map<String, Object> delete(String saasId, String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
@@ -140,7 +142,7 @@ public class HtmlFormController {
 		return result;
 	}
 	@ResponseBody
-	@RequestMapping(value="/show",method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/form",method = {RequestMethod.GET})
 	public Map<String, Object> show(String saasId,String htmlFormId) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
