@@ -2,6 +2,7 @@ package com.agilemaster.form.war.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.Contact;
 
 import java.util.Date;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,14 +59,14 @@ public class HtmlFormController {
 	@Qualifier("htmlFormDataConvertFormBuilder")
 	HtmlFormDataConvert htmlFormDataConvert;
 	
-	@ApiOperation(value = "创建用户", notes = "返回创建结果对象", response = Contact.class)  
+	@ApiOperation(value = "创建表单", notes = "返回创建结果对象", response = Map.class)  
 	@ResponseBody
-	@RequestMapping(value ="/form",method = {RequestMethod.POST},produces = MediaType.ALL_VALUE,
-            consumes = MediaType.ALL_VALUE)
-	public Map<String, Object> create( @ModelAttribute HtmlForm htmlForm, @ModelAttribute String parentHtmlFormId,@ModelAttribute String saasId,
-			@ModelAttribute String accessKey, 
-			@ModelAttribute @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
-			@ModelAttribute @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
+	@RequestMapping(value ="/form",method = {RequestMethod.POST},produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public Map<String, Object> create(@RequestParam HtmlForm htmlForm,@RequestParam  String parentHtmlFormId, @RequestParam String saasId,
+			@RequestParam String accessKey, 
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,
 			HttpServletRequest request,HttpServletResponse response) {
 		Map<String, Object> result = StaticMethod.genResult();
 		log.info("create-parentHtmlFormId--> "+parentHtmlFormId+"\n"+htmlForm.getJsonContent());
@@ -155,10 +157,13 @@ public class HtmlFormController {
 		}
 		return result;
 	}
-	
+	@ApiOperation(value = "根据id复制表单", notes = "返回复制表单结果对象", response = Map.class)  
 	@ResponseBody
-	@RequestMapping(value="/copy",method = {RequestMethod.POST,RequestMethod.GET})
-	public Map<String, Object> copy(String saasId,String htmlFormId) {
+	@RequestMapping(value="/copy",method = {RequestMethod.POST,RequestMethod.GET},produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public Map<String, Object> copy(@ApiParam(name="saasId",value = "saasId字符串", required = true,defaultValue="946c4eea-15cb-4dfb-8f8d-91b99fe78939") @RequestParam String saasId
+			,@ApiParam(name="htmlFormId",value = "需要复制的表单id", required = true) @RequestParam String htmlFormId,
+			@ApiParam(name="accessKey",value = "访问api时需要的key", required = true,defaultValue="c8d47cffb16e4668bc84b3b4f9f72023") @RequestParam String accessKey) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
 			HtmlForm htmlForm = htmlFormOptions.copyAndSave(htmlFormId);

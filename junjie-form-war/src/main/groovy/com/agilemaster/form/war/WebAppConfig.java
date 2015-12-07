@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,6 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.schema.WildcardType;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
@@ -93,11 +93,17 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		List<SecurityContext> securityConList = new ArrayList<SecurityContext>();
 		securityConList.add(securityContext());
 		ApiInfo apiInfo  = new ApiInfo("junjie-form api", "junjie 表单系统api", "0.1", "www.agilemaster.com.cn", "asdtiangxia@163.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0.html");
+		Set<String> produces = new HashSet<String>();
+		produces.add("application/json")		;
+		Set<String> consumes = new HashSet<String>();
+		consumes.add("application/x-www-form-urlencoded")		;
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
 				.build()
+				.produces(produces)
+				.consumes(consumes)
 				.apiInfo(apiInfo)
 				.pathMapping("/")
 				.directModelSubstitute(LocalDate.class, String.class)
@@ -119,7 +125,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		securityRef
 				.add(new SecurityReference("accessKey", authorizationScopes));
 		return SecurityContext.builder().securityReferences(securityRef)
-				.forPaths(PathSelectors.regex("/api/v1/*")).build();
+				.forPaths(PathSelectors.regex("/api/v1/**")).build();
 	}
 
 	@Autowired
