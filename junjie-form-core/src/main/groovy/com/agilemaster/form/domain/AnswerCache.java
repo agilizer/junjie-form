@@ -3,10 +3,11 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
-@Table(keyspace = "junjie_form",name = "AnswerCache")
+@Table(keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE,name = "AnswerCache")
 public class AnswerCache  implements Serializable{
 
 	/**

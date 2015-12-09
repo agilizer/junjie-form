@@ -2,7 +2,7 @@ package com.agilemaster.form.constants;
 
 public interface JunjieFormConstants {
 
-	String DEFAULT_KEY_SPACE = "junjie_form";
+	String DEFAULT_KEY_SPACE = "junjie_form_open";
 	String SAAS_COUNT_ID="1";
 	String T_FORM_SAAS="FormSaas";
 	String T_HTML_INPUT="HtmlInput";

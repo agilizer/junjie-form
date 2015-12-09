@@ -3,13 +3,14 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 
 /**
  * @author asdtiang
  */
-@Table (keyspace = "junjie_form", name = "FormSubmit")
+@Table (keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE, name = "FormSubmit")
 public class FormSubmit   implements Serializable{
 	private static final long serialVersionUID = -5497177824207251105L;
 	@PartitionKey

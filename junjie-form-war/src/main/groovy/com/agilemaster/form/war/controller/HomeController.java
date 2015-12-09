@@ -16,4 +16,9 @@ public class HomeController {
 	public String api(){
 		return "swagger";
 	}
+	@RequestMapping("/demo")
+	public String demo(){
+		return "demo";
+	}
+	
 }

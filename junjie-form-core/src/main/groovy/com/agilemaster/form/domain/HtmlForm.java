@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "HtmlForm")
+@Table(keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE, name = "HtmlForm")
 public class HtmlForm implements Serializable{
 	/**
 	 * 

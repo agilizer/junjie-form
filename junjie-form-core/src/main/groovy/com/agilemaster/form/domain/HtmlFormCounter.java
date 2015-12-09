@@ -1,5 +1,6 @@
 package com.agilemaster.form.domain;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
 /**
@@ -7,7 +8,7 @@ import com.datastax.driver.mapping.annotations.Table;
  * @author asdtiang
  *
  */
-@Table(keyspace = "junjie_form", name = "HtmlFormCounter")
+@Table(keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE, name = "HtmlFormCounter")
 public class HtmlFormCounter{
 	@PartitionKey
 	private String  id;

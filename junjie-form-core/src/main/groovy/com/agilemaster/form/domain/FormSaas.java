@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.Column;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
@@ -11,7 +12,7 @@ import com.datastax.driver.mapping.annotations.Table;
  * 租户，一个租户有多个表单。
  * @author asdtiang
  */
-@Table(keyspace = "junjie_form",name = "FormSaas")
+@Table(keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE,name = "FormSaas")
 public class FormSaas implements Serializable{
 	/**
 	 * 

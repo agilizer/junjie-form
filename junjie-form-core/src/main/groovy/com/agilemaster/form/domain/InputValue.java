@@ -3,10 +3,11 @@ package com.agilemaster.form.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.annotations.Frozen;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "InputValue")
+@Table(keyspace = JunjieFormConstants.DEFAULT_KEY_SPACE, name = "InputValue")
 public class InputValue {
 	@PartitionKey
 	private String id;

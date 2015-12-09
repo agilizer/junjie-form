@@ -5,11 +5,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.EnumType;
 import com.datastax.driver.mapping.annotations.Enumerated;
 import com.datastax.driver.mapping.annotations.PartitionKey;
 import com.datastax.driver.mapping.annotations.Table;
-@Table(keyspace = "junjie_form", name = "HtmlInput")
+@Table(keyspace =JunjieFormConstants.DEFAULT_KEY_SPACE, name = "HtmlInput")
 public class HtmlInput implements Serializable{
 	/**
 	 * 

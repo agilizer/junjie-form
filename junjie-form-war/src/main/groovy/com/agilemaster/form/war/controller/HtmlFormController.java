@@ -63,7 +63,7 @@ public class HtmlFormController {
 	@ResponseBody
 	@RequestMapping(value ="/form",method = {RequestMethod.POST},produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public Map<String, Object> create(@RequestParam HtmlForm htmlForm,@RequestParam  String parentHtmlFormId, @RequestParam String saasId,
+	public Map<String, Object> create(HtmlForm htmlForm, String parentHtmlFormId, @RequestParam String saasId,
 			@RequestParam String accessKey, 
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date startDate,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date endDate,

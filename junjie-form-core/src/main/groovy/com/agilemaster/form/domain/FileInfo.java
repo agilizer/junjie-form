@@ -3,10 +3,12 @@ package com.agilemaster.form.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
+
+import com.agilemaster.form.constants.JunjieFormConstants;
 import com.datastax.driver.mapping.EnumType;
 import com.datastax.driver.mapping.annotations.Enumerated;
 import com.datastax.driver.mapping.annotations.UDT;
-@UDT (keyspace = "junjie_form", name = "FileInfo")
+@UDT (keyspace =JunjieFormConstants.DEFAULT_KEY_SPACE, name = "FileInfo")
 public class FileInfo implements Serializable{
 	/**
 	 * 
