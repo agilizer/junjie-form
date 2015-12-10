@@ -1,6 +1,7 @@
 package com.agilemaster.form.war.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import springfox.documentation.annotations.ApiIgnore;
@@ -19,7 +20,7 @@ public class HtmlFormTestController {
 		return "htmlFormTest/create";
 	}
 	@RequestMapping("/edit")
-	public String edit(){
+	public String edit(@ModelAttribute String accessKey,@ModelAttribute String saasId,@ModelAttribute String htmlFormId){
 		return "htmlFormTest/edit";
 	}
 	@RequestMapping("/list")

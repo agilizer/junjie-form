@@ -1,20 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"/>
-<title>Insert title here</title>
+<meta charset="UTF-8" />
+<title>示例demo</title>
+<link rel="stylesheet" href="./vendor/css/vendor.css"
+	th:href="@{/resources/plugins/formbuilder/vendor/css/vendor.css}" />
+<link rel="stylesheet" href="./dist/formbuilder.css"
+	th:href="@{/resources/plugins/formbuilder/dist/formbuilder-min.css}" />
+<link rel="stylesheet"
+	href="/resources/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css"
+	th:href="@{/resources/plugins/bootstrap-3.3.5-dist/css/bootstrap.min.css}" />
+	
+	  <link rel="stylesheet" href="/resources/plugins/formrender-base/dist/formrenderer.uncompressed.css" />
+	
 </head>
 <body>
-<form action="/api/v1/form" method="post">
-	saasId<input type="text" name="saasId" value="884b8165-7aad-4467-bc7e-e05e8f5efd49"/>
-	accessKey<input type="text" name="accessKey" value="023e498c-7ff8-41cd-8874-137c46b73c5b"/>
-	name<input type="text" name="name" value="name"/>
-	beforeText<input type="text" name="beforeText" value="beforeText"/>
-	afterText<input type="text" name="afterText" value="afterText"/>
-	startTime<input type="text" name="startDate" value="2015-8-25 12:30"/>
-	endTime<input type="text" name="endDate" value="2015-9-25 12:30"/>
-	description<input type="text" name="description" value="description"/>
-	<input type="submit" name="submit"  value="创建"/>
-</form>
+	<div class="container">
+		<div class="row  well">
+			<h3>创建一个表单</h3>
+			<form action="/api/v1/form" method="post" id="createForm"
+				class="form-horizontal">
+				<div class="form-group">
+					<label for="saasId" class="col-sm-2 control-label">saasId</label>
+					<div class="col-sm-10">
+						<input type="text" name="saasId" id="saasId" class="form-control"
+							value="884b8165-7aad-4467-bc7e-e05e8f5efd49" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="accessKey" class="col-sm-2 control-label">accessKey</label>
+					<div class="col-sm-10">
+						<input type="text" name="accessKey" id="accessKey"  class="form-control"
+							value="023e498c-7ff8-41cd-8874-137c46b73c5b" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">name</label>
+					<div class="col-sm-10">
+						<input type="text" name="name" id="name"   class="form-control" value="name" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="beforeText" class="col-sm-2 control-label">beforeText</label>
+					<div class="col-sm-10">
+						<input type="text" id="beforeText" name="beforeText"  class="form-control"
+							value="beforeText" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="afterText" class="col-sm-2 control-label">afterText</label>
+					<div class="col-sm-10">
+						<input type="text" name="afterText"   class="form-control"   value="afterText" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="startDate" class="col-sm-2 control-label">startDate</label>
+					<div class="col-sm-10">
+						<input type="text" name="startDate"  class="form-control" value="2015-8-25 12:30" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="endDate" class="col-sm-2 control-label">endDate</label>
+					<div class="col-sm-10">
+						<input type="text" id="endDate" name="endDate"  class="form-control"
+							value="2015-9-25 12:30" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">description</label>
+					<div class="col-sm-10">
+						<input type="text"   class="form-control" name="description" value="description" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">创建</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		<form id="formBuilderUpdate" style="display: none"
+			action="/api/v1/form/updateByJsonContent" method="post">
+			<input type="hidden" name="htmlFormId" id="htmlFormIdUpdate" /> <input
+				type="hidden" name="accessKey" id="accessKeyUpdate" /> <input
+				type="hidden" name="saasId" id="saasIdUpdate" />
+			<textarea name="jsonContent" id="jsonContent"></textarea>
+		</form>
+		<div id="createDiv" class="row well">
+			<h2>表单编辑</h2>
+			<div class='fb-main'></div>
+			<button id="answerFormBtn" type="button">我要答题</button>
+		</div>
+		
+		
+		
+		<form id="answerForm" name="answerForm" action="#" style="display:none">
+	<input type="hidden" name="htmlFormId" id="htmlFormIdAnswer"  />
+	<input type="hidden" name="accessKey" id="accessKeyAnswer"  />
+	<input type="hidden" name="saasId" id="saasIdAnswer"  />
+	<input  type="hidden" name="answerId" id="answerId"   />
+	<input  type="hidden" name="answerCacheId" id="answerCacheId"  />
+	<input  type="hidden" name="finish" id="finish"   th:value="${false}"/>
+	<input  type="hidden" name="allRight" id="allRight"   th:value="${false}"/>
+	<textarea name="jsonAnswer" id="jsonAnswer"></textarea>
+	</form>
+		<div id="answerDiv" class="row well">
+		 <form data-formrenderer=""></form>
+		</div>
+	</div>
+	<script src="./vendor/js/vendor.js"
+		th:src="@{/resources/plugins/formbuilder/vendor/js/vendor.js}"></script>
+	<script src="./dist/formbuilder.js"
+		th:src="@{/resources/plugins/formbuilder/dist/formbuilder-min.js}"></script>
+	<script src="./dist/formbuilder.js"
+		th:src="@{/resources/plugins/store.js}"></script>
+	<script
+		src="/resources/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js"
+		th:src="@{/resources/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js}"></script>
+
+ <script src="/resources/plugins/formrender-base/dist/formrenderer.uncompressed.js"></script>
+
+
+	<script src="./formbuilder-demo.js"
+		th:src="@{/resources/jsForm/formbuilder-demo.js}"></script>
 </body>
 </html>

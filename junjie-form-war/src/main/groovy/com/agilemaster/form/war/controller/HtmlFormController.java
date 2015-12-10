@@ -92,7 +92,7 @@ public class HtmlFormController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/formCreateByJsonContent"  ,method = {RequestMethod.POST})
+	@RequestMapping(value="/form/updateByJsonContent"  ,method = {RequestMethod.POST})
 	public Map<String, Object> createFormBuilder(String htmlFormId,String jsonContent,
 			HttpServletRequest request,HttpServletResponse response) {
 		log.info("createFormBuilder---> "+htmlFormId+"\n"+jsonContent);
@@ -145,7 +145,7 @@ public class HtmlFormController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/form",method = {RequestMethod.GET})
-	public Map<String, Object> show(String saasId,String htmlFormId) {
+	public Map<String, Object> show(String saasId,String htmlFormId,String accessKey) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
 			HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
@@ -208,15 +208,4 @@ public class HtmlFormController {
 		return result;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/showFormrender",method = {RequestMethod.POST,RequestMethod.GET})
-	public Map<String, Object> showFormrender(String saasId,String htmlFormId) {
-		Map<String, Object> result = StaticMethod.genResult();
-		if (null != saasId && htmlFormId != null) {
-			HtmlForm htmlForm = htmlFormOptions.findOne(htmlFormId);
-			result.put(FormWarConstants.DATA,htmlForm);
-			result.put(FormWarConstants.SUCCESS, true);
-		}
-		return result;
-	}
 }
