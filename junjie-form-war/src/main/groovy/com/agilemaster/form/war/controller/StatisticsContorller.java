@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class StatisticsContorller {
 	@Autowired
 	StatisticsService statisticsService;
 	@ResponseBody
-	@RequestMapping("/formAnswerData")
-	public Map<String, Object> createFormBuilder(String htmlFormIds,
+	@RequestMapping(value="/data-mutil",method = {RequestMethod.POST})
+	public Map<String, Object> dataMutil(String htmlFormIds,
 			HttpServletRequest request,HttpServletResponse response) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if(null!=htmlFormIds){
@@ -50,9 +51,24 @@ public class StatisticsContorller {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/data",method = {RequestMethod.POST})
+	public Map<String, Object> data(String htmlFormId,
+			HttpServletRequest request,HttpServletResponse response) {
+		Map<String, Object> result = StaticMethod.genResult();
+		if(null!=htmlFormId){
+			Map resultMap = statisticsService.listValueByInputValueVo(htmlFormId);
+			result.put(FormWarConstants.SUCCESS, true);
+			result.put(FormWarConstants.DATA, resultMap);
+		}else{
+			result.put(FormWarConstants.ERROR_CODE, FormWarConstants.ERROR_CODE_NOT_FOUND);
+		}
+		return result;
+	}
+	
 	
 	@ResponseBody
-	@RequestMapping("/checkRight")
+	@RequestMapping(value="/checkRight",method = {RequestMethod.POST})
 	public Boolean checkRight(String saasId,String htmlFormId, String answerId, HttpServletRequest request) {
 		Boolean result = false;
 		try{

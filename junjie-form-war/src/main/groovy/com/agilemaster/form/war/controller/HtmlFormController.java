@@ -159,7 +159,7 @@ public class HtmlFormController {
 	}
 	@ApiOperation(value = "根据id复制表单", notes = "返回复制表单结果对象", response = Map.class)  
 	@ResponseBody
-	@RequestMapping(value="/copy",method = {RequestMethod.POST,RequestMethod.GET},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(value="/copy",method = {RequestMethod.POST},produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public Map<String, Object> copy(@ApiParam(name="saasId",value = "saasId字符串", required = true,defaultValue="946c4eea-15cb-4dfb-8f8d-91b99fe78939") @RequestParam String saasId
 			,@ApiParam(name="htmlFormId",value = "需要复制的表单id", required = true) @RequestParam String htmlFormId,

@@ -1,4 +1,5 @@
 var HTML_FORM_ID_KEY = "storeHtmlFormId";
+var DATA_TABLE ;
 $(document).ready($(function() {
 	if (store.get(HTML_FORM_ID_KEY) != undefined) {
 		initFormBuilder(store.get(HTML_FORM_ID_KEY))
@@ -19,10 +20,72 @@ $(document).ready($(function() {
 		});
 		return false;
 	});
+	
+	
+	$("#answerListForm").on("submit", function() {
+		$.ajax({
+			url : "/api/v1/statistics/data",
+			type : "POST",
+			data : $("#answerListForm").serialize(),
+			success : function(data) {
+				if (data.success) {
+					var dataSet = data.data.valueList;
+					var titleList = data.data.titleList;
+					var titleShowList = new Array();
+					for(var i=0;i<titleList.length;i++){
+						titleShowList.push({title:titleList[i]})
+					}
+					if(DATA_TABLE!=null){
+						DATA_TABLE.destroy();
+					}
+					DATA_TABLE =  $('#dataTable').DataTable( {
+					        data: dataSet,
+					        dom: 'Bfrtip',
+					        buttons: [
+					           'csv'
+					        ],
+					        columns:titleShowList,
+					        "language": {
+					        	    "decimal":        "",
+					        	    "emptyTable":     "没有数据展示",
+					        	    "info":           "查看 _START_ to _END_ of _TOTAL_ 数据",
+					        	    "infoEmpty":      "查看 0 到 0 共 0 数据",
+					        	    "infoFiltered":   "(共  _MAX_  条)",
+					        	    "infoPostFix":    "",
+					        	    "thousands":      ",",
+					        	    "lengthMenu":     "每页显示 _MENU_ 条",
+					        	    "loadingRecords": "加载...",
+					        	    "processing":     "处理...",
+					        	    "search":         "查找:",
+					        	    "zeroRecords":    "没有查找到数据",
+					        	    "paginate": {
+					        	        "first":      "首页",
+					        	        "last":       "末页",
+					        	        "next":       "下一页",
+					        	        "previous":   "上一页"
+					        	    },
+					          }
+					    } );
+					console.log(dataTable)
+				} else {
+					alert(data.errorMsg);
+				}
+			}
+		});
+		return false;
+	});
+	
+	
+	
 }));
 
 function initFormBuilder(htmlFormId) {
 	if (htmlFormId != "") {
+		$("#showHtmlFormId").html(htmlFormId);
+		$("#htmlFormIdListAnswer").val(htmlFormId);
+		$("#answerListDiv").show();
+		$("#accessKeyListAnswer").val($("#accessKey").val());
+		$("#saasIdListAnswer").val($("#saasId").val());
 		var jsonContent;
 		var bootstrapData = [];
 		var data = {

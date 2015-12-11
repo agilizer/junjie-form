@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service
 
 import com.agilemaster.form.domain.AnswerCache
 import com.agilemaster.form.domain.HtmlInput
-import com.agilemaster.form.option.AnswerCacheOptions;
+import com.agilemaster.form.domain.HtmlInput.InputType
+import com.agilemaster.form.option.AnswerCacheOptions
 import com.agilemaster.form.option.HtmlFormOptions
 import com.agilemaster.form.option.HtmlInputOptions
 import com.agilemaster.form.option.InputValueOptions
@@ -67,12 +68,76 @@ public class StatisticsServiceImpl  implements StatisticsService{
 		resultMap.put("htmlInputInfo", inputMap);
 		return resultMap;
 	}
-	
+
 	@Override
 	public boolean checkRight(String saasId, String htmlFormId, String answerId) {
 		// TODO JUST select allRight field
 		String answerCacheId = MD5Util.MD5(saasId+htmlFormId+answerId);
 		AnswerCache answerCache = answerCacheOptions.findOne(answerCacheId);
 		return answerCache.isAllRight();
+	}
+
+	@Override
+	public Map listValueByInputValueVo(String htmlFormId) {
+		def resultMap = [:] ////key answerId value answerRow
+		def resultTempMap = [:]
+		def inputLabelMap = [:]
+		def inputLabelList = []
+		def inputIdSet = null
+		def answerRow = null
+		def answerId = ""
+		def htmlInputId = ""
+		if(htmlFormId&&htmlFormId.trim()!=""){
+			List<Row> inputValueList = inputValueOptions.listByHtmlForm(htmlFormId)
+			if(inputValueList){
+				//select answerId,htmlInputId,strValue,answerRight
+				List<HtmlInput> inputs = htmlInputOptions.listByFormId(htmlFormId)
+				def inputIdMap = [:]
+				inputs.each{HtmlInput input->
+					if(input.getInputType()!=InputType.section_break){
+						inputLabelMap.put(input.getId(), input.getLabelBefore());
+						inputIdMap.putAt(input.getId(),input.getSequence())
+					}
+				}
+				inputIdMap = inputIdMap.sort{a,b->a.value <=> b.value}
+				inputIdSet = inputIdMap.keySet()
+				inputIdSet.each {
+					inputLabelList.add(inputLabelMap.get(it))
+				}
+				inputValueList.each {row->
+					answerId = row.getString("answerId")
+					answerRow = resultTempMap.get(answerId)
+					if(answerRow==null){
+						answerRow = [:]
+						resultTempMap.put(answerId, answerRow)
+					}
+					htmlInputId = row.getString("htmlInputId")
+					answerRow.put(htmlInputId, row.getString("strValue"))
+				}
+			}
+		}
+		def valueList = []
+		def valueItem = null
+		def valueTemp = null
+		def allNullTag = true
+		resultTempMap.each {key,value->
+			valueItem = []
+			allNullTag = true
+			inputIdSet.each {inputId->
+				valueTemp = value.get(inputId)
+				if(valueTemp){
+					allNullTag = false
+					valueItem.add(valueTemp)
+				}else{
+					valueItem.add("");
+				}
+			}
+			if(!allNullTag){
+				valueList.add(valueItem)
+			}
+		}
+		resultMap.put("titleList", inputLabelList)
+		resultMap.put("valueList", valueList);
+		return resultMap;
 	}
 }
