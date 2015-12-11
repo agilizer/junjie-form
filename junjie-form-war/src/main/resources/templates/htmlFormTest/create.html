@@ -110,9 +110,6 @@
 	<input type="hidden" name="accessKey" id="accessKeyAnswer"  />
 	<input type="hidden" name="saasId" id="saasIdAnswer"  />
 	<input  type="hidden" name="answerId" id="answerId"   />
-	<input  type="hidden" name="answerCacheId" id="answerCacheId"  />
-	<input  type="hidden" name="finish" id="finish"   th:value="${false}"/>
-	<input  type="hidden" name="allRight" id="allRight"   th:value="${false}"/>
 	<textarea name="jsonAnswer" id="jsonAnswer"></textarea>
 	</form>
 		<div id="answerDiv" class="row well">
@@ -130,7 +127,7 @@
 		th:src="@{/resources/plugins/bootstrap-3.3.5-dist/js/bootstrap.min.js}"></script>
 
  <script src="/resources/plugins/formrender-base/dist/formrenderer.uncompressed.js"></script>
-
+ <script src="/resources/plugins/formrender-base/dist/i18n/zh.js"></script>
 
 	<script src="./formbuilder-demo.js"
 		th:src="@{/resources/jsForm/formbuilder-demo.js}"></script>

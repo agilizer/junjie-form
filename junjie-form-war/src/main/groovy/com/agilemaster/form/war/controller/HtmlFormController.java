@@ -190,8 +190,8 @@ public class HtmlFormController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/showFormrender/{answerId}",method = {RequestMethod.POST,RequestMethod.GET})
-	public Map<String, Object> showFormrender(String saasId,String htmlFormId,@PathVariable("answerId") String answerId) {
+	@RequestMapping(value="/answer-form",method = {RequestMethod.POST})
+	public Map<String, Object> showFormrender(String saasId,String htmlFormId,String answerId,String accessKey) {
 		Map<String, Object> result = StaticMethod.genResult();
 		if (null != saasId && htmlFormId != null) {
 			String answerCacheId = MD5Util.MD5(saasId+htmlFormId+answerId);

@@ -700,11 +700,6 @@
 }).call(this);
 
 (function() {
-
-
-}).call(this);
-
-(function() {
   Formbuilder.registerField('number', {
     order: 30,
     view: "<input type='text' />\n<% if (units = rf.get(Formbuilder.options.mappings.UNITS)) { %>\n  <%= units %>\n<% } %>",
@@ -739,16 +734,6 @@
 }).call(this);
 
 (function() {
-  Formbuilder.registerField('progress', {
-    order: 30,
-    view: "<input type='text' />\n<% if (units = rf.get(Formbuilder.options.mappings.UNITS)) { %>\n  <%= units %>\n<% } %>",
-    edit: "<%= Formbuilder.templates['edit/min_max_score']() %>",
-    addButton: "<span class=\"symbol\"><span class=\"fa fa-heart\"></span></span>评分"
-  });
-
-}).call(this);
-
-(function() {
   Formbuilder.registerField('radio', {
     order: 15,
     view: "<% for (i in (rf.get(Formbuilder.options.mappings.OPTIONS) || [])) { %>\n  <% domId = 'radio_' + i%>\n  <div class='checkbox checkbox'>\n      <input type='radio' id='<%=domId%>' <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].checked && 'checked' %> onclick=\"javascript: return false;\" />\n      <label for=\"<%= domId%>\">\n        <%= rf.get(Formbuilder.options.mappings.OPTIONS)[i].label %>\n      </label>\n  </div>\n<% } %>\n\n<% if (rf.get(Formbuilder.options.mappings.INCLUDE_OTHER)) { %>\n  <div class='other-option checkbox checkbox'>\n      <input type='radio' id='otherRadio' />\n      <label for=\"otherRadio\">\n        其它\n      </label>\n    </label>\n\n    <input type='text' />\n  </div>\n<% } %>",
@@ -772,11 +757,10 @@
 
 (function() {
   Formbuilder.registerField('section_break', {
-    order: 0,
-    type: 'non_input',
-    view: "<label class='section-name'><%= rf.get(Formbuilder.options.mappings.LABEL) %></label>\n<p><%= rf.get(Formbuilder.options.mappings.DESCRIPTION) %></p>",
+    order: 80,
+    view: "",
     edit: "<div class='fb-edit-section-header'>Label</div>\n<input type='text' data-rv-input='model.<%= Formbuilder.options.mappings.LABEL %>' />\n<textarea data-rv-input='model.<%= Formbuilder.options.mappings.DESCRIPTION %>'\n  placeholder='Add a longer description to this field'></textarea>",
-    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> Section Break"
+    addButton: "<span class='symbol'><span class='fa fa-minus'></span></span> 文本段落"
   });
 
 }).call(this);
